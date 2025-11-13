@@ -1279,8 +1279,8 @@
                     <div class="settings-description">Управление данными приложения</div>
                     
                     <div class="form-row">
-                        <button class="btn btn-secondary" id="exportSettingsBtn" data-tooltip="Экспортировать все настройки и данные приложения">💾 Экспорт настроек</button>
-                        <button class="btn btn-warning" id="importSettingsBtn" data-tooltip="Импортировать настройки и данные из файла">📥 Импорт настроек</button>
+                        <button class="btn btn-secondary" id="exportAllDataBtn" data-tooltip="Экспортировать все настройки и данные приложения">💾 Экспорт всех данных</button>
+                        <button class="btn btn-warning" id="importAllDataBtn" data-tooltip="Импортировать настройки и данные из файла">📥 Импорт всех данных</button>
                     </div>
                     
                     <button class="btn btn-danger mt-10" id="clearStorageBtn" data-tooltip="Полностью очистить все данные приложения (действие необратимо)">🗑️ Очистить все данные</button>
@@ -1589,6 +1589,9 @@
                 
                 // Инициализация кнопки очистки данных
                 this.initClearStorage();
+                
+                // Инициализация кнопок импорта/экспорта всех данных
+                this.initAllDataButtons();
             },
             
             // Инициализация звуковой системы
@@ -1859,6 +1862,28 @@
                             this.playSound('success');
                             this.playVibration([100, 50, 100]);
                         }
+                    });
+                }
+            },
+            
+            // Инициализация кнопок импорта/экспорта всех данных
+            initAllDataButtons() {
+                const exportAllDataBtn = document.getElementById('exportAllDataBtn');
+                const importAllDataBtn = document.getElementById('importAllDataBtn');
+                
+                if (exportAllDataBtn) {
+                    exportAllDataBtn.addEventListener('click', () => {
+                        this.playSound('click');
+                        this.playVibration([30]);
+                        this.exportAllData();
+                    });
+                }
+                
+                if (importAllDataBtn) {
+                    importAllDataBtn.addEventListener('click', () => {
+                        this.playSound('click');
+                        this.playVibration([30]);
+                        this.importAllData();
                     });
                 }
             },
@@ -3148,6 +3173,162 @@
                             this.playSound('error');
                             this.playVibration([100, 50, 100]);
                             this.showToast('Ошибка при импорте базы', 'warning');
+                        }
+                    };
+                    reader.readAsText(file);
+                };
+                
+                input.click();
+            },
+            
+            // Экспорт всех данных приложения
+            exportAllData() {
+                try {
+                    const allData = {
+                        version: '2.5.0',
+                        exportDate: new Date().toISOString(),
+                        reports: this.state.reportsDatabase,
+                        inspections: this.state.inspectionsDatabase,
+                        settings: {
+                            theme: localStorage.getItem('motodiag_theme'),
+                            soundEnabled: localStorage.getItem('motodiag_sound_enabled'),
+                            vibrationEnabled: localStorage.getItem('motodiag_vibration_enabled'),
+                            autoSave: localStorage.getItem('motodiag_auto_save'),
+                            inspectionNotifications: localStorage.getItem('motodiag_inspection_notifications'),
+                            reminderTime: localStorage.getItem('motodiag_reminder_time')
+                        },
+                        formData: localStorage.getItem('motodiag_form_data')
+                    };
+
+                    const dataStr = JSON.stringify(allData, null, 2);
+                    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                    
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(dataBlob);
+                    link.download = `motodiag_all_data_${new Date().toISOString().split('T')[0]}.json`;
+                    link.click();
+                    
+                    this.playSound('success');
+                    this.playVibration([100]);
+                    this.showToast('Все данные успешно экспортированы', 'success');
+                } catch (e) {
+                    console.error('Ошибка экспорта всех данных:', e);
+                    this.playSound('error');
+                    this.playVibration([100, 50, 100]);
+                    this.showToast('Ошибка при экспорте данных', 'warning');
+                }
+            },
+            
+            // Импорт всех данных приложения
+            importAllData() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                
+                input.onchange = e => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    
+                    const reader = new FileReader();
+                    reader.onload = event => {
+                        try {
+                            const importedData = JSON.parse(event.target.result);
+                            
+                            // Проверяем, что файл содержит необходимые поля
+                            if (!importedData.reports || !importedData.inspections || !importedData.settings) {
+                                throw new Error('Некорректный формат файла');
+                            }
+
+                            // Запрашиваем подтверждение
+                            if (!confirm('Вы уверены, что хотите импортировать все данные? Текущие данные будут потеряны.')) {
+                                return;
+                            }
+
+                            // Восстанавливаем данные
+                            this.state.reportsDatabase = importedData.reports;
+                            this.state.inspectionsDatabase = importedData.inspections;
+
+                            // Сохраняем в localStorage
+                            localStorage.setItem('motodiag_reports', JSON.stringify(this.state.reportsDatabase));
+                            localStorage.setItem('motodiag_inspections', JSON.stringify(this.state.inspectionsDatabase));
+
+                            // Восстанавливаем настройки
+                            if (importedData.settings.theme) {
+                                localStorage.setItem('motodiag_theme', importedData.settings.theme);
+                            }
+                            if (importedData.settings.soundEnabled) {
+                                localStorage.setItem('motodiag_sound_enabled', importedData.settings.soundEnabled);
+                            }
+                            if (importedData.settings.vibrationEnabled) {
+                                localStorage.setItem('motodiag_vibration_enabled', importedData.settings.vibrationEnabled);
+                            }
+                            if (importedData.settings.autoSave) {
+                                localStorage.setItem('motodiag_auto_save', importedData.settings.autoSave);
+                            }
+                            if (importedData.settings.inspectionNotifications) {
+                                localStorage.setItem('motodiag_inspection_notifications', importedData.settings.inspectionNotifications);
+                            }
+                            if (importedData.settings.reminderTime) {
+                                localStorage.setItem('motodiag_reminder_time', importedData.settings.reminderTime);
+                            }
+
+                            // Восстанавливаем данные формы, если они есть
+                            if (importedData.formData) {
+                                localStorage.setItem('motodiag_form_data', importedData.formData);
+                            }
+
+                            // Применяем настройки темы
+                            document.body.setAttribute('data-theme', importedData.settings.theme || 'light');
+
+                            // Обновляем чекбоксы в настройках
+                            const darkThemeCheckbox = document.getElementById('darkTheme');
+                            if (darkThemeCheckbox) {
+                                darkThemeCheckbox.checked = (importedData.settings.theme || 'light') === 'dark';
+                            }
+
+                            // Обновляем другие настройки
+                            const soundCheckbox = document.getElementById('soundNotifications');
+                            if (soundCheckbox) {
+                                soundCheckbox.checked = importedData.settings.soundEnabled === 'true';
+                                this.state.soundEnabled = importedData.settings.soundEnabled === 'true';
+                            }
+
+                            const vibrationCheckbox = document.getElementById('vibration');
+                            if (vibrationCheckbox) {
+                                vibrationCheckbox.checked = importedData.settings.vibrationEnabled === 'true';
+                                this.state.vibrationEnabled = importedData.settings.vibrationEnabled === 'true';
+                            }
+
+                            const autoSaveCheckbox = document.getElementById('autoSave');
+                            if (autoSaveCheckbox) {
+                                autoSaveCheckbox.checked = importedData.settings.autoSave === 'true';
+                            }
+
+                            const inspectionNotificationsCheckbox = document.getElementById('inspectionNotifications');
+                            if (inspectionNotificationsCheckbox) {
+                                inspectionNotificationsCheckbox.checked = importedData.settings.inspectionNotifications === 'true';
+                            }
+
+                            const reminderTimeInput = document.getElementById('reminderTime');
+                            if (reminderTimeInput && importedData.settings.reminderTime) {
+                                reminderTimeInput.value = importedData.settings.reminderTime;
+                            }
+
+                            // Перезагружаем списки и статистику
+                            this.loadReportsList();
+                            this.loadInspectionsList();
+                            this.updateStatistics();
+                            this.loadFormData(); // перезагружаем форму
+
+                            this.playSound('success');
+                            this.playVibration([100]);
+                            this.showToast('Все данные успешно импортированы', 'success');
+
+                        } catch (error) {
+                            console.error('Ошибка импорта всех данных:', error);
+                            this.playSound('error');
+                            this.playVibration([100, 50, 100]);
+                            this.showToast('Ошибка при импорте данных', 'warning');
                         }
                     };
                     reader.readAsText(file);
