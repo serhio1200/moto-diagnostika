@@ -1503,7 +1503,8 @@
                 activeToasts: new Set(),
                 audioContext: null,
                 soundEnabled: true,
-                vibrationEnabled: true
+                vibrationEnabled: true,
+                isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
             },
             init() {
                 try {
@@ -1704,12 +1705,24 @@
                 }
             },
             
-            // Воспроизведение вибрации
+            // Воспроизведение вибрации - ИСПРАВЛЕННАЯ ВЕРСИЯ ДЛЯ iOS
             playVibration(pattern = [50]) {
                 if (!this.state.vibrationEnabled || !navigator.vibrate) return;
                 
                 try {
-                    navigator.vibrate(pattern);
+                    // Для iOS используем упрощенную вибрацию
+                    let vibrationPattern = pattern;
+                    if (this.state.isIOS) {
+                        // iOS поддерживает только простые паттерны
+                        vibrationPattern = [30]; // Короткая вибрация для всех событий на iOS
+                    }
+                    
+                    // Проверяем поддержку вибрации и вызываем
+                    const result = navigator.vibrate(vibrationPattern);
+                    
+                    if (!result) {
+                        console.warn('Вибрация не поддерживается или заблокирована');
+                    }
                 } catch (e) {
                     console.warn('Ошибка воспроизведения вибрации:', e);
                 }
