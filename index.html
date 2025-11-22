@@ -16,8 +16,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         /* Стили остаются без изменений */
-        :root{--primary-color:#6366F1;--primary-dark:#4F46E5;--secondary-color:#10B981;--danger-color:#EF4444;--warning-color:#F59E0B;--success-color:#10B981;--text-color:#1F2937;--text-light:#6B7280;--bg-color:#F9FAFB;--card-bg:#ffffff;--border-color:#E5E7EB;--shadow:0 4px 20px rgba(0,0,0,0.08);--shadow-hover:0 8px 30px rgba(0,0,0,0.12);--safe-area-inset-bottom:env(safe-area-inset-bottom,0px);--safe-area-inset-top:env(safe-area-inset-top,0px);}[data-theme="dark"]{--primary-color:#818CF8;--primary-dark:#6366F1;--secondary-color:#34D399;--danger-color:#F87171;--warning-color:#FBBF24;--success-color:#34D399;--text-color:#F9FAFB;--text-light:#D1D5DB;--bg-color:#111827;--card-bg:#1F2937;--border-color:#374151;--shadow:0 4px 20px rgba(0,0,0,0.25);--shadow-hover:0 8px 30px rgba(0,0,0,0.35);}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:var(--bg-color);color:var(--text-color);line-height:1.6;min-height:100vh;padding:0;margin:0;transition:background-color 0.3s ease,color 0.3s ease;padding-bottom:var(--safe-area-inset-bottom);padding-top:var(--safe-area-inset-top);}.app-container{max-width:100%;margin:0 auto;background:var(--bg-color);min-height:100vh;position:relative;}.app-header{background:linear-gradient(135deg,var(--primary-color),var(--primary-dark));color:white;padding:20px 16px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.15);padding-top:calc(20px + var(--safe-area-inset-top));transform:translateZ(0);transition:transform 0.3s ease,box-shadow 0.3s ease;}.app-header.scrolled{transform:translateY(-5px);box-shadow:0 8px 30px rgba(0,0,0,0.25);}.app-header h1{font-size:1.5rem;margin-bottom:6px;font-weight:700;letter-spacing:-0.025em;}.app-header p{opacity:0.9;font-size:0.9rem;font-weight:400;}.nav-tabs{display:flex;background:var(--card-bg);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:99;padding:0 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}.nav-tabs::-webkit-scrollbar{display:none;}.nav-tab{flex:1;min-width:70px;background:none;border:none;padding:14px 6px;text-align:center;font-weight:600;font-size:0.7rem;color:var(--text-light);cursor:pointer;transition:all 0.3s ease;border-bottom:3px solid transparent;border-radius:0;margin:0 1px;white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:4px;}.nav-tab.active{color:var(--primary-color);border-bottom-color:var(--primary-color);background:rgba(99,102,241,0.05);}.nav-tab:active{background:rgba(99,102,241,0.1);transform:scale(0.98);}.nav-tab .tab-icon{font-size:1.1rem;margin-bottom:2px;}.nav-tab .tab-text{font-size:0.65rem;line-height:1.2;}.tab-content{display:none;padding:20px 16px;animation:fadeIn 0.4s ease;padding-bottom:calc(20px + var(--safe-area-inset-bottom));}.tab-content.active{display:block;}@keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}.card{background:var(--card-bg);border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--border-color);transition:transform 0.3s ease,box-shadow 0.3s ease;transform:translateZ(0);}.card:hover{box-shadow:var(--shadow-hover);transform:translateY(-5px) translateZ(0);}.card:active{transform:scale(0.995) translateZ(0);}.section-title{font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary-color);display:flex;align-items:center;gap:8px;letter-spacing:-0.025em;}.form-group{margin-bottom:20px;}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}label{display:block;margin-bottom:8px;font-weight:600;color:var(--text-color);font-size:0.9rem;}input,select,textarea{width:100%;padding:14px;border:2px solid var(--border-color);border-radius:12px;font-size:16px;background:var(--card-bg);color:var(--text-color);transition:all 0.3s ease;font-family:inherit;-webkit-appearance:none;}input:focus,select:focus,textarea:focus{border-color:var(--primary-color);outline:none;box-shadow:0 0 0 3px rgba(99,102,241,0.1);transform:translateY(-2px);}.mileage-row{display:flex;align-items:center;gap:12px;}.mileage-input-group{flex:1;display:flex;flex-direction:column;gap:6px;}.mileage-input-group input{width:100%;padding:14px;border:2px solid var(--border-color);border-radius:12px;font-size:16px;background:var(--card-bg);color:var(--text-color);transition:all 0.3s ease;}.mileage-input-group input:focus{border-color:var(--primary-color);outline:none;box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.mileage-label{font-size:0.75rem;color:var(--text-light);text-align:center;font-weight:500;}.mileage-separator{color:var(--primary-color);font-size:1.2rem;font-weight:bold;padding:0 8px;}@media (max-width:480px){.mileage-row{flex-direction:column;gap:8px;}.mileage-separator{transform:rotate(90deg);padding:4px 0;}}.btn{background:linear-gradient(135deg,var(--primary-color),var(--primary-dark));color:white;border:none;border-radius:12px;padding:16px 20px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-align:center;display:block;width:100%;position:relative;overflow:hidden;transform:translateZ(0);}.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s;}.btn:hover::before{left:100%;}.btn:hover{transform:translateY(-3px) translateZ(0);box-shadow:0 8px 25px rgba(99,102,241,0.3);}.btn:active{transform:scale(0.98) translateZ(0);}.btn-secondary{background:linear-gradient(135deg,var(--secondary-color),#059669);}.btn-warning{background:linear-gradient(135deg,var(--warning-color),#D97706);}.btn-danger{background:linear-gradient(135deg,var(--danger-color),#DC2626);}.btn-success{background:linear-gradient(135deg,var(--success-color),#059669);}.progress-container{margin:20px 0;}.progress-bar{height:8px;background:var(--border-color);border-radius:4px;overflow:hidden;margin-bottom:10px;box-shadow:inset 0 1px 3px rgba(0,0,0,0.1);}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary-color),var(--secondary-color));width:0%;transition:width 0.7s cubic-bezier(0.34,1.56,0.64,1);border-radius:4px;position:relative;overflow:hidden;}.progress-fill::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2s infinite;}@keyframes shimmer{0%{left:-100%;}100%{left:100%;}}.progress-text{text-align:center;font-size:0.8rem;color:var(--text-light);font-weight:500;}.alert{padding:16px;border-radius:12px;margin:16px 0;font-weight:500;animation:slideIn 0.4s ease;border-left:4px solid;}@keyframes slideIn{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}.alert-success{background:rgba(16,185,129,0.1);color:var(--success-color);border-left-color:var(--success-color);}.alert-info{background:rgba(99,102,241,0.1);color:var(--primary-color);border-left-color:var(--primary-color);}.alert-warning{background:rgba(245,158,11,0.1);color:var(--warning-color);border-left-color:var(--warning-color);}.output-container{background:var(--card-bg);border-radius:12px;padding:20px;margin-top:20px;border:1px solid var(--border-color);white-space:pre-wrap;font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.85rem;line-height:1.6;max-height:400px;overflow-y:auto;transition:all 0.3s ease;}.output-container:focus{border-color:var(--primary-color);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.search-box{position:relative;margin-bottom:20px;}.search-box input{padding-left:44px;}.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-light);z-index:2;}.reports-list{max-height:500px;overflow-y:auto;}.report-item{background:var(--card-bg);border-radius:14px;padding:16px;margin-bottom:10px;border:1px solid var(--border-color);transition:all 0.3s ease;cursor:pointer;transform:translateZ(0);}.report-item:hover{transform:translateY(-5px) translateZ(0);box-shadow:var(--shadow-hover);}.report-item:active{transform:scale(0.99) translateZ(0);}.report-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}.report-title{font-weight:700;font-size:1rem;color:var(--text-color);}.report-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.8rem;color:var(--text-light);}.report-actions{display:flex;gap:6px;}.action-btn{padding:6px 10px;border:none;border-radius:8px;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;font-weight:600;transform:translateZ(0);}.action-btn:hover{transform:translateY(-2px) translateZ(0);}.action-btn:active{transform:scale(0.95) translateZ(0);}.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:20px 0;}.stat-card{background:var(--card-bg);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border-color);transition:all 0.3s ease;transform:translateZ(0);}.stat-card:hover{transform:translateY(-5px) translateZ(0);box-shadow:var(--shadow-hover);}.stat-value{font-size:1.5rem;font-weight:800;color:var(--primary-color);margin:6px 0;letter-spacing:-0.025em;}.stat-label{font-size:0.8rem;color:var(--text-light);font-weight:500;}.grid-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;}.grid-btn{background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;padding:8px 4px;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;}.grid-btn.active{background:var(--primary-color);color:white;border-color:var(--primary-color);}@media (max-width:768px){.form-row{grid-template-columns:1fr;}.nav-tab{font-size:0.65rem;padding:12px 4px;}.nav-tab .tab-icon{font-size:1rem;}.stats-grid{grid-template-columns:1fr;}.tab-content{padding:16px 12px;}.card{padding:16px;border-radius:14px;}.app-header{padding:16px 12px;padding-top:calc(16px + var(--safe-area-inset-top));}.app-header h1{font-size:1.3rem;}.section-title{font-size:1rem;}.btn{padding:14px 16px;font-size:0.95rem;}}@media (max-width:480px){.app-header h1{font-size:1.2rem;}.nav-tab .tab-text{font-size:0.6rem;}}@media (max-width:380px){.nav-tabs{padding:0 2px;}.nav-tab{min-width:60px;padding:8px 1px;}.nav-tab .tab-icon{font-size:0.9rem;}.nav-tab .tab-text{font-size:0.55rem;}}.text-center{text-align:center;}.mt-10{margin-top:10px;}.mt-20{margin-top:20px;}.mb-10{margin-bottom:10px;}.mb-20{margin-bottom:20px;}.hidden{display:none!important;}.flex{display:flex;}.items-center{align-items:center;}.justify-between{justify-content:space-between;}.gap-10{gap:10px;}.scroll-to-top{position:fixed;bottom:80px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--primary-color);color:white;border:none;font-size:20px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:none;z-index:1000;transition:all 0.3s ease;align-items:center;justify-content:center;transform:translateZ(0);}.scroll-to-top.visible{display:flex;}.scroll-to-top:hover{transform:translateY(-3px) translateZ(0);box-shadow:0 8px 25px rgba(99,102,241,0.3);}.scroll-to-top:active{transform:scale(0.95) translateZ(0);}.settings-group{margin-bottom:24px;}.settings-label{font-weight:600;margin-bottom:10px;color:var(--text-color);font-size:0.95rem;}.settings-description{font-size:0.8rem;color:var(--text-light);margin-bottom:14px;}.toggle-switch{position:relative;display:inline-block;width:50px;height:26px;}.toggle-switch input{opacity:0;width:0;height:0;}.toggle-slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:var(--border-color);transition:.4s;border-radius:34px;}.toggle-slider:before{position:absolute;content:"";height:20px;width:20px;left:3px;bottom:3px;background:white;transition:.4s;border-radius:50%;}input:checked+.toggle-slider{background:var(--primary-color);}input:checked+.toggle-slider:before{transform:translateX(24px);}.toggle-container{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border-color);}.toggle-label{font-weight:500;color:var(--text-color);}.inspection-fields{background:rgba(99,102,241,0.05);border-radius:12px;padding:16px;margin-top:14px;border:2px dashed var(--primary-color);}.inspection-item{background:var(--card-bg);border-radius:12px;padding:16px;margin-bottom:14px;border:1px solid var(--border-color);transition:all 0.3s ease;position:relative;}.inspection-item.urgent{border-left:4px solid var(--warning-color);}.inspection-item.completed{opacity:0.7;background:rgba(16,185,129,0.05);}.inspection-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}.inspection-title{font-weight:700;font-size:1rem;color:var(--text-color);}.inspection-date{font-size:0.85rem;color:var(--text-light);background:var(--primary-color);color:white;padding:4px 8px;border-radius:16px;font-weight:600;}.inspection-details{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.8rem;margin-bottom:14px;}.inspection-actions{display:flex;gap:6px;}.badge{display:inline-block;padding:4px 8px;border-radius:10px;font-size:0.7rem;font-weight:600;margin-right:6px;margin-bottom:6px;}.badge-warning{background:rgba(245,158,11,0.1);color:var(--warning-color);}.badge-success{background:rgba(16,185,129,0.1);color:var(--success-color);}.badge-info{background:rgba(99,102,241,0.1);color:var(--primary-color);}.pulse{animation:pulse 2s infinite;}@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}.shake{animation:shake 0.5s;}@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}@supports(padding:max(0px)){.app-header,.tab-content,.nav-tabs{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));}.scroll-to-top{right:max(16px,env(safe-area-inset-right));bottom:max(80px,calc(80px+env(safe-area-inset-bottom)));}}.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;}.modal.hidden{display:none;}.modal-content{background:var(--card-bg);border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:modalSlideIn 0.3s ease;}@keyframes modalSlideIn{from{opacity:0;transform:translateY(-50px) scale(0.9);}to{opacity:1;transform:translateY(0) scale(1);}}.modal-header{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--border-color);background:var(--primary-color);color:white;}.modal-header h3{margin:0;font-size:1.2rem;}.modal-close{background:none;border:none;color:white;font-size:24px;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;}.modal-body{padding:20px;max-height:60vh;overflow-y:auto;}.modal-actions{padding:20px;border-top:1px solid var(--border-color);display:flex;gap:10px;}.report-identifiers{background:rgba(99,102,241,0.05);border-radius:12px;padding:16px;margin-bottom:16px;border:2px solid var(--primary-color);}.identifier-item{display:flex;justify-content:space-between;margin-bottom:8px;padding:8px 0;border-bottom:1px solid var(--border-color);}.identifier-item:last-child{margin-bottom:0;border-bottom:none;}#toastContainer{position:fixed;bottom:calc(20px + var(--safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:10001;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:90vw;width:400px;}.toast{pointer-events:all;background:var(--card-bg);color:var(--text-color);border:1px solid var(--border-color);border-left:4px solid var(--primary-color);border-radius:12px;padding:16px;box-shadow:var(--shadow-hover);opacity:0;transform:translateY(6px);transition:all .3s ease;font-weight:500;max-width:100%;word-wrap:break-word;}.toast.show{opacity:1;transform:translateY(0);}.toast-success{border-left-color:var(--success-color);}.toast-info{border-left-color:var(--primary-color);}.toast-warning{border-left-color:var(--warning-color);}.save-indicator{position:fixed;top:20px;right:20px;background:var(--success-color);color:white;padding:8px 16px;border-radius:8px;font-size:0.8rem;z-index:10002;opacity:0;transform:translateY(-10px);transition:all 0.3s ease;}.save-indicator.visible{opacity:1;transform:translateY(0);}.tooltip{position:fixed;background:var(--card-bg);color:var(--text-color);padding:12px 16px;border-radius:8px;box-shadow:var(--shadow-hover);border:1px solid var(--border-color);max-width:300px;font-size:0.8rem;line-height:1.4;z-index:10003;pointer-events:none;}.mileage-conversion{font-size:0.75rem;color:var(--text-light);margin-top:4px;font-style:italic;}@media (max-width:480px){#toastContainer{width:95vw;max-width:95vw;}.toast{padding:14px;}}@keyframes errorPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.7);}70%{box-shadow:0 0 0 10px rgba(239,68,68,0);}100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}}.pulse{animation:errorPulse 1.5s infinite;}input:invalid,select:invalid{border-color:var(--danger-color)!important;}.required-field::after{content:" *";color:var(--danger-color);}.toast-close{background:none;border:none;font-size:18px;cursor:pointer;margin-left:auto;padding:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--text-light);}.toast-close:hover{color:var(--text-color);}.inspection-item.priority-high{border-left:4px solid var(--danger-color);}.inspection-item.priority-medium{border-left:4px solid var(--warning-color);}.inspection-item.priority-low{border-left:4px solid var(--success-color);}.priority-badge{font-size:0.7rem;padding:2px 6px;border-radius:8px;font-weight:600;}.priority-high{background:rgba(239,68,68,0.1);color:var(--danger-color);}.priority-medium{background:rgba(245,158,11,0.1);color:var(--warning-color);}.priority-low{background:rgba(16,185,129,0.1);color:var(--success-color);}.photo-upload-section{margin-top:16px;padding:16px;background:rgba(99,102,241,0.05);border-radius:12px;border:2px dashed var(--primary-color);}.photo-upload-label{display:block;margin-bottom:10px;font-weight:600;color:var(--primary-color);}.photo-upload-input{width:100%;padding:12px;border:2px dashed var(--border-color);border-radius:8px;background:var(--card-bg);cursor:pointer;transition:all 0.3s ease;margin-bottom:12px;}.photo-upload-input:hover{border-color:var(--primary-color);background:rgba(99,102,241,0.05);}.photo-preview-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px;}.photo-preview-item{position:relative;border-radius:8px;overflow:hidden;border:2px solid var(--border-color);transition:all 0.3s ease;}.photo-preview-item:hover{border-color:var(--primary-color);transform:scale(1.05);}.photo-preview-img{width:100%;height:80px;object-fit:cover;display:block;}.photo-preview-remove{position:absolute;top:4px;right:4px;background:var(--danger-color);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;}.photo-counter{font-size:0.8rem;color:var(--text-light);margin-top:8px;text-align:center;}.photo-storage-warning{background:rgba(245,158,11,0.1);border:1px solid var(--warning-color);border-radius:8px;padding:10px;margin-top:10px;font-size:0.8rem;color:var(--warning-color);}.pdf-page{width:100%;min-height:280mm;padding:8mm;background:white;position:relative;page-break-after:always;box-sizing:border-box;}.pdf-page:last-child{page-break-after:auto;}.page-break{page-break-before:always;}@media print{.pdf-page{page-break-after:always;}.pdf-page:last-child{page-break-after:auto;}}.inspection-section{border:2px dashed var(--primary-color);border-radius:12px;padding:16px;margin-bottom:20px;background:rgba(99,102,241,0.03);}#pdfProgress .modal-content{max-width:500px;}#pdfProgress .progress-container{margin:20px 0;}#pdfPageStatus{text-align:center;margin-top:10px;font-size:0.9rem;color:var(--text-light);}#pdfProgressDetails{font-size:0.8rem;color:var(--text-light);margin-top:5px;text-align:center;}
-    </style>
+        :root{--primary-color:#6366F1;--primary-dark:#4F46E5;--secondary-color:#10B981;--danger-color:#EF4444;--warning-color:#F59E0B;--success-color:#10B981;--text-color:#1F2937;--text-light:#6B7280;--bg-color:#F9FAFB;--card-bg:#ffffff;--border-color:#E5E7EB;--shadow:0 4px 20px rgba(0,0,0,0.08);--shadow-hover:0 8px 30px rgba(0,0,0,0.12);--safe-area-inset-bottom:env(safe-area-inset-bottom,0px);--safe-area-inset-top:env(safe-area-inset-top,0px);}[data-theme="dark"]{--primary-color:#818CF8;--primary-dark:#6366F1;--secondary-color:#34D399;--danger-color:#F87171;--warning-color:#FBBF24;--success-color:#34D399;--text-color:#F9FAFB;--text-light:#D1D5DB;--bg-color:#111827;--card-bg:#1F2937;--border-color:#374151;--shadow:0 4px 20px rgba(0,0,0,0.25);--shadow-hover:0 8px 30px rgba(0,0,0,0.35);}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:var(--bg-color);color:var(--text-color);line-height:1.6;min-height:100vh;padding:0;margin:0;transition:background-color 0.3s ease,color 0.3s ease;padding-bottom:var(--safe-area-inset-bottom);padding-top:var(--safe-area-inset-top);}.app-container{max-width:100%;margin:0 auto;background:var(--bg-color);min-height:100vh;position:relative;}.app-header{background:linear-gradient(135deg,var(--primary-color),var(--primary-dark));color:white;padding:20px 16px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.15);padding-top:calc(20px + var(--safe-area-inset-top));transform:translateZ(0);transition:transform 0.3s ease,box-shadow 0.3s ease;}.app-header.scrolled{transform:translateY(-5px);box-shadow:0 8px 30px rgba(0,0,0,0.25);}.app-header h1{font-size:1.5rem;margin-bottom:6px;font-weight:700;letter-spacing:-0.025em;}.app-header p{opacity:0.9;font-size:0.9rem;font-weight:400;}.nav-tabs{display:flex;background:var(--card-bg);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:99;padding:0 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}.nav-tabs::-webkit-scrollbar{display:none;}.nav-tab{flex:1;min-width:70px;background:none;border:none;padding:14px 6px;text-align:center;font-weight:600;font-size:0.7rem;color:var(--text-light);cursor:pointer;transition:all 0.3s ease;border-bottom:3px solid transparent;border-radius:0;margin:0 1px;white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:4px;}.nav-tab.active{color:var(--primary-color);border-bottom-color:var(--primary-color);background:rgba(99,102,241,0.05);}.nav-tab:active{background:rgba(99,102,241,0.1);transform:scale(0.98);}.nav-tab .tab-icon{font-size:1.1rem;margin-bottom:2px;}.nav-tab .tab-text{font-size:0.65rem;line-height:1.2;}.tab-content{display:none;padding:20px 16px;animation:fadeIn 0.4s ease;padding-bottom:calc(20px + var(--safe-area-inset-bottom));}.tab-content.active{display:block;}@keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}.card{background:var(--card-bg);border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--border-color);transition:transform 0.3s ease,box-shadow 0.3s ease;transform:translateZ(0);}.card:hover{box-shadow:var(--shadow-hover);transform:translateY(-5px) translateZ(0);}.card:active{transform:scale(0.995) translateZ(0);}.section-title{font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary-color);display:flex;align-items:center;gap:8px;letter-spacing:-0.025em;}.form-group{margin-bottom:20px;}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}label{display:block;margin-bottom:8px;font-weight:600;color:var(--text-color);font-size:0.9rem;}input,select,textarea{width:100%;padding:14px;border:2px solid var(--border-color);border-radius:12px;font-size:16px;background:var(--card-bg);color:var(--text-color);transition:all 0.3s ease;font-family:inherit;-webkit-appearance:none;}input:focus,select:focus,textarea:focus{border-color:var(--primary-color);outline:none;box-shadow:0 0 0 3px rgba(99,102,241,0.1);transform:translateY(-2px);}.mileage-row{display:flex;align-items:center;gap:12px;}.mileage-input-group{flex:1;display:flex;flex-direction:column;gap:6px;}.mileage-input-group input{width:100%;padding:14px;border:2px solid var(--border-color);border-radius:12px;font-size:16px;background:var(--card-bg);color:var(--text-color);transition:all 0.3s ease;}.mileage-input-group input:focus{border-color:var(--primary-color);outline:none;box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.mileage-label{font-size:0.75rem;color:var(--text-light);text-align:center;font-weight:500;}.mileage-separator{color:var(--primary-color);font-size:1.2rem;font-weight:bold;padding:0 8px;}@media (max-width:480px){.mileage-row{flex-direction:column;gap:8px;}.mileage-separator{transform:rotate(90deg);padding:4px 0;}}.btn{background:linear-gradient(135deg,var(--primary-color),var(--primary-dark));color:white;border:none;border-radius:12px;padding:16px 20px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-align:center;display:block;width:100%;position:relative;overflow:hidden;transform:translateZ(0);}.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s;}.btn:hover::before{left:100%;}.btn:hover{transform:translateY(-3px) translateZ(0);box-shadow:0 8px 25px rgba(99,102,241,0.3);}.btn:active{transform:scale(0.98) translateZ(0);}.btn-secondary{background:linear-gradient(135deg,var(--secondary-color),#059669);}.btn-warning{background:linear-gradient(135deg,var(--warning-color),#D97706);}.btn-danger{background:linear-gradient(135deg,var(--danger-color),#DC2626);}.btn-success{background:linear-gradient(135deg,var(--success-color),#059669);}.progress-container{margin:20px 0;}.progress-bar{height:8px;background:var(--border-color);border-radius:4px;overflow:hidden;margin-bottom:10px;box-shadow:inset0 1px 3px rgba(0,0,0,0.1);}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary-color),var(--secondary-color));width:0%;transition:width 0.7s cubic-bezier(0.34,1.56,0.64,1);border-radius:4px;position:relative;overflow:hidden;}.progress-fill::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2s infinite;}@keyframes shimmer{0%{left:-100%;}100%{left:100%;}}.progress-text{text-align:center;font-size:0.8rem;color:var(--text-light);font-weight:500;}.alert{padding:16px;border-radius:12px;margin:16px 0;font-weight:500;animation:slideIn 0.4s ease;border-left:4px solid;}@keyframes slideIn{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}.alert-success{background:rgba(16,185,129,0.1);color:var(--success-color);border-left-color:var(--success-color);}.alert-info{background:rgba(99,102,241,0.1);color:var(--primary-color);border-left-color:var(--primary-color);}.alert-warning{background:rgba(245,158,11,0.1);color:var(--warning-color);border-left-color:var(--warning-color);}.output-container{background:var(--card-bg);border-radius:12px;padding:20px;margin-top:20px;border:1px solid var(--border-color);white-space:pre-wrap;font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.85rem;line-height:1.6;max-height:400px;overflow-y:auto;transition:all 0.3s ease;}.output-container:focus{border-color:var(--primary-color);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.search-box{position:relative;margin-bottom:20px;}.search-box input{padding-left:44px;}.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-light);z-index:2;}.reports-list{max-height:500px;overflow-y:auto;}.report-item{background:var(--card-bg);border-radius:14px;padding:16px;margin-bottom:10px;border:1px solid var(--border-color);transition:all 0.3s ease;cursor:pointer;transform:translateZ(0);}.report-item:hover{transform:translateY(-5px) translateZ(0);box-shadow:var(--shadow-hover);}.report-item:active{transform:scale(0.99) translateZ(0);}.report-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}.report-title{font-weight:700;font-size:1rem;color:var(--text-color);}.report-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.8rem;color:var(--text-light);}.report-actions{display:flex;gap:6px;}.action-btn{padding:6px 10px;border:none;border-radius:8px;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;font-weight:600;transform:translateZ(0);}.action-btn:hover{transform:translateY(-2px) translateZ(0);}.action-btn:active{transform:scale(0.95) translateZ(0);}.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:20px 0;}.stat-card{background:var(--card-bg);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border-color);transition:all 0.3s ease;transform:translateZ(0);}.stat-card:hover{transform:translateY(-5px) translateZ(0);box-shadow:var(--shadow-hover);}.stat-value{font-size:1.5rem;font-weight:800;color:var(--primary-color);margin:6px 0;letter-spacing:-0.025em;}.stat-label{font-size:0.8rem;color:var(--text-light);font-weight:500;}.grid-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;}.grid-btn{background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;padding:8px 4px;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;}.grid-btn.active{background:var(--primary-color);color:white;border-color:var(--primary-color);}@media (max-width:768px){.form-row{grid-template-columns:1fr;}.nav-tab{font-size:0.65rem;padding:12px 4px;}.nav-tab .tab-icon{font-size:1rem;}.stats-grid{grid-template-columns:1fr;}.tab-content{padding:16px 12px;}.card{padding:16px;border-radius:14px;}.app-header{padding:16px 12px;padding-top:calc(16px + var(--safe-area-inset-top));}.app-header h1{font-size:1.3rem;}.section-title{font-size:1rem;}.btn{padding:14px 16px;font-size:0.95rem;}}@media (max-width:480px){.app-header h1{font-size:1.2rem;}.nav-tab .tab-text{font-size:0.6rem;}}@media (max-width:380px){.nav-tabs{padding:0 2px;}.nav-tab{min-width:60px;padding:8px 1px;}.nav-tab .tab-icon{font-size:0.9rem;}.nav-tab .tab-text{font-size:0.55rem;}}.text-center{text-align:center;}.mt-10{margin-top:10px;}.mt-20{margin-top:20px;}.mb-10{margin-bottom:10px;}.mb-20{margin-bottom:20px;}.hidden{display:none!important;}.flex{display:flex;}.items-center{align-items:center;}.justify-between{justify-content:space-between;}.gap-10{gap:10px;}.scroll-to-top{position:fixed;bottom:80px;right:16px;width:50px;height:50px;border-radius:50%;background:#6366F1;color:white;border:none;font-size:20px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;z-index:10000;transition:all 0.3s ease;opacity:0;visibility:hidden;}.scroll-to-top.visible{opacity:1;visibility:visible;}.scroll-to-top:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(99,102,241,0.3);}.scroll-to-top:active{transform:scale(0.95);}@media (max-width:480px){.scroll-to-top{bottom:70px;right:12px;width:44px;height:44px;font-size:18px;}}.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;}.modal.hidden{display:none;}.modal-content{background:var(--card-bg);border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:modalSlideIn 0.3s ease;}@keyframes modalSlideIn{from{opacity:0;transform:translateY(-50px) scale(0.9);}to{opacity:1;transform:translateY(0) scale(1);}}.modal-header{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--border-color);background:var(--primary-color);color:white;}.modal-header h3{margin:0;font-size:1.2rem;}.modal-close{background:none;border:none;color:white;font-size:24px;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;}.modal-body{padding:20px;max-height:60vh;overflow-y:auto;}.modal-actions{padding:20px;border-top:1px solid var(--border-color);display:flex;gap:10px;}.report-identifiers{background:rgba(99,102,241,0.05);border-radius:12px;padding:16px;margin-bottom:16px;border:2px solid var(--primary-color);}.identifier-item{display:flex;justify-content:space-between;margin-bottom:8px;padding:8px 0;border-bottom:1px solid var(--border-color);}.identifier-item:last-child{margin-bottom:0;border-bottom:none;}#toastContainer{position:fixed;bottom:calc(20px + var(--safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:10001;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:90vw;width:400px;}.toast{pointer-events:all;background:var(--card-bg);color:var(--text-color);border:1px solid var(--border-color);border-left:4px solid var(--primary-color);border-radius:12px;padding:16px;box-shadow:var(--shadow-hover);opacity:0;transform:translateY(6px);transition:all .3s ease;font-weight:500;max-width:100%;word-wrap:break-word;}.toast.show{opacity:1;transform:translateY(0);}.toast-success{border-left-color:var(--success-color);}.toast-info{border-left-color:var(--primary-color);}.toast-warning{border-left-color:var(--warning-color);}.save-indicator{position:fixed;top:20px;right:20px;background:var(--success-color);color:white;padding:8px 16px;border-radius:8px;font-size:0.8rem;z-index:10002;opacity:0;transform:translateY(-10px);transition:all 0.3s ease;}.save-indicator.visible{opacity:1;transform:translateY(0);}.tooltip{position:fixed;background:var(--card-bg);color:var(--text-color);padding:12px 16px;border-radius:8px;box-shadow:var(--shadow-hover);border:1px solid var(--border-color);max-width:300px;font-size:0.8rem;line-height:1.4;z-index:10003;pointer-events:none;}.mileage-conversion{font-size:0.75rem;color:var(--text-light);margin-top:4px;font-style:italic;}@media (max-width:480px){#toastContainer{width:95vw;max-width:95vw;}.toast{padding:14px;}}@keyframes errorPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.7);}70%{box-shadow:0 0 0 10px rgba(239,68,68,0);}100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}}.pulse{animation:errorPulse 1.5s infinite;}input:invalid,select:invalid{border-color:var(--danger-color)!important;}.required-field::after{content:" *";color:var(--danger-color);}.toast-close{background:none;border:none;font-size:18px;cursor:pointer;margin-left:auto;padding:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--text-light);}.toast-close:hover{color:var(--text-color);}.inspection-item.priority-high{border-left:4px solid var(--danger-color);}.inspection-item.priority-medium{border-left:4px solid var(--warning-color);}.inspection-item.priority-low{border-left:4px solid var(--success-color);}.priority-badge{font-size:0.7rem;padding:2px 6px;border-radius:8px;font-weight:600;}.priority-high{background:rgba(239,68,68,0.1);color:var(--danger-color);}.priority-medium{background:rgba(245,158,11,0.1);color:var(--warning-color);}.priority-low{background:rgba(16,185,129,0.1);color:var(--success-color);}.photo-upload-section{margin-top:16px;padding:16px;background:rgba(99,102,241,0.05);border-radius:12px;border:2px dashed var(--primary-color);}.photo-upload-label{display:block;margin-bottom:10px;font-weight:600;color:var(--primary-color);}.photo-upload-input{width:100%;padding:12px;border:2px dashed var(--border-color);border-radius:8px;background:var(--card-bg);cursor:pointer;transition:all 0.3s ease;margin-bottom:12px;}.photo-upload-input:hover{border-color:var(--primary-color);background:rgba(99,102,241,0.05);}.photo-preview-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px;}.photo-preview-item{position:relative;border-radius:8px;overflow:hidden;border:2px solid var(--border-color);transition:all 0.3s ease;}.photo-preview-item:hover{border-color:var(--primary-color);transform:scale(1.05);}.photo-preview-img{width:100%;height:80px;object-fit:cover;display:block;}.photo-preview-remove{position:absolute;top:4px;right:4px;background:var(--danger-color);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;}.photo-counter{font-size:0.8rem;color:var(--text-light);margin-top:8px;text-align:center;}.photo-storage-warning{background:rgba(245,158,11,0.1);border:1px solid var(--warning-color);border-radius:8px;padding:10px;margin-top:10px;font-size:0.8rem;color:var(--warning-color);}.pdf-page{width:100%;min-height:280mm;padding:8mm;background:white;position:relative;page-break-after:always;box-sizing:border-box;}.pdf-page:last-child{page-break-after:auto;}.page-break{page-break-before:always;}@media print{.pdf-page{page-break-after:always;}.pdf-page:last-child{page-break-after:auto;}}.inspection-section{border:2px dashed var(--primary-color);border-radius:12px;padding:16px;margin-bottom:20px;background:rgba(99,102,241,0.03);}#pdfProgress .modal-content{max-width:500px;}#pdfProgress .progress-container{margin:20px 0;}#pdfPageStatus{text-align:center;margin-top:10px;font-size:0.9rem;color:var(--text-light);}#pdfProgressDetails{font-size:0.8rem;color:var(--text-light);margin-top:5px;text-align:center;}.settings-group{margin-bottom:30px;padding:20px;background:var(--card-bg);border-radius:12px;border:1px solid var(--border-color);}.settings-label{font-weight:700;font-size:1rem;margin-bottom:8px;color:var(--text-color);}.settings-description{font-size:0.85rem;color:var(--text-light);margin-bottom:16px;line-height:1.4;}.toggle-container{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding:12px 0;border-bottom:1px solid var(--border-color);}.toggle-container:last-child{margin-bottom:0;border-bottom:none;}.toggle-label{font-weight:600;font-size:0.9rem;color:var(--text-color);}.toggle-switch{position:relative;display:inline-block;width:50px;height:24px;}.toggle-switch input{opacity:0;width:0;height:0;}.toggle-slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:var(--border-color);transition:.3s ease;border-radius:24px;border:2px solid transparent;}.toggle-slider:before{position:absolute;content:"";height:20px;width:20px;left:2px;bottom:2px;background-color:white;transition:.3s ease;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,0.2);}.toggle-switch input:checked+.toggle-slider{background-color:var(--primary-color);border-color:var(--primary-dark);}.toggle-switch input:checked+.toggle-slider:before{transform:translateX(26px);}.toggle-switch input:focus+.toggle-slider{box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.toggle-switch input:disabled+.toggle-slider{opacity:0.6;cursor:not-allowed;}.reminder-input{display:flex;align-items:center;gap:10px;margin-top:15px;padding:12px;background:rgba(99,102,241,0.05);border-radius:8px;border:1px solid var(--border-color);}.reminder-label{font-size:0.85rem;color:var(--text-color);font-weight:500;}
+</style>
 </head>
 <body>
     <div class="app-container">
@@ -721,6 +721,7 @@
             </div>
         </div>
     </div>
+
     <button class="scroll-to-top" id="scrollToTopBtn" aria-label="Наверх">↑</button>
     
     <!-- Модальное окно для просмотра отчетов -->
@@ -807,9 +808,14 @@
                 isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
                 currentPhotos: {},
                 pdfGenerationInProgress: false,
-                pdfGenerationCanceled: false
+                pdfGenerationCanceled: false,
+                inspectionReminderTimeout: null,
+                cleanupCallbacks: []
             },
             async init() {
+                // Очищаем предыдущие состояния при переинициализации
+                this.cleanup();
+                
                 try {
                     await this.initIndexedDB();
                     await this.migrateFromLocalStorage();
@@ -836,6 +842,7 @@
                     this.checkInspectionReminders();
                     console.log('Motopodbor.ru PRO инициализирована с IndexedDB');
                 } catch (error) {
+                    this.cleanup(); // Очистка при ошибках
                     console.error('Критическая ошибка инициализации:', error);
                     this.showToast('Ошибка загрузки приложения. Проверьте консоль для подробностей.', 'warning');
                     this.initBasicComponents();
@@ -926,7 +933,34 @@
             },
             upgradeToVersion2(db) {
                 console.log('Выполняется миграция до версии 2');
-                // Уже реализовано в createStores
+                
+                // Создаем недостающие хранилища
+                if (!db.objectStoreNames.contains(this.indexedDB.stores.INSPECTIONS)) {
+                    const inspectionsStore = db.createObjectStore(this.indexedDB.stores.INSPECTIONS, { 
+                        keyPath: 'id' 
+                    });
+                    inspectionsStore.createIndex('timestamp', 'timestamp', { unique: false });
+                    inspectionsStore.createIndex('date', 'date', { unique: false });
+                    inspectionsStore.createIndex('status', 'status', { unique: false });
+                }
+                
+                if (!db.objectStoreNames.contains(this.indexedDB.stores.PHOTOS)) {
+                    const photosStore = db.createObjectStore(this.indexedDB.stores.PHOTOS, { 
+                        keyPath: 'id',
+                        autoIncrement: true 
+                    });
+                    photosStore.createIndex('reportId', 'reportId', { unique: false });
+                    photosStore.createIndex('section', 'section', { unique: false });
+                }
+                
+                // Миграция данных из старых структур
+                const transaction = db.transaction([this.indexedDB.stores.REPORTS], 'readwrite');
+                const store = transaction.objectStore(this.indexedDB.stores.REPORTS);
+                const request = store.getAll();
+                
+                request.onsuccess = () => {
+                    console.log(`Мигрировано ${request.result.length} записей в версию 2`);
+                };
             },
             upgradeToVersion3(db) {
                 console.log('Выполняется миграция до версии 3');
@@ -983,21 +1017,21 @@
             },
             async migrateFromLocalStorage() {
                 try {
-                    // Проверяем версию миграции
                     const migrationVersion = localStorage.getItem('motodiag_migration_version');
                     if (migrationVersion === '2.7.1') {
                         console.log('Миграция уже выполнена для этой версии');
                         return;
                     }
-                    
-                    // Проверяем все хранилища на наличие данных
+
+                    // Проверяем наличие данных в IndexedDB
                     const hasData = await this.checkIfAnyIndexedDBHasData();
-                    
                     if (hasData) {
                         console.log('IndexedDB уже содержит данные, пропускаем миграцию');
                         localStorage.setItem('motodiag_migration_version', '2.7.1');
                         return;
                     }
+
+                    console.log('Начинаем миграцию данных из localStorage...');
                     
                     let totalMigrated = 0;
                     let totalErrors = 0;
@@ -1091,6 +1125,7 @@
                 } catch (e) {
                     console.error('Критическая ошибка миграции данных:', e);
                     this.showToast('Ошибка при переносе данных. Проверьте консоль для подробностей.', 'warning');
+                    // Не блокируем приложение при ошибке миграции
                 }
             },
             async getReportFromIndexedDB(reportId) {
@@ -1335,6 +1370,11 @@
                         return;
                     }
                     
+                    // Таймаут операции
+                    const timeoutId = setTimeout(() => {
+                        reject(new Error('Timeout deleting report after 10 seconds'));
+                    }, 10000);
+                    
                     const transaction = this.db.transaction([
                         this.indexedDB.stores.REPORTS,
                         this.indexedDB.stores.INSPECTIONS,
@@ -1347,6 +1387,7 @@
                     
                     const checkCompletion = () => {
                         if (completedOperations === totalOperations && !hasError) {
+                            clearTimeout(timeoutId);
                             console.log(`Все операции удаления для отчета ${reportId} завершены`);
                             resolve();
                         }
@@ -1354,6 +1395,7 @@
                     
                     transaction.onerror = (event) => {
                         hasError = true;
+                        clearTimeout(timeoutId);
                         console.error('Ошибка транзакции удаления:', event.target.error);
                         reject(event.target.error);
                     };
@@ -1368,70 +1410,91 @@
                     };
                     reportRequest.onerror = () => {
                         hasError = true;
+                        clearTimeout(timeoutId);
                         reject(reportRequest.error);
                     };
                     
-                    // Удаляем связанные проверки (без использования индекса)
+                    // Удаляем связанные проверки с улучшенной обработкой ошибок
                     const inspectionsStore = transaction.objectStore(this.indexedDB.stores.INSPECTIONS);
                     const inspectionsRequest = inspectionsStore.openCursor();
                     
-                    let inspectionsDeleted = false;
+                    let inspectionsProcessed = false;
                     inspectionsRequest.onsuccess = () => {
                         const cursor = inspectionsRequest.result;
                         if (cursor) {
                             if (cursor.value.reportId === reportId) {
-                                inspectionsStore.delete(cursor.primaryKey);
+                                const deleteRequest = cursor.delete();
+                                deleteRequest.onsuccess = () => {
+                                    cursor.continue();
+                                };
+                                deleteRequest.onerror = () => {
+                                    console.error('Ошибка удаления проверки:', deleteRequest.error);
+                                    cursor.continue(); // Продолжаем несмотря на ошибки
+                                };
+                            } else {
+                                cursor.continue();
                             }
-                            cursor.continue();
                         } else {
                             console.log('Все проверки обработаны');
-                            inspectionsDeleted = true;
+                            inspectionsProcessed = true;
                             completedOperations++;
                             checkCompletion();
                         }
                     };
                     inspectionsRequest.onerror = () => {
-                        hasError = true;
-                        reject(inspectionsRequest.error);
+                        console.error('Ошибка курсора проверок:', inspectionsRequest.error);
+                        inspectionsProcessed = true;
+                        completedOperations++;
+                        checkCompletion();
                     };
                     
-                    // Удаляем связанные фото (без использования индекса)
+                    // Удаляем связанные фото с улучшенной обработкой ошибок
                     const photosStore = transaction.objectStore(this.indexedDB.stores.PHOTOS);
                     const photosRequest = photosStore.openCursor();
                     
-                    let photosDeleted = false;
+                    let photosProcessed = false;
                     photosRequest.onsuccess = () => {
                         const cursor = photosRequest.result;
                         if (cursor) {
                             if (cursor.value.reportId === reportId) {
-                                photosStore.delete(cursor.primaryKey);
+                                const deleteRequest = cursor.delete();
+                                deleteRequest.onsuccess = () => {
+                                    cursor.continue();
+                                };
+                                deleteRequest.onerror = () => {
+                                    console.error('Ошибка удаления фото:', deleteRequest.error);
+                                    cursor.continue(); // Продолжаем несмотря на ошибки
+                                };
+                            } else {
+                                cursor.continue();
                             }
-                            cursor.continue();
                         } else {
                             console.log('Все фото обработаны');
-                            photosDeleted = true;
+                            photosProcessed = true;
                             completedOperations++;
                             checkCompletion();
                         }
                     };
                     photosRequest.onerror = () => {
-                        hasError = true;
-                        reject(photosRequest.error);
+                        console.error('Ошибка курсора фото:', photosRequest.error);
+                        photosProcessed = true;
+                        completedOperations++;
+                        checkCompletion();
                     };
                     
                     // На случай, если нет записей для удаления
                     setTimeout(() => {
-                        if (!inspectionsDeleted) {
-                            console.log('Нет проверок для удаления');
+                        if (!inspectionsProcessed) {
+                            console.log('Нет проверок для удаления (таймаут)');
                             completedOperations++;
                             checkCompletion();
                         }
-                        if (!photosDeleted) {
-                            console.log('Нет фото для удаления');
+                        if (!photosProcessed) {
+                            console.log('Нет фото для удаления (таймаут)');
                             completedOperations++;
                             checkCompletion();
                         }
-                    }, 100);
+                    }, 1000);
                 });
             },
             async saveReportToDatabase() {
@@ -1648,6 +1711,11 @@
                 };
                 
                 window.addEventListener('scroll', onScroll, { passive: true });
+                
+                // Добавляем в очистку
+                this.state.cleanupCallbacks.push(() => {
+                    window.removeEventListener('scroll', onScroll);
+                });
             },
             initPhotoUploadSystem() {
                 this.loadPhotoPreviews();
@@ -1685,10 +1753,12 @@
                         this.compressImage(file).then(compressedFile => {
                             const reader = new FileReader();
                             reader.onload = (e) => {
-                                const base64Data = e.target.result;
+                                // Генерируем ID как строку для consistency
+                                const photoId = Date.now() + Math.random().toString(36).substr(2, 9);
+                                
                                 this.state.currentPhotos[section].push({
-                                    id: Date.now() + Math.random(),
-                                    data: base64Data,
+                                    id: photoId, // Теперь всегда строка
+                                    data: e.target.result,
                                     name: file.name,
                                     timestamp: new Date().toISOString(),
                                     compressed: true
@@ -1707,10 +1777,11 @@
                             console.error('Ошибка сжатия изображения:', error);
                             const reader = new FileReader();
                             reader.onload = (e) => {
-                                const base64Data = e.target.result;
+                                const photoId = Date.now() + Math.random().toString(36).substr(2, 9);
+                                
                                 this.state.currentPhotos[section].push({
-                                    id: Date.now() + Math.random(),
-                                    data: base64Data,
+                                    id: photoId,
+                                    data: e.target.result,
                                     name: file.name,
                                     timestamp: new Date().toISOString(),
                                     compressed: false
@@ -1792,7 +1863,7 @@
                 previewContainer.innerHTML = photos.map(photo => `
                     <div class="photo-preview-item">
                         <img src="${photo.data}" alt="${photo.name}" class="photo-preview-img">
-                        <button class="photo-preview-remove" onclick="app.removePhoto('${section}', ${photo.id})">×</button>
+                        <button class="photo-preview-remove" onclick="app.removePhoto('${section}', '${photo.id}')">×</button>
                     </div>
                 `).join('');
             },
@@ -1813,11 +1884,13 @@
             },
             removePhoto(section, photoId) {
                 if (!this.state.currentPhotos[section]) return;
-                const idToRemove = typeof photoId === 'string' ? parseFloat(photoId) : photoId;
+                
+                // Сохраняем оригинальный тип ID для корректного сравнения
                 this.state.currentPhotos[section] = this.state.currentPhotos[section].filter(photo => {
-                    const photoIdNum = typeof photo.id === 'string' ? parseFloat(photo.id) : photo.id;
-                    return photoIdNum !== idToRemove;
+                    // Сравниваем как строки чтобы избежать проблем с типами
+                    return String(photo.id) !== String(photoId);
                 });
+                
                 this.updatePhotoPreview(section);
                 this.updatePhotoCounter(section);
                 this.playSound('success');
@@ -2013,6 +2086,27 @@
                 document.body.setAttribute('data-theme', theme);
                 localStorage.setItem('motodiag_theme', theme);
                 app.playSound('click');
+            },
+            cleanup() {
+                // Очищаем все таймеры
+                if (this.state.inspectionReminderTimeout) {
+                    clearTimeout(this.state.inspectionReminderTimeout);
+                }
+                
+                this.state.notificationTimeouts.forEach(timeoutId => {
+                    clearTimeout(timeoutId);
+                });
+                
+                this.state.cleanupCallbacks.forEach(callback => {
+                    try {
+                        callback();
+                    } catch (e) {
+                        console.error('Ошибка при очистке:', e);
+                    }
+                });
+                
+                this.state.notificationTimeouts = [];
+                this.state.cleanupCallbacks = [];
             },
             initClearStorage() {
                 const clearStorageBtn = document.getElementById('clearStorageBtn');
@@ -2235,16 +2329,27 @@
             initScrollToTop() {
                 const btn = document.getElementById('scrollToTopBtn');
                 if (!btn) {
-                    console.log('Кнопка прокрутки наверх не найдена');
+                    console.error('Кнопка прокрутки наверх не найдена в DOM');
                     return;
                 }
-                window.addEventListener('scroll', () => {
+                
+                const scrollHandler = () => {
                     btn.classList.toggle('visible', window.pageYOffset > 300);
-                });
+                };
+                
+                window.addEventListener('scroll', scrollHandler);
+                
                 btn.addEventListener('click', () => {
                     this.playSound('click');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
+                
+                // Добавляем в очистку
+                this.state.cleanupCallbacks.push(() => {
+                    window.removeEventListener('scroll', scrollHandler);
+                });
+                
+                console.log('Стрелка вверх инициализирована');
             },
             initModal() {
                 const modal = document.getElementById('reportModal');
@@ -2710,7 +2815,9 @@
                         creator: 'Motopodbor.ru PRO'
                     });
 
+                    // Создаем временный контейнер
                     const tempContainer = document.createElement('div');
+                    tempContainer.id = 'pdf-temp-container'; // Добавляем ID для поиска
                     tempContainer.style.width = '210mm';
                     tempContainer.style.minHeight = '297mm';
                     tempContainer.style.padding = '15mm';
@@ -2721,6 +2828,13 @@
                     tempContainer.style.left = '-9999px';
                     tempContainer.style.boxSizing = 'border-box';
                     tempContainer.innerHTML = htmlContent;
+
+                    // Удаляем существующий контейнер если есть
+                    const existingContainer = document.getElementById('pdf-temp-container');
+                    if (existingContainer) {
+                        existingContainer.remove();
+                    }
+
                     document.body.appendChild(tempContainer);
 
                     const pages = tempContainer.querySelectorAll('.pdf-page');
@@ -2731,67 +2845,76 @@
                     
                     this.showToast(`Начинаем генерацию PDF (${totalPages} страниц)...`, 'info');
 
-                    for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
-                        if (this.state.pdfGenerationCanceled) {
-                            break;
-                        }
-                        
-                        const progress = ((pageIndex + 1) / totalPages) * 100;
-                        this.showPDFProgress(progress, `Обработка страницы ${pageIndex + 1} из ${totalPages}`);
-                        
-                        if (pageIndex > 0) {
-                            await new Promise(resolve => setTimeout(resolve, 100));
-                        }
-                        
-                        const page = pages[pageIndex];
-                        
-                        try {
-                            const canvas = await html2canvas(page, {
-                                scale: 3,
-                                useCORS: true,
-                                logging: false,
-                                backgroundColor: '#ffffff',
-                                width: page.offsetWidth,
-                                height: page.offsetHeight,
-                                windowWidth: page.scrollWidth,
-                                windowHeight: page.scrollHeight
-                            });
-
-                            const imgData = canvas.toDataURL('image/png');
-                            const imgWidth = 210;
-                            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-                            if (pageIndex > 0) {
-                                doc.addPage();
+                    try {
+                        for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
+                            if (this.state.pdfGenerationCanceled) {
+                                break;
                             }
                             
-                            doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                            const progress = ((pageIndex + 1) / totalPages) * 100;
+                            this.showPDFProgress(progress, `Обработка страницы ${pageIndex + 1} из ${totalPages}`);
                             
-                        } catch (error) {
-                            console.error('Ошибка генерации страницы PDF:', error);
-                            document.body.removeChild(tempContainer);
+                            if (pageIndex > 0) {
+                                await new Promise(resolve => setTimeout(resolve, 100));
+                            }
+                            
+                            const page = pages[pageIndex];
+                            
+                            try {
+                                const canvas = await html2canvas(page, {
+                                    scale: 3,
+                                    useCORS: true,
+                                    logging: false,
+                                    backgroundColor: '#ffffff',
+                                    width: page.offsetWidth,
+                                    height: page.offsetHeight,
+                                    windowWidth: page.scrollWidth,
+                                    windowHeight: page.scrollHeight
+                                });
+
+                                const imgData = canvas.toDataURL('image/png');
+                                const imgWidth = 210;
+                                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                                if (pageIndex > 0) {
+                                    doc.addPage();
+                                }
+                                
+                                doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                                
+                            } catch (error) {
+                                console.error('Ошибка генерации страницы PDF:', error);
+                                throw error;
+                            }
+                        }
+
+                        if (!this.state.pdfGenerationCanceled) {
+                            const filename = `Отчет_${(data.brand || 'мотоцикл').replace(/[^\w]/g, '_')}_${(data.model || '').replace(/[^\w]/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+                            doc.save(filename);
                             this.hidePDFProgress();
                             this.state.pdfGenerationInProgress = false;
-                            this.playSound('error');
-                            this.showToast(`Ошибка на странице ${pageIndex + 1}: ${error.message}`, 'warning');
-                            return;
+                            this.playSound('success');
+                            this.showToast(`PDF отчет успешно сгенерирован! (${totalPages} страниц)`, 'success');
+                        } else {
+                            this.hidePDFProgress();
+                            this.state.pdfGenerationInProgress = false;
+                            this.playSound('warning');
+                            this.showToast('Генерация PDF отменена', 'warning');
                         }
-                    }
 
-                    if (!this.state.pdfGenerationCanceled) {
-                        const filename = `Отчет_${(data.brand || 'мотоцикл').replace(/[^\w]/g, '_')}_${(data.model || '').replace(/[^\w]/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
-                        doc.save(filename);
-                        document.body.removeChild(tempContainer);
+                    } catch (error) {
+                        console.error('Ошибка генерации страницы PDF:', error);
                         this.hidePDFProgress();
                         this.state.pdfGenerationInProgress = false;
-                        this.playSound('success');
-                        this.showToast(`PDF отчет успешно сгенерирован! (${totalPages} страниц)`, 'success');
-                    } else {
-                        document.body.removeChild(tempContainer);
-                        this.hidePDFProgress();
-                        this.state.pdfGenerationInProgress = false;
-                        this.playSound('warning');
-                        this.showToast('Генерация PDF отменена', 'warning');
+                        this.playSound('error');
+                        this.showToast(`Ошибка при генерации PDF: ${error.message}`, 'warning');
+                        throw error;
+                    } finally {
+                        // Всегда удаляем временный контейнер
+                        const tempContainer = document.getElementById('pdf-temp-container');
+                        if (tempContainer) {
+                            tempContainer.remove();
+                        }
                     }
 
                 } catch (e) {
@@ -3797,13 +3920,21 @@
                 }
             },
             checkInspectionReminders() {
+                // Очищаем предыдущие таймеры
+                if (this.state.inspectionReminderTimeout) {
+                    clearTimeout(this.state.inspectionReminderTimeout);
+                }
+                
                 const reminderTime = parseInt(document.getElementById('reminderTime')?.value || 2, 10);
                 const now = new Date();
                 const reminderMs = reminderTime * 60 * 60 * 1000;
+                
                 this.state.inspectionsDatabase.forEach(inspection => {
                     if (inspection.status !== 'planned' || inspection.reminded) return;
+                    
                     const inspectionDateTime = new Date(inspection.date + 'T' + inspection.time);
                     const timeUntilInspection = inspectionDateTime - now;
+                    
                     if (timeUntilInspection > 0 && timeUntilInspection <= reminderMs) {
                         this.showToast(
                             `Напоминание: проверка ${inspection.brand} ${inspection.model} запланирована на ${inspection.date} ${inspection.time}`,
@@ -3814,7 +3945,11 @@
                         this.saveInspectionToIndexedDB(inspection);
                     }
                 });
-                setTimeout(() => this.checkInspectionReminders(), 30 * 60 * 1000);
+                
+                // Сохраняем новый таймер с очисткой
+                this.state.inspectionReminderTimeout = setTimeout(() => {
+                    this.checkInspectionReminders();
+                }, 30 * 60 * 1000);
             }
         };
 
