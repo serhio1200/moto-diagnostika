@@ -15,199 +15,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        :root {--primary-color: #6366F1;--primary-dark: #4F46E5;--secondary-color: #10B981;--danger-color: #EF4444;--warning-color: #F59E0B;--success-color: #10B981;--text-color: #1F2937;--text-light: #6B7280;--bg-color: #F9FAFB;--card-bg: #ffffff;--border-color: #E5E7EB;--shadow: 0 4px 20px rgba(0,0,0,0.08);--shadow-hover: 0 8px 30px rgba(0,0,0,0.12);--safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);--safe-area-inset-top: env(safe-area-inset-top, 0px);}
-        [data-theme="dark"] {--primary-color: #818CF8;--primary-dark: #6366F1;--secondary-color: #34D399;--danger-color: #F87171;--warning-color: #FBBF24;--success-color: #34D399;--text-color: #F9FAFB;--text-light: #D1D5DB;--bg-color: #111827;--card-bg: #1F2937;--border-color: #374151;--shadow: 0 4px 20px rgba(0,0,0,0.25);--shadow-hover: 0 8px 30px rgba(0,0,0,0.35);}
-        * {box-sizing: border-box;margin: 0;padding: 0;-webkit-tap-highlight-color: transparent;}
-        body {font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;background: var(--bg-color);color: var(--text-color);line-height: 1.6;min-height: 100vh;padding: 0;margin: 0;transition: background-color 0.3s ease, color 0.3s ease;padding-bottom: var(--safe-area-inset-bottom);padding-top: var(--safe-area-inset-top);}
-        .app-container {max-width: 100%;margin: 0 auto;background: var(--bg-color);min-height: 100vh;position: relative;}
-        .app-header {background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));color: white;padding: 20px 16px;text-align: center;position: sticky;top: 0;z-index: 100;box-shadow: 0 4px 20px rgba(0,0,0,0.15);padding-top: calc(20px + var(--safe-area-inset-top));}
-        .app-header h1 {font-size: 1.5rem;margin-bottom: 6px;font-weight: 700;letter-spacing: -0.025em;}
-        .app-header p {opacity: 0.9;font-size: 0.9rem;font-weight: 400;}
-        .nav-tabs {display: flex;background: var(--card-bg);border-bottom: 1px solid var(--border-color);position: sticky;top: 0;z-index: 99;padding: 0 4px;overflow-x: auto;-webkit-overflow-scrolling: touch;scrollbar-width: none;}
-        .nav-tabs::-webkit-scrollbar { display: none; }
-        .nav-tab {flex: 1;min-width: 70px;background: none;border: none;padding: 14px 6px;text-align: center;font-weight: 600;font-size: 0.7rem;color: var(--text-light);cursor: pointer;transition: all 0.3s ease;border-bottom: 3px solid transparent;border-radius: 0;margin: 0 1px;white-space: nowrap;display: flex;flex-direction: column;align-items: center;gap: 4px;}
-        .nav-tab.active {color: var(--primary-color);border-bottom-color: var(--primary-color);background: rgba(99, 102, 241, 0.05);}
-        .nav-tab:active { background: rgba(99, 102, 241, 0.1); transform: scale(0.98); }
-        .nav-tab .tab-icon { font-size: 1.1rem; margin-bottom: 2px; }
-        .nav-tab .tab-text { font-size: 0.65rem; line-height: 1.2; }
-        .tab-content {display: none;padding: 20px 16px;animation: fadeIn 0.4s ease;padding-bottom: calc(20px + var(--safe-area-inset-bottom));}
-        .tab-content.active { display: block; }
-        @keyframes fadeIn {from { opacity: 0; transform: translateY(15px); }to { opacity: 1; transform: translateY(0); }}
-        .card {background: var(--card-bg);border-radius: 16px;padding: 20px;margin-bottom: 20px;box-shadow: var(--shadow);border: 1px solid var(--border-color);transition: transform 0.3s ease, box-shadow 0.3s ease;}
-        .card:hover { box-shadow: var(--shadow-hover); }
-        .card:active { transform: scale(0.995); }
-        .section-title {font-size: 1.1rem;font-weight: 700;margin-bottom: 16px;color: var(--primary-color);display: flex;align-items: center;gap: 8px;letter-spacing: -0.025em;}
-        .form-group { margin-bottom: 20px; }
-        .form-row {display: grid;grid-template-columns: 1fr 1fr;gap: 16px;margin-bottom: 16px;}
-        label {display: block;margin-bottom: 8px;font-weight: 600;color: var(--text-color);font-size: 0.9rem;}
-        input, select, textarea {width: 100%;padding: 14px;border: 2px solid var(--border-color);border-radius: 12px;font-size: 16px;background: var(--card-bg);color: var(--text-color);transition: all 0.3s ease;font-family: inherit;-webkit-appearance: none;}
-        input:focus, select:focus, textarea:focus {border-color: var(--primary-color);outline: none;box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);transform: translateY(-2px);}
-        .mileage-row {display: flex;align-items: center;gap: 12px;}
-        .mileage-input-group {flex: 1;display: flex;flex-direction: column;gap: 6px;}
-        .mileage-input-group input {width: 100%;padding: 14px;border: 2px solid var(--border-color);border-radius: 12px;font-size: 16px;background: var(--card-bg);color: var(--text-color);transition: all 0.3s ease;}
-        .mileage-input-group input:focus {border-color: var(--primary-color);outline: none;box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);}
-        .mileage-label {font-size: 0.75rem;color: var(--text-light);text-align: center;font-weight: 500;}
-        .mileage-separator {color: var(--primary-color);font-size: 1.2rem;font-weight: bold;padding: 0 8px;}
-        @media (max-width: 480px) {.mileage-row {flex-direction: column;gap: 8px;}.mileage-separator {transform: rotate(90deg);padding: 4px 0;}}
-        .btn {background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));color: white;border: none;border-radius: 12px;padding: 16px 20px;font-size: 1rem;font-weight: 600;cursor: pointer;transition: all 0.3s ease;text-align: center;display: block;width: 100%;position: relative;overflow: hidden;}
-        .btn::before {content: '';position: absolute;top: 0; left: -100%;width: 100%; height: 100%;background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);transition: left 0.5s;}
-        .btn:hover::before { left: 100%; }
-        .btn:active { transform: scale(0.98); }
-        .btn-secondary { background: linear-gradient(135deg, var(--secondary-color), #059669); }
-        .btn-warning { background: linear-gradient(135deg, var(--warning-color), #D97706); }
-        .btn-danger { background: linear-gradient(135deg, var(--danger-color), #DC2626); }
-        .btn-success { background: linear-gradient(135deg, var(--success-color), #059669); }
-        .progress-container { margin: 20px 0; }
-        .progress-bar {height: 8px; background: var(--border-color);border-radius: 4px; overflow: hidden; margin-bottom: 10px;box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);}
-        .progress-fill {height: 100%;background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));width: 0%; transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);border-radius: 4px; position: relative; overflow: hidden;}
-        .progress-fill::after {content: ''; position: absolute; top: 0; left: -100%;width: 100%; height: 100%;background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);animation: shimmer 2s infinite;}
-        @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
-        .progress-text { text-align: center; font-size: 0.8rem; color: var(--text-light); font-weight: 500; }
-        .alert {padding: 16px; border-radius: 12px; margin: 16px 0; font-weight: 500;animation: slideIn 0.4s ease; border-left: 4px solid;}
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-20px);} to { opacity: 1; transform: translateX(0);} }
-        .alert-success { background: rgba(16,185,129,0.1); color: var(--success-color); border-left-color: var(--success-color); }
-        .alert-info { background: rgba(99,102,241,0.1); color: var(--primary-color); border-left-color: var(--primary-color); }
-        .alert-warning { background: rgba(245,158,11,0.1); color: var(--warning-color); border-left-color: var(--warning-color); }
-        .output-container {background: var(--card-bg); border-radius: 12px; padding: 20px; margin-top: 20px;border: 1px solid var(--border-color); white-space: pre-wrap;font-family: 'JetBrains Mono','Fira Code', monospace; font-size: 0.85rem; line-height: 1.6;max-height: 400px; overflow-y: auto; transition: all 0.3s ease;}
-        .output-container:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
-        .search-box { position: relative; margin-bottom: 20px; }
-        .search-box input { padding-left: 44px; }
-        .search-icon {position: absolute; left: 14px; top: 50%; transform: translateY(-50%);color: var(--text-light); z-index: 2;}
-        .reports-list { max-height: 500px; overflow-y: auto; }
-        .report-item {background: var(--card-bg); border-radius: 14px; padding: 16px; margin-bottom: 10px;border: 1px solid var(--border-color); transition: all 0.3s ease; cursor: pointer;}
-        .report-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-        .report-item:active { transform: scale(0.99); }
-        .report-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .report-title { font-weight: 700; font-size: 1rem; color: var(--text-color); }
-        .report-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.8rem; color: var(--text-light); }
-        .report-actions { display: flex; gap: 6px; }
-        .action-btn { padding: 6px 10px; border: none; border-radius: 8px; font-size: 0.75rem; cursor: pointer; transition: all 0.3s ease; font-weight: 600; }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 20px 0; }
-        .stat-card {background: var(--card-bg); border-radius: 14px; padding: 16px; text-align: center;box-shadow: var(--shadow); border: 1px solid var(--border-color); transition: all 0.3s ease;}
-        .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-        .stat-value { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); margin: 6px 0; letter-spacing: -0.025em; }
-        .stat-label { font-size: 0.8rem; color: var(--text-light); font-weight: 500; }
-        .grid-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
-        .grid-btn {background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px;padding: 8px 4px; font-size: 0.75rem; cursor: pointer; transition: all 0.3s ease;}
-        .grid-btn.active { background: var(--primary-color); color: white; border-color: var(--primary-color); }
-        @media (max-width: 768px) {.form-row { grid-template-columns: 1fr; }.nav-tab { font-size: 0.65rem; padding: 12px 4px; }.nav-tab .tab-icon { font-size: 1rem; }.stats-grid { grid-template-columns: 1fr; }.tab-content { padding: 16px 12px; }.card { padding: 16px; border-radius: 14px; }.app-header { padding: 16px 12px; padding-top: calc(16px + var(--safe-area-inset-top)); }.app-header h1 { font-size: 1.3rem; }.section-title { font-size: 1rem; }.btn { padding: 14px 16px; font-size: 0.95rem; }}
-        @media (max-width: 480px) {.app-header h1 { font-size: 1.2rem; }.nav-tab .tab-text { font-size: 0.6rem; }}
-        @media (max-width: 380px) {.nav-tabs { padding: 0 2px; }.nav-tab { min-width: 60px; padding: 8px 1px; }.nav-tab .tab-icon { font-size: 0.9rem; }.nav-tab .tab-text { font-size: 0.55rem; }}
-        .text-center { text-align: center; }
-        .mt-10 { margin-top: 10px; }
-        .mt-20 { margin-top: 20px; }
-        .mb-10 { margin-bottom: 10px; }
-        .mb-20 { margin-bottom: 20px; }
-        .hidden { display: none !important; }
-        .flex { display: flex; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .gap-10 { gap: 10px; }
-        .scroll-to-top {position: fixed; bottom: 80px; right: 16px; width: 50px; height: 50px; border-radius: 50%;background: var(--primary-color); color: white; border: none; font-size: 20px; cursor: pointer;box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: none; z-index: 1000; transition: all 0.3s ease;align-items: center; justify-content: center;}
-        .scroll-to-top.visible { display: flex; }
-        .scroll-to-top:active { transform: scale(0.95); }
-        .settings-group { margin-bottom: 24px; }
-        .settings-label { font-weight: 600; margin-bottom: 10px; color: var(--text-color); font-size: 0.95rem; }
-        .settings-description { font-size: 0.8rem; color: var(--text-light); margin-bottom: 14px; }
-        .toggle-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
-        .toggle-switch input { opacity: 0; width: 0; height: 0; }
-        .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: var(--border-color); transition: .4s; border-radius: 34px; }
-        .toggle-slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background: white; transition: .4s; border-radius: 50%; }
-        input:checked + .toggle-slider { background: var(--primary-color); }
-        input:checked + .toggle-slider:before { transform: translateX(24px); }
-        .toggle-container { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border-color); }
-        .toggle-label { font-weight: 500; color: var(--text-color); }
-        .inspection-fields {background: rgba(99, 102, 241, 0.05); border-radius: 12px; padding: 16px; margin-top: 14px; border: 2px dashed var(--primary-color);}
-        .inspection-item {background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 14px;border: 1px solid var(--border-color); transition: all 0.3s ease; position: relative;}
-        .inspection-item.urgent { border-left: 4px solid var(--warning-color); }
-        .inspection-item.completed { opacity: 0.7; background: rgba(16, 185, 129, 0.05); }
-        .inspection-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-        .inspection-title { font-weight: 700; font-size: 1rem; color: var(--text-color); }
-        .inspection-date {font-size: 0.85rem; color: var(--text-light); background: var(--primary-color); color: white;padding: 4px 8px; border-radius: 16px; font-weight: 600;}
-        .inspection-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.8rem; margin-bottom: 14px; }
-        .inspection-actions { display: flex; gap: 6px; }
-        .badge { display: inline-block; padding: 4px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 600; margin-right: 6px; margin-bottom: 6px; }
-        .badge-warning { background: rgba(245,158,11,0.1); color: var(--warning-color); }
-        .badge-success { background: rgba(16,185,129,0.1); color: var(--success-color); }
-        .badge-info { background: rgba(99,102,241,0.1); color: var(--primary-color); }
-        .pulse { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%{ transform: scale(1);} 50%{ transform: scale(1.05);} 100%{ transform: scale(1);} }
-        .shake { animation: shake 0.5s; }
-        @keyframes shake { 0%,100%{ transform: translateX(0);} 25%{ transform: translateX(-6px);} 75%{ transform: translateX(6px);} }
-        @supports(padding: max(0px)) {.app-header, .tab-content, .nav-tabs {padding-left: max(16px, env(safe-area-inset-left));padding-right: max(16px, env(safe-area-inset-right));}.scroll-to-top {right: max(16px, env(safe-area-inset-right));bottom: max(80px, calc(80px + env(safe-area-inset-bottom)));}}
-        .modal { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:10000; padding:20px; }
-        .modal.hidden { display: none; }
-        .modal-content {background: var(--card-bg); border-radius: 20px; width: 100%; max-width: 600px; max-height: 90vh; overflow: hidden;box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: modalSlideIn 0.3s ease;}
-        @keyframes modalSlideIn { from { opacity:0; transform: translateY(-50px) scale(0.9);} to { opacity:1; transform: translateY(0) scale(1);} }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-color); background: var(--primary-color); color: white; }
-        .modal-header h3 { margin:0; font-size:1.2rem; }
-        .modal-close { background:none; border:none; color:white; font-size:24px; cursor:pointer; width:30px; height:30px; display:flex; align-items:center; justify-content:center; }
-        .modal-body { padding:20px; max-height:60vh; overflow-y:auto; }
-        .modal-actions { padding:20px; border-top:1px solid var(--border-color); display:flex; gap:10px; }
-        .report-identifiers { background: rgba(99,102,241,0.05); border-radius:12px; padding:16px; margin-bottom:16px; border:2px solid var(--primary-color); }
-        .identifier-item { display:flex; justify-content:space-between; margin-bottom:8px; padding:8px 0; border-bottom:1px solid var(--border-color); }
-        .identifier-item:last-child { margin-bottom:0; border-bottom:none; }
-        #toastContainer {position: fixed;bottom: calc(20px + var(--safe-area-inset-bottom));left: 50%;transform: translateX(-50%);z-index: 10001;display: flex;flex-direction: column;gap: 8px;pointer-events: none;max-width: 90vw;width: 400px;}
-        .toast {pointer-events: all;background: var(--card-bg);color: var(--text-color);border: 1px solid var(--border-color);border-left: 4px solid var(--primary-color);border-radius: 12px;padding: 16px;box-shadow: var(--shadow-hover);opacity: 0;transform: translateY(6px);transition: all .3s ease;font-weight: 500;max-width: 100%;word-wrap: break-word;}
-        .toast.show { opacity: 1; transform: translateY(0); }
-        .toast-success { border-left-color: var(--success-color); }
-        .toast-info { border-left-color: var(--primary-color); }
-        .toast-warning { border-left-color: var(--warning-color); }
-        .save-indicator {position: fixed;top: 20px;right: 20px;background: var(--success-color);color: white;padding: 8px 16px;border-radius: 8px;font-size: 0.8rem;z-index: 10002;opacity: 0;transform: translateY(-10px);transition: all 0.3s ease;}
-        .save-indicator.visible { opacity: 1; transform: translateY(0); }
-        .tooltip {position: fixed;background: var(--card-bg);color: var(--text-color);padding: 12px 16px;border-radius: 8px;box-shadow: var(--shadow-hover);border: 1px solid var(--border-color);max-width: 300px;font-size: 0.8rem;line-height: 1.4;z-index: 10003;pointer-events: none;}
-        .mileage-conversion {font-size: 0.75rem;color: var(--text-light);margin-top: 4px;font-style: italic;}
-        @media (max-width: 480px) {#toastContainer {width: 95vw;max-width: 95vw;}.toast {padding: 14px;}}
-        @keyframes errorPulse {0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }}
-        .pulse {animation: errorPulse 1.5s infinite;}
-        input:invalid, select:invalid {border-color: var(--danger-color) !important;}
-        .required-field::after {content: " *";color: var(--danger-color);}
-        .toast-close {background: none;border: none;font-size: 18px;cursor: pointer;margin-left: auto;padding: 0;width: 20px;height: 20px;display: flex;align-items: center;justify-content: center;color: var(--text-light);}
-        .toast-close:hover {color: var(--text-color);}
-        .inspection-item.priority-high {border-left: 4px solid var(--danger-color);}
-        .inspection-item.priority-medium {border-left: 4px solid var(--warning-color);}
-        .inspection-item.priority-low {border-left: 4px solid var(--success-color);}
-        .priority-badge {font-size: 0.7rem;padding: 2px 6px;border-radius: 8px;font-weight: 600;}
-        .priority-high { background: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
-        .priority-medium { background: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
-        .priority-low { background: rgba(16, 185, 129, 0.1); color: var(--success-color); }
-        .photo-upload-section {margin-top: 16px;padding: 16px;background: rgba(99, 102, 241, 0.05);border-radius: 12px;border: 2px dashed var(--primary-color);}
-        .photo-upload-label {display: block;margin-bottom: 10px;font-weight: 600;color: var(--primary-color);}
-        .photo-upload-input {width: 100%;padding: 12px;border: 2px dashed var(--border-color);border-radius: 8px;background: var(--card-bg);cursor: pointer;transition: all 0.3s ease;margin-bottom: 12px;}
-        .photo-upload-input:hover {border-color: var(--primary-color);background: rgba(99, 102, 241, 0.05);}
-        .photo-preview-container {display: grid;grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));gap: 10px;margin-top: 12px;}
-        .photo-preview-item {position: relative;border-radius: 8px;overflow: hidden;border: 2px solid var(--border-color);transition: all 0.3s ease;}
-        .photo-preview-item:hover {border-color: var(--primary-color);transform: scale(1.05);}
-        .photo-preview-img {width: 100%;height: 80px;object-fit: cover;display: block;}
-        .photo-preview-remove {position: absolute;top: 4px;right: 4px;background: var(--danger-color);color: white;border: none;border-radius: 50%;width: 20px;height: 20px;font-size: 12px;cursor: pointer;display: flex;align-items: center;justify-content: center;}
-        .photo-counter {font-size: 0.8rem;color: var(--text-light);margin-top: 8px;text-align: center;}
-        .photo-storage-warning {background: rgba(245, 158, 11, 0.1);border: 1px solid var(--warning-color);border-radius: 8px;padding: 10px;margin-top: 10px;font-size: 0.8rem;color: var(--warning-color);}
-        .pdf-page {width: 100%;min-height: 280mm;padding: 8mm;background: white;position: relative;page-break-after: always;box-sizing: border-box;}
-        .pdf-page:last-child {page-break-after: auto;}
-        .page-break {page-break-before: always;}
-        @media print {.pdf-page {page-break-after: always;}.pdf-page:last-child {page-break-after: auto;}}
-        /* НОВЫЙ СТИЛЬ: Визуальное выделение разделов проверки */
-        .inspection-section {border: 2px dashed var(--primary-color);border-radius: 12px;padding: 16px;margin-bottom: 20px;background: rgba(99, 102, 241, 0.03);}
-        
-        /* Стили для модального окна прогресса PDF */
-        #pdfProgress .modal-content {
-            max-width: 500px;
-        }
-        #pdfProgress .progress-container {
-            margin: 20px 0;
-        }
-        #pdfPageStatus {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-        #pdfProgressDetails {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 5px;
-            text-align: center;
-        }
+        /* Стили остаются без изменений */
+        :root{--primary-color:#6366F1;--primary-dark:#4F46E5;--secondary-color:#10B981;--danger-color:#EF4444;--warning-color:#F59E0B;--success-color:#10B981;--text-color:#1F2937;--text-light:#6B7280;--bg-color:#F9FAFB;--card-bg:#ffffff;--border-color:#E5E7EB;--shadow:0 4px 20px rgba(0,0,0,0.08);--shadow-hover:0 8px 30px rgba(0,0,0,0.12);--safe-area-inset-bottom:env(safe-area-inset-bottom,0px);--safe-area-inset-top:env(safe-area-inset-top,0px);}[data-theme="dark"]{--primary-color:#818CF8;--primary-dark:#6366F1;--secondary-color:#34D399;--danger-color:#F87171;--warning-color:#FBBF24;--success-color:#34D399;--text-color:#F9FAFB;--text-light:#D1D5DB;--bg-color:#111827;--card-bg:#1F2937;--border-color:#374151;--shadow:0 4px 20px rgba(0,0,0,0.25);--shadow-hover:0 8px 30px rgba(0,0,0,0.35);}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:var(--bg-color);color:var(--text-color);line-height:1.6;min-height:100vh;padding:0;margin:0;transition:background-color 0.3s ease,color 0.3s ease;padding-bottom:var(--safe-area-inset-bottom);padding-top:var(--safe-area-inset-top);}.app-container{max-width:100%;margin:0 auto;background:var(--bg-color);min-height:100vh;position:relative;}.app-header{background:linear-gradient(135deg,var(--primary-color),var(--primary-dark));color:white;padding:20px 16px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.15);padding-top:calc(20px + var(--safe-area-inset-top));transform:translateZ(0);transition:transform 0.3s ease,box-shadow 0.3s ease;}.app-header.scrolled{transform:translateY(-5px);box-shadow:0 8px 30px rgba(0,0,0,0.25);}.app-header h1{font-size:1.5rem;margin-bottom:6px;font-weight:700;letter-spacing:-0.025em;}.app-header p{opacity:0.9;font-size:0.9rem;font-weight:400;}.nav-tabs{display:flex;background:var(--card-bg);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:99;padding:0 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}.nav-tabs::-webkit-scrollbar{display:none;}.nav-tab{flex:1;min-width:70px;background:none;border:none;padding:14px 6px;text-align:center;font-weight:600;font-size:0.7rem;color:var(--text-light);cursor:pointer;transition:all 0.3s ease;border-bottom:3px solid transparent;border-radius:0;margin:0 1px;white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:4px;}.nav-tab.active{color:var(--primary-color);border-bottom-color:var(--primary-color);background:rgba(99,102,241,0.05);}.nav-tab:active{background:rgba(99,102,241,0.1);transform:scale(0.98);}.nav-tab .tab-icon{font-size:1.1rem;margin-bottom:2px;}.nav-tab .tab-text{font-size:0.65rem;line-height:1.2;}.tab-content{display:none;padding:20px 16px;animation:fadeIn 0.4s ease;padding-bottom:calc(20px + var(--safe-area-inset-bottom));}.tab-content.active{display:block;}@keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}.card{background:var(--card-bg);border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--border-color);transition:transform 0.3s ease,box-shadow 0.3s ease;transform:translateZ(0);}.card:hover{box-shadow:var(--shadow-hover);transform:translateY(-5px) translateZ(0);}.card:active{transform:scale(0.995) translateZ(0);}.section-title{font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary-color);display:flex;align-items:center;gap:8px;letter-spacing:-0.025em;}.form-group{margin-bottom:20px;}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}label{display:block;margin-bottom:8px;font-weight:600;color:var(--text-color);font-size:0.9rem;}input,select,textarea{width:100%;padding:14px;border:2px solid var(--border-color);border-radius:12px;font-size:16px;background:var(--card-bg);color:var(--text-color);transition:all 0.3s ease;font-family:inherit;-webkit-appearance:none;}input:focus,select:focus,textarea:focus{border-color:var(--primary-color);outline:none;box-shadow:0 0 0 3px rgba(99,102,241,0.1);transform:translateY(-2px);}.mileage-row{display:flex;align-items:center;gap:12px;}.mileage-input-group{flex:1;display:flex;flex-direction:column;gap:6px;}.mileage-input-group input{width:100%;padding:14px;border:2px solid var(--border-color);border-radius:12px;font-size:16px;background:var(--card-bg);color:var(--text-color);transition:all 0.3s ease;}.mileage-input-group input:focus{border-color:var(--primary-color);outline:none;box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.mileage-label{font-size:0.75rem;color:var(--text-light);text-align:center;font-weight:500;}.mileage-separator{color:var(--primary-color);font-size:1.2rem;font-weight:bold;padding:0 8px;}@media (max-width:480px){.mileage-row{flex-direction:column;gap:8px;}.mileage-separator{transform:rotate(90deg);padding:4px 0;}}.btn{background:linear-gradient(135deg,var(--primary-color),var(--primary-dark));color:white;border:none;border-radius:12px;padding:16px 20px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-align:center;display:block;width:100%;position:relative;overflow:hidden;transform:translateZ(0);}.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s;}.btn:hover::before{left:100%;}.btn:hover{transform:translateY(-3px) translateZ(0);box-shadow:0 8px 25px rgba(99,102,241,0.3);}.btn:active{transform:scale(0.98) translateZ(0);}.btn-secondary{background:linear-gradient(135deg,var(--secondary-color),#059669);}.btn-warning{background:linear-gradient(135deg,var(--warning-color),#D97706);}.btn-danger{background:linear-gradient(135deg,var(--danger-color),#DC2626);}.btn-success{background:linear-gradient(135deg,var(--success-color),#059669);}.progress-container{margin:20px 0;}.progress-bar{height:8px;background:var(--border-color);border-radius:4px;overflow:hidden;margin-bottom:10px;box-shadow:inset 0 1px 3px rgba(0,0,0,0.1);}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary-color),var(--secondary-color));width:0%;transition:width 0.7s cubic-bezier(0.34,1.56,0.64,1);border-radius:4px;position:relative;overflow:hidden;}.progress-fill::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2s infinite;}@keyframes shimmer{0%{left:-100%;}100%{left:100%;}}.progress-text{text-align:center;font-size:0.8rem;color:var(--text-light);font-weight:500;}.alert{padding:16px;border-radius:12px;margin:16px 0;font-weight:500;animation:slideIn 0.4s ease;border-left:4px solid;}@keyframes slideIn{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}.alert-success{background:rgba(16,185,129,0.1);color:var(--success-color);border-left-color:var(--success-color);}.alert-info{background:rgba(99,102,241,0.1);color:var(--primary-color);border-left-color:var(--primary-color);}.alert-warning{background:rgba(245,158,11,0.1);color:var(--warning-color);border-left-color:var(--warning-color);}.output-container{background:var(--card-bg);border-radius:12px;padding:20px;margin-top:20px;border:1px solid var(--border-color);white-space:pre-wrap;font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.85rem;line-height:1.6;max-height:400px;overflow-y:auto;transition:all 0.3s ease;}.output-container:focus{border-color:var(--primary-color);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.search-box{position:relative;margin-bottom:20px;}.search-box input{padding-left:44px;}.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-light);z-index:2;}.reports-list{max-height:500px;overflow-y:auto;}.report-item{background:var(--card-bg);border-radius:14px;padding:16px;margin-bottom:10px;border:1px solid var(--border-color);transition:all 0.3s ease;cursor:pointer;transform:translateZ(0);}.report-item:hover{transform:translateY(-5px) translateZ(0);box-shadow:var(--shadow-hover);}.report-item:active{transform:scale(0.99) translateZ(0);}.report-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}.report-title{font-weight:700;font-size:1rem;color:var(--text-color);}.report-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.8rem;color:var(--text-light);}.report-actions{display:flex;gap:6px;}.action-btn{padding:6px 10px;border:none;border-radius:8px;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;font-weight:600;transform:translateZ(0);}.action-btn:hover{transform:translateY(-2px) translateZ(0);}.action-btn:active{transform:scale(0.95) translateZ(0);}.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:20px 0;}.stat-card{background:var(--card-bg);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border-color);transition:all 0.3s ease;transform:translateZ(0);}.stat-card:hover{transform:translateY(-5px) translateZ(0);box-shadow:var(--shadow-hover);}.stat-value{font-size:1.5rem;font-weight:800;color:var(--primary-color);margin:6px 0;letter-spacing:-0.025em;}.stat-label{font-size:0.8rem;color:var(--text-light);font-weight:500;}.grid-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;}.grid-btn{background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;padding:8px 4px;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;}.grid-btn.active{background:var(--primary-color);color:white;border-color:var(--primary-color);}@media (max-width:768px){.form-row{grid-template-columns:1fr;}.nav-tab{font-size:0.65rem;padding:12px 4px;}.nav-tab .tab-icon{font-size:1rem;}.stats-grid{grid-template-columns:1fr;}.tab-content{padding:16px 12px;}.card{padding:16px;border-radius:14px;}.app-header{padding:16px 12px;padding-top:calc(16px + var(--safe-area-inset-top));}.app-header h1{font-size:1.3rem;}.section-title{font-size:1rem;}.btn{padding:14px 16px;font-size:0.95rem;}}@media (max-width:480px){.app-header h1{font-size:1.2rem;}.nav-tab .tab-text{font-size:0.6rem;}}@media (max-width:380px){.nav-tabs{padding:0 2px;}.nav-tab{min-width:60px;padding:8px 1px;}.nav-tab .tab-icon{font-size:0.9rem;}.nav-tab .tab-text{font-size:0.55rem;}}.text-center{text-align:center;}.mt-10{margin-top:10px;}.mt-20{margin-top:20px;}.mb-10{margin-bottom:10px;}.mb-20{margin-bottom:20px;}.hidden{display:none!important;}.flex{display:flex;}.items-center{align-items:center;}.justify-between{justify-content:space-between;}.gap-10{gap:10px;}.scroll-to-top{position:fixed;bottom:80px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--primary-color);color:white;border:none;font-size:20px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:none;z-index:1000;transition:all 0.3s ease;align-items:center;justify-content:center;transform:translateZ(0);}.scroll-to-top.visible{display:flex;}.scroll-to-top:hover{transform:translateY(-3px) translateZ(0);box-shadow:0 8px 25px rgba(99,102,241,0.3);}.scroll-to-top:active{transform:scale(0.95) translateZ(0);}.settings-group{margin-bottom:24px;}.settings-label{font-weight:600;margin-bottom:10px;color:var(--text-color);font-size:0.95rem;}.settings-description{font-size:0.8rem;color:var(--text-light);margin-bottom:14px;}.toggle-switch{position:relative;display:inline-block;width:50px;height:26px;}.toggle-switch input{opacity:0;width:0;height:0;}.toggle-slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:var(--border-color);transition:.4s;border-radius:34px;}.toggle-slider:before{position:absolute;content:"";height:20px;width:20px;left:3px;bottom:3px;background:white;transition:.4s;border-radius:50%;}input:checked+.toggle-slider{background:var(--primary-color);}input:checked+.toggle-slider:before{transform:translateX(24px);}.toggle-container{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border-color);}.toggle-label{font-weight:500;color:var(--text-color);}.inspection-fields{background:rgba(99,102,241,0.05);border-radius:12px;padding:16px;margin-top:14px;border:2px dashed var(--primary-color);}.inspection-item{background:var(--card-bg);border-radius:12px;padding:16px;margin-bottom:14px;border:1px solid var(--border-color);transition:all 0.3s ease;position:relative;}.inspection-item.urgent{border-left:4px solid var(--warning-color);}.inspection-item.completed{opacity:0.7;background:rgba(16,185,129,0.05);}.inspection-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}.inspection-title{font-weight:700;font-size:1rem;color:var(--text-color);}.inspection-date{font-size:0.85rem;color:var(--text-light);background:var(--primary-color);color:white;padding:4px 8px;border-radius:16px;font-weight:600;}.inspection-details{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.8rem;margin-bottom:14px;}.inspection-actions{display:flex;gap:6px;}.badge{display:inline-block;padding:4px 8px;border-radius:10px;font-size:0.7rem;font-weight:600;margin-right:6px;margin-bottom:6px;}.badge-warning{background:rgba(245,158,11,0.1);color:var(--warning-color);}.badge-success{background:rgba(16,185,129,0.1);color:var(--success-color);}.badge-info{background:rgba(99,102,241,0.1);color:var(--primary-color);}.pulse{animation:pulse 2s infinite;}@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}.shake{animation:shake 0.5s;}@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}@supports(padding:max(0px)){.app-header,.tab-content,.nav-tabs{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));}.scroll-to-top{right:max(16px,env(safe-area-inset-right));bottom:max(80px,calc(80px+env(safe-area-inset-bottom)));}}.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;}.modal.hidden{display:none;}.modal-content{background:var(--card-bg);border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:modalSlideIn 0.3s ease;}@keyframes modalSlideIn{from{opacity:0;transform:translateY(-50px) scale(0.9);}to{opacity:1;transform:translateY(0) scale(1);}}.modal-header{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--border-color);background:var(--primary-color);color:white;}.modal-header h3{margin:0;font-size:1.2rem;}.modal-close{background:none;border:none;color:white;font-size:24px;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;}.modal-body{padding:20px;max-height:60vh;overflow-y:auto;}.modal-actions{padding:20px;border-top:1px solid var(--border-color);display:flex;gap:10px;}.report-identifiers{background:rgba(99,102,241,0.05);border-radius:12px;padding:16px;margin-bottom:16px;border:2px solid var(--primary-color);}.identifier-item{display:flex;justify-content:space-between;margin-bottom:8px;padding:8px 0;border-bottom:1px solid var(--border-color);}.identifier-item:last-child{margin-bottom:0;border-bottom:none;}#toastContainer{position:fixed;bottom:calc(20px + var(--safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:10001;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:90vw;width:400px;}.toast{pointer-events:all;background:var(--card-bg);color:var(--text-color);border:1px solid var(--border-color);border-left:4px solid var(--primary-color);border-radius:12px;padding:16px;box-shadow:var(--shadow-hover);opacity:0;transform:translateY(6px);transition:all .3s ease;font-weight:500;max-width:100%;word-wrap:break-word;}.toast.show{opacity:1;transform:translateY(0);}.toast-success{border-left-color:var(--success-color);}.toast-info{border-left-color:var(--primary-color);}.toast-warning{border-left-color:var(--warning-color);}.save-indicator{position:fixed;top:20px;right:20px;background:var(--success-color);color:white;padding:8px 16px;border-radius:8px;font-size:0.8rem;z-index:10002;opacity:0;transform:translateY(-10px);transition:all 0.3s ease;}.save-indicator.visible{opacity:1;transform:translateY(0);}.tooltip{position:fixed;background:var(--card-bg);color:var(--text-color);padding:12px 16px;border-radius:8px;box-shadow:var(--shadow-hover);border:1px solid var(--border-color);max-width:300px;font-size:0.8rem;line-height:1.4;z-index:10003;pointer-events:none;}.mileage-conversion{font-size:0.75rem;color:var(--text-light);margin-top:4px;font-style:italic;}@media (max-width:480px){#toastContainer{width:95vw;max-width:95vw;}.toast{padding:14px;}}@keyframes errorPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.7);}70%{box-shadow:0 0 0 10px rgba(239,68,68,0);}100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}}.pulse{animation:errorPulse 1.5s infinite;}input:invalid,select:invalid{border-color:var(--danger-color)!important;}.required-field::after{content:" *";color:var(--danger-color);}.toast-close{background:none;border:none;font-size:18px;cursor:pointer;margin-left:auto;padding:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--text-light);}.toast-close:hover{color:var(--text-color);}.inspection-item.priority-high{border-left:4px solid var(--danger-color);}.inspection-item.priority-medium{border-left:4px solid var(--warning-color);}.inspection-item.priority-low{border-left:4px solid var(--success-color);}.priority-badge{font-size:0.7rem;padding:2px 6px;border-radius:8px;font-weight:600;}.priority-high{background:rgba(239,68,68,0.1);color:var(--danger-color);}.priority-medium{background:rgba(245,158,11,0.1);color:var(--warning-color);}.priority-low{background:rgba(16,185,129,0.1);color:var(--success-color);}.photo-upload-section{margin-top:16px;padding:16px;background:rgba(99,102,241,0.05);border-radius:12px;border:2px dashed var(--primary-color);}.photo-upload-label{display:block;margin-bottom:10px;font-weight:600;color:var(--primary-color);}.photo-upload-input{width:100%;padding:12px;border:2px dashed var(--border-color);border-radius:8px;background:var(--card-bg);cursor:pointer;transition:all 0.3s ease;margin-bottom:12px;}.photo-upload-input:hover{border-color:var(--primary-color);background:rgba(99,102,241,0.05);}.photo-preview-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px;}.photo-preview-item{position:relative;border-radius:8px;overflow:hidden;border:2px solid var(--border-color);transition:all 0.3s ease;}.photo-preview-item:hover{border-color:var(--primary-color);transform:scale(1.05);}.photo-preview-img{width:100%;height:80px;object-fit:cover;display:block;}.photo-preview-remove{position:absolute;top:4px;right:4px;background:var(--danger-color);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;}.photo-counter{font-size:0.8rem;color:var(--text-light);margin-top:8px;text-align:center;}.photo-storage-warning{background:rgba(245,158,11,0.1);border:1px solid var(--warning-color);border-radius:8px;padding:10px;margin-top:10px;font-size:0.8rem;color:var(--warning-color);}.pdf-page{width:100%;min-height:280mm;padding:8mm;background:white;position:relative;page-break-after:always;box-sizing:border-box;}.pdf-page:last-child{page-break-after:auto;}.page-break{page-break-before:always;}@media print{.pdf-page{page-break-after:always;}.pdf-page:last-child{page-break-after:auto;}}.inspection-section{border:2px dashed var(--primary-color);border-radius:12px;padding:16px;margin-bottom:20px;background:rgba(99,102,241,0.03);}#pdfProgress .modal-content{max-width:500px;}#pdfProgress .progress-container{margin:20px 0;}#pdfPageStatus{text-align:center;margin-top:10px;font-size:0.9rem;color:var(--text-light);}#pdfProgressDetails{font-size:0.8rem;color:var(--text-light);margin-top:5px;text-align:center;}
     </style>
 </head>
 <body>
@@ -312,7 +121,7 @@
                                     <option value="Трэйл (Trail)">Трэйл (Trail)</option>
                                     <option value="Эдвенчер (Adventure)">Эдвенчер (Adventure)</option>
                                     <option value="Супермото (Supermoto)">Супермото (Supermoto)</option>
-                                    <option value="Скутеры (Scooter)">Скутееры (Scooter)</option>
+                                    <option value="Скутеры (Scooter)">Скутеры (Scooter)</option>
                                     <option value="Мопеды / Легкие мотоциклы">Мопеды / Легкие мотоциклы</option>
                                     <option value="Электрические мотоциклы">Электрические мотоциклы</option>
                                 </select>
@@ -424,7 +233,7 @@
                     </div>
                     <div class="section-title">🔧 Проверка мотоцикла</div>
                     <div class="card">
-                        <!-- Внешний вид -->
+                        <!-- Титульный лист -->
                         <div class="inspection-section">
                             <div class="form-group">
                                 <div class="photo-upload-section">
@@ -436,30 +245,16 @@
                             </div>
                         </div>
 
-                        <!-- Внешний вид -->
+                        <!-- Осмотр Общий, Внешний вид -->
                         <div class="inspection-section">
                             <div class="form-group">
-                                <label for="inspection_geometry">Внешний вид</label>
-                                <textarea id="inspection_geometry" name="inspection_geometry" rows="2" placeholder="Состояние внешнего вида мотоцикла..."></textarea>
+                                <label for="inspection_engine">Осмотр Общий, Внешний вид</label>
+                                <textarea id="inspection_engine" name="inspection_engine" rows="2" placeholder="Общий осмотр мотоцикла, внешний вид..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии внешнего вида (максимум 10)</label>
-                                    <input type="file" class="photo-upload-input" data-section="geometry" accept="image/*" multiple>
-                                    <div class="photo-preview-container" data-section="geometry"></div>
-                                    <div class="photo-counter" data-section="geometry">Загружено: 0/10</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Осмотр Общий -->
-                        <div class="inspection-section">
-                            <div class="form-group">
-                                <label for="inspection_engine">Осмотр Общий</label>
-                                <textarea id="inspection_engine" name="inspection_engine" rows="2" placeholder="Общий осмотр мотоцикла..."></textarea>
-                                <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии общего осмотра (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии общего осмотра и внешнего вида (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="engine" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="engine"></div>
-                                    <div class="photo-counter" data-section="engine">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="engine">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -470,10 +265,10 @@
                                 <label for="inspection_consumables">Состояние ЛКП</label>
                                 <textarea id="inspection_consumables" name="inspection_consumables" rows="2" placeholder="Состояние лакокрасочного покрытия..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии состояния ЛКП (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии состояния ЛКП (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="consumables" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="consumables"></div>
-                                    <div class="photo-counter" data-section="consumables">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="consumables">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -484,10 +279,10 @@
                                 <label for="inspection_electrical">Состояние Сиденья</label>
                                 <textarea id="inspection_electrical" name="inspection_electrical" rows="2" placeholder="Состояние сиденья..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии состояния сиденья (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии состояния сиденья (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="electrical" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="electrical"></div>
-                                    <div class="photo-counter" data-section="electrical">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="electrical">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -498,10 +293,10 @@
                                 <label for="inspection_suspension">Осмотр Оптики</label>
                                 <textarea id="inspection_suspension" name="inspection_suspension" rows="2" placeholder="Состояние оптики: фары, поворотники, стоп-сигналы..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии оптики (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии оптики (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="suspension" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="suspension"></div>
-                                    <div class="photo-counter" data-section="suspension">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="suspension">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -512,10 +307,10 @@
                                 <label for="inspection_fuel_system">Рама, Швы, Вторичная окраска</label>
                                 <textarea id="inspection_fuel_system" name="inspection_fuel_system" rows="2" placeholder="Состояние рамы, швов, вторичной окраски..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии рамы, швов, окраски (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии рамы, швов, окраски (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="fuel_system" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="fuel_system"></div>
-                                    <div class="photo-counter" data-section="fuel_system">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="fuel_system">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -526,10 +321,10 @@
                                 <label for="inspection_brake_system">Криминал, Вин номера, Номера Двигателя</label>
                                 <textarea id="inspection_brake_system" name="inspection_brake_system" rows="2" placeholder="Проверка на криминал, сверка VIN и номеров двигателя..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии VIN и номеров (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии VIN и номеров (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="brake_system" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="brake_system"></div>
-                                    <div class="photo-counter" data-section="brake_system">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="brake_system">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -540,10 +335,10 @@
                                 <label for="inspection_cooling_system">Геометрия, Подрамника, руля, вилки</label>
                                 <textarea id="inspection_cooling_system" name="inspection_cooling_system" rows="2" placeholder="Геометрия подрамника, руля, вилки..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии геометрии (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии геометрии (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="cooling_system" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="cooling_system"></div>
-                                    <div class="photo-counter" data-section="cooling_system">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="cooling_system">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -554,10 +349,10 @@
                                 <label for="inspection_controls">Органы управления</label>
                                 <textarea id="inspection_controls" name="inspection_controls" rows="2" placeholder="Состояние органов управления: ручки, переключатели..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии органов управления (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии органов управления (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="controls" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="controls"></div>
-                                    <div class="photo-counter" data-section="controls">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="controls">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -568,10 +363,10 @@
                                 <label for="inspection_additional_equipment">Моторный Узел</label>
                                 <textarea id="inspection_additional_equipment" name="inspection_additional_equipment" rows="2" placeholder="Состояние моторного узла..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии моторного узла (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии моторного узла (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="additional_equipment" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="additional_equipment"></div>
-                                    <div class="photo-counter" data-section="additional_equipment">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="additional_equipment">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -582,10 +377,10 @@
                                 <label for="inspection_bodywork">Топливная система</label>
                                 <textarea id="inspection_bodywork" name="inspection_bodywork" rows="2" placeholder="Состояние топливной системы..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии топливной системы (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии топливной системы (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="bodywork" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="bodywork"></div>
-                                    <div class="photo-counter" data-section="bodywork">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="bodywork">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -596,10 +391,10 @@
                                 <label for="inspection_electrical_new">Система охлаждения</label>
                                 <textarea id="inspection_electrical_new" name="inspection_electrical_new" rows="2" placeholder="Состояние системы охлаждения..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии системы охлаждения (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии системы охлаждения (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="electrical_new" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="electrical_new"></div>
-                                    <div class="photo-counter" data-section="electrical_new">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="electrical_new">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -610,10 +405,10 @@
                                 <label for="inspection_brake_system_new">Электрооборудование</label>
                                 <textarea id="inspection_brake_system_new" name="inspection_brake_system_new" rows="2" placeholder="Состояние электрооборудования..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии электрооборудования (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии электрооборудования (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="brake_system_new" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="brake_system_new"></div>
-                                    <div class="photo-counter" data-section="brake_system_new">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="brake_system_new">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -624,10 +419,10 @@
                                 <label for="inspection_drive">Тормозная система</label>
                                 <textarea id="inspection_drive" name="inspection_drive" rows="2" placeholder="Состояние тормозной системы..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии тормозной системы (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии тормозной системы (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="drive" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="drive"></div>
-                                    <div class="photo-counter" data-section="drive">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="drive">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -638,10 +433,10 @@
                                 <label for="inspection_tires">Привод</label>
                                 <textarea id="inspection_tires" name="inspection_tires" rows="2" placeholder="Состояние привода..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии привода (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии привода (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="tires" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="tires"></div>
-                                    <div class="photo-counter" data-section="tires">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="tires">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -652,10 +447,10 @@
                                 <label for="inspection_suspension_front_rear">Резина</label>
                                 <textarea id="inspection_suspension_front_rear" name="inspection_suspension_front_rear" rows="2" placeholder="Состояние резины..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии резины (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии резины (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="suspension_front_rear" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="suspension_front_rear"></div>
-                                    <div class="photo-counter" data-section="suspension_front_rear">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="suspension_front_rear">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -666,10 +461,10 @@
                                 <label for="inspection_computer_diagnostics">Подвеска перед, зад</label>
                                 <textarea id="inspection_computer_diagnostics" name="inspection_computer_diagnostics" rows="2" placeholder="Состояние передней и задней подвески..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии подвески (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии подвески (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="computer_diagnostics" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="computer_diagnostics"></div>
-                                    <div class="photo-counter" data-section="computer_diagnostics">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="computer_diagnostics">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -680,10 +475,10 @@
                                 <label for="inspection_additional_equipment_new">Компьютерная Диагностика</label>
                                 <textarea id="inspection_additional_equipment_new" name="inspection_additional_equipment_new" rows="2" placeholder="Результаты компьютерной диагностики..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии компьютерной диагностики (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии компьютерной диагностики (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="additional_equipment_new" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="additional_equipment_new"></div>
-                                    <div class="photo-counter" data-section="additional_equipment_new">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="additional_equipment_new">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -694,10 +489,24 @@
                                 <label for="inspection_final">Дополнительное оборудование</label>
                                 <textarea id="inspection_final" name="inspection_final" rows="2" placeholder="Состояние дополнительного оборудования..."></textarea>
                                 <div class="photo-upload-section">
-                                    <label class="photo-upload-label">📷 Фотографии дополнительного оборудования (максимум 10)</label>
+                                    <label class="photo-upload-label">📷 Фотографии дополнительного оборудования (максимум 9)</label>
                                     <input type="file" class="photo-upload-input" data-section="final" accept="image/*" multiple>
                                     <div class="photo-preview-container" data-section="final"></div>
-                                    <div class="photo-counter" data-section="final">Загружено: 0/10</div>
+                                    <div class="photo-counter" data-section="final">Загружено: 0/9</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Дополнительные фотографии -->
+                        <div class="inspection-section">
+                            <div class="form-group">
+                                <label for="inspection_geometry">Дополнительные фотографии</label>
+                                <textarea id="inspection_geometry" name="inspection_geometry" rows="2" placeholder="Дополнительные фотографии мотоцикла..."></textarea>
+                                <div class="photo-upload-section">
+                                    <label class="photo-upload-label">📷 Дополнительные фотографии (максимум 9)</label>
+                                    <input type="file" class="photo-upload-input" data-section="geometry" accept="image/*" multiple>
+                                    <div class="photo-preview-container" data-section="geometry"></div>
+                                    <div class="photo-counter" data-section="geometry">Загружено: 0/9</div>
                                 </div>
                             </div>
                         </div>
@@ -797,46 +606,47 @@
         <div id="stats-tab" class="tab-content">
             <div class="card">
                 <h2 class="section-title">📈 Статистика</h2>
-                <div class="grid-buttons">
-                    <button class="grid-btn active" data-period="week">Неделя</button>
-                    <button class="grid-btn" data-period="month">Месяц</button>
-                    <button class="grid-btn" data-period="quarter">Квартал</button>
-                    <button class="grid-btn" data-period="year">Год</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate">Начальная дата</label>
+                        <input type="date" id="startDate" name="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">Конечная дата</label>
+                        <input type="date" id="endDate" name="endDate">
+                    </div>
                 </div>
+                <button class="btn btn-secondary" id="updateStatsBtn">Обновить статистику</button>
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-label">Всего отчетов</div>
                         <div class="stat-value" id="totalReports">0</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Успешных сделок</div>
-                        <div class="stat-value" id="successfulDeals">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Средняя экономия</div>
-                        <div class="stat-value" id="avgSavings">0 тыс.</div>
+                        <div class="stat-label">Класс мотоциклов</div>
+                        <div class="stat-value" id="motorcycleClasses">-</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Популярная марка</div>
                         <div class="stat-value" id="popularBrand">-</div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Средняя цена</div>
+                        <div class="stat-value" id="avgPrice">0</div>
+                    </div>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-label">Запланировано проверок</div>
-                        <div class="stat-value" id="plannedInspections">0</div>
+                        <div class="stat-label">Куплено</div>
+                        <div class="stat-value" id="purchasedCount">0</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Выполнено проверок</div>
-                        <div class="stat-value" id="completedInspections">0</div>
+                        <div class="stat-label">Не куплено</div>
+                        <div class="stat-value" id="notPurchasedCount">0</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Активные проверки</div>
-                        <div class="stat-value" id="activeInspections">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Просроченные</div>
-                        <div class="stat-value" id="overdueInspections">0</div>
+                        <div class="stat-label">На рассмотрении</div>
+                        <div class="stat-value" id="pendingCount">0</div>
                     </div>
                 </div>
                 <button class="btn btn-secondary" id="generateStatsBtn">📊 Сгенерировать пост статистики</button>
@@ -962,7 +772,7 @@
             db: null,
             indexedDB: {
                 name: 'MotopodborDB',
-                version: 1,
+                version: 3,
                 stores: {
                     REPORTS: 'reports',
                     INSPECTIONS: 'inspections',
@@ -993,8 +803,11 @@
                 activeToasts: new Set(),
                 audioContext: null,
                 soundEnabled: true,
+                audioContextInitialized: false,
                 isIOS: /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
-                currentPhotos: {}
+                currentPhotos: {},
+                pdfGenerationInProgress: false,
+                pdfGenerationCanceled: false
             },
             async init() {
                 try {
@@ -1049,8 +862,16 @@
                         const db = event.target.result;
                         const oldVersion = event.oldVersion;
                         
-                        if (oldVersion < 1) {
-                            this.createStores(db);
+                        // Создаем хранилища, если их нет
+                        this.createStores(db);
+                        
+                        // Миграции для разных версий
+                        if (oldVersion < 2) {
+                            this.upgradeToVersion2(db);
+                        }
+                        
+                        if (oldVersion < 3) {
+                            this.upgradeToVersion3(db);
                         }
                     };
                 });
@@ -1072,6 +893,13 @@
                     inspectionsStore.createIndex('date', 'date', { unique: false });
                     inspectionsStore.createIndex('status', 'status', { unique: false });
                     inspectionsStore.createIndex('reportId', 'reportId', { unique: false });
+                } else {
+                    // Если хранилище уже существует, проверяем и создаем отсутствующие индексы
+                    const inspectionsStore = db.transaction([this.indexedDB.stores.INSPECTIONS], 'readwrite')
+                                              .objectStore(this.indexedDB.stores.INSPECTIONS);
+                    if (!inspectionsStore.indexNames.contains('reportId')) {
+                        inspectionsStore.createIndex('reportId', 'reportId', { unique: false });
+                    }
                 }
                 
                 if (!db.objectStoreNames.contains(this.indexedDB.stores.PHOTOS)) {
@@ -1081,6 +909,13 @@
                     });
                     photosStore.createIndex('reportId', 'reportId', { unique: false });
                     photosStore.createIndex('section', 'section', { unique: false });
+                } else {
+                    // Если хранилище уже существует, проверяем и создаем отсутствующие индексы
+                    const photosStore = db.transaction([this.indexedDB.stores.PHOTOS], 'readwrite')
+                                         .objectStore(this.indexedDB.stores.PHOTOS);
+                    if (!photosStore.indexNames.contains('reportId')) {
+                        photosStore.createIndex('reportId', 'reportId', { unique: false });
+                    }
                 }
                 
                 if (!db.objectStoreNames.contains(this.indexedDB.stores.SETTINGS)) {
@@ -1089,39 +924,173 @@
                     });
                 }
             },
-            async migrateFromLocalStorage() {
-                try {
-                    const localStorageReports = localStorage.getItem('motodiag_reports');
-                    if (localStorageReports) {
-                        const reports = JSON.parse(localStorageReports);
-                        for (const report of reports) {
-                            const existingReport = await this.getReportFromIndexedDB(report.id);
-                            if (!existingReport) {
-                                await this.saveReportToIndexedDB(report);
-                            }
-                        }
-                        localStorage.removeItem('motodiag_reports');
+            upgradeToVersion2(db) {
+                console.log('Выполняется миграция до версии 2');
+                // Уже реализовано в createStores
+            },
+            upgradeToVersion3(db) {
+                console.log('Выполняется миграция до версии 3');
+                // Добавляем новые индексы или изменения структуры если нужно
+            },
+            async checkIfAnyIndexedDBHasData() {
+                return new Promise((resolve, reject) => {
+                    if (!this.db) {
+                        resolve(false);
+                        return;
                     }
                     
-                    const localStorageInspections = localStorage.getItem('motodiag_inspections');
-                    if (localStorageInspections) {
-                        const inspections = JSON.parse(localStorageInspections);
-                        for (const inspection of inspections) {
-                            const existingInspection = await this.getInspectionFromIndexedDB(inspection.id);
-                            if (!existingInspection) {
-                                await this.saveInspectionToIndexedDB(inspection);
+                    const stores = [
+                        this.indexedDB.stores.REPORTS,
+                        this.indexedDB.stores.INSPECTIONS,
+                        this.indexedDB.stores.PHOTOS
+                    ];
+                    
+                    let completedChecks = 0;
+                    let hasData = false;
+                    
+                    stores.forEach(storeName => {
+                        try {
+                            const transaction = this.db.transaction([storeName], 'readonly');
+                            const store = transaction.objectStore(storeName);
+                            const request = store.count();
+                            
+                            request.onsuccess = () => {
+                                if (request.result > 0) {
+                                    hasData = true;
+                                }
+                                completedChecks++;
+                                if (completedChecks === stores.length) {
+                                    resolve(hasData);
+                                }
+                            };
+                            
+                            request.onerror = () => {
+                                console.error(`Ошибка проверки хранилища ${storeName}:`, request.error);
+                                completedChecks++;
+                                if (completedChecks === stores.length) {
+                                    resolve(hasData);
+                                }
+                            };
+                        } catch (e) {
+                            console.error(`Ошибка доступа к хранилищу ${storeName}:`, e);
+                            completedChecks++;
+                            if (completedChecks === stores.length) {
+                                resolve(hasData);
                             }
                         }
-                        localStorage.removeItem('motodiag_inspections');
+                    });
+                });
+            },
+            async migrateFromLocalStorage() {
+                try {
+                    // Проверяем версию миграции
+                    const migrationVersion = localStorage.getItem('motodiag_migration_version');
+                    if (migrationVersion === '2.7.1') {
+                        console.log('Миграция уже выполнена для этой версии');
+                        return;
                     }
-
+                    
+                    // Проверяем все хранилища на наличие данных
+                    const hasData = await this.checkIfAnyIndexedDBHasData();
+                    
+                    if (hasData) {
+                        console.log('IndexedDB уже содержит данные, пропускаем миграцию');
+                        localStorage.setItem('motodiag_migration_version', '2.7.1');
+                        return;
+                    }
+                    
+                    let totalMigrated = 0;
+                    let totalErrors = 0;
+                    
+                    // Миграция отчетов
+                    const localStorageReports = localStorage.getItem('motodiag_reports');
+                    if (localStorageReports) {
+                        try {
+                            const reports = JSON.parse(localStorageReports);
+                            let migratedCount = 0;
+                            let errorCount = 0;
+                            
+                            for (const report of reports) {
+                                try {
+                                    await this.saveReportToIndexedDB(report);
+                                    migratedCount++;
+                                } catch (e) {
+                                    console.error('Ошибка миграции отчета:', report.id, e);
+                                    errorCount++;
+                                }
+                            }
+                            
+                            totalMigrated += migratedCount;
+                            totalErrors += errorCount;
+                            
+                            // Удаляем из localStorage только после успешной миграции всех отчетов
+                            if (errorCount === 0) {
+                                localStorage.removeItem('motodiag_reports');
+                                console.log(`Мигрировано отчетов: ${migratedCount}`);
+                            } else {
+                                console.log(`Мигрировано отчетов: ${migratedCount}, ошибок: ${errorCount}`);
+                            }
+                        } catch (e) {
+                            console.error('Ошибка парсинга отчетов из localStorage:', e);
+                            totalErrors++;
+                        }
+                    }
+                    
+                    // Миграция проверок
+                    const localStorageInspections = localStorage.getItem('motodiag_inspections');
+                    if (localStorageInspections) {
+                        try {
+                            const inspections = JSON.parse(localStorageInspections);
+                            let migratedCount = 0;
+                            let errorCount = 0;
+                            
+                            for (const inspection of inspections) {
+                                try {
+                                    await this.saveInspectionToIndexedDB(inspection);
+                                    migratedCount++;
+                                } catch (e) {
+                                    console.error('Ошибка миграции проверки:', inspection.id, e);
+                                    errorCount++;
+                                }
+                            }
+                            
+                            totalMigrated += migratedCount;
+                            totalErrors += errorCount;
+                            
+                            if (errorCount === 0) {
+                                localStorage.removeItem('motodiag_inspections');
+                                console.log(`Мигрировано проверок: ${migratedCount}`);
+                            } else {
+                                console.log(`Мигрировано проверок: ${migratedCount}, ошибок: ${errorCount}`);
+                            }
+                        } catch (e) {
+                            console.error('Ошибка парсинга проверок из localStorage:', e);
+                            totalErrors++;
+                        }
+                    }
+                    
+                    // Миграция фотографий
                     const localStoragePhotos = localStorage.getItem('motodiag_current_photos');
                     if (localStoragePhotos) {
-                        this.state.currentPhotos = JSON.parse(localStoragePhotos);
-                        localStorage.removeItem('motodiag_current_photos');
+                        try {
+                            this.state.currentPhotos = JSON.parse(localStoragePhotos);
+                            localStorage.removeItem('motodiag_current_photos');
+                            console.log('Мигрированы текущие фотографии');
+                        } catch (e) {
+                            console.error('Ошибка миграции фотографий:', e);
+                            totalErrors++;
+                        }
                     }
+                    
+                    // Сохраняем версию миграции только если были успешно мигрированы данные
+                    if (totalMigrated > 0 || totalErrors === 0) {
+                        localStorage.setItem('motodiag_migration_version', '2.7.1');
+                        console.log(`Миграция завершена. Успешно: ${totalMigrated}, ошибок: ${totalErrors}`);
+                    }
+                    
                 } catch (e) {
-                    console.warn('Ошибка миграции данных:', e);
+                    console.error('Критическая ошибка миграции данных:', e);
+                    this.showToast('Ошибка при переносе данных. Проверьте консоль для подробностей.', 'warning');
                 }
             },
             async getReportFromIndexedDB(reportId) {
@@ -1220,8 +1189,14 @@
                     
                     const request = store.put(report);
                     
-                    request.onsuccess = () => resolve();
-                    request.onerror = () => reject(request.error);
+                    request.onsuccess = () => {
+                        console.log('Отчет успешно сохранен в IndexedDB:', report.id);
+                        resolve();
+                    };
+                    request.onerror = () => {
+                        console.error('Ошибка сохранения отчета:', request.error);
+                        reject(request.error);
+                    };
                 });
             },
             async saveInspectionToIndexedDB(inspection) {
@@ -1260,6 +1235,7 @@
                     };
                     
                     try {
+                        // Удаляем старые фото для этого отчета
                         const index = store.index('reportId');
                         const clearRequest = index.openCursor(IDBKeyRange.only(reportId));
                         
@@ -1269,7 +1245,9 @@
                                 store.delete(cursor.primaryKey);
                                 cursor.continue();
                             } else {
+                                // Сохраняем новые фото
                                 this.saveNewPhotos(store, reportId, photos);
+                                resolve();
                             }
                         };
                         
@@ -1365,44 +1343,95 @@
                     
                     let completedOperations = 0;
                     const totalOperations = 3;
+                    let hasError = false;
                     
-                    transaction.onerror = () => reject(transaction.error);
-                    transaction.oncomplete = () => resolve();
+                    const checkCompletion = () => {
+                        if (completedOperations === totalOperations && !hasError) {
+                            console.log(`Все операции удаления для отчета ${reportId} завершены`);
+                            resolve();
+                        }
+                    };
                     
+                    transaction.onerror = (event) => {
+                        hasError = true;
+                        console.error('Ошибка транзакции удаления:', event.target.error);
+                        reject(event.target.error);
+                    };
+                    
+                    // Удаляем отчет
                     const reportsStore = transaction.objectStore(this.indexedDB.stores.REPORTS);
                     const reportRequest = reportsStore.delete(reportId);
-                    reportRequest.onsuccess = () => completedOperations++;
-                    reportRequest.onerror = () => reject(reportRequest.error);
+                    reportRequest.onsuccess = () => {
+                        console.log('Отчет удален из хранилища reports');
+                        completedOperations++;
+                        checkCompletion();
+                    };
+                    reportRequest.onerror = () => {
+                        hasError = true;
+                        reject(reportRequest.error);
+                    };
                     
+                    // Удаляем связанные проверки (без использования индекса)
                     const inspectionsStore = transaction.objectStore(this.indexedDB.stores.INSPECTIONS);
-                    const inspectionsIndex = inspectionsStore.index('reportId');
-                    const inspectionsRequest = inspectionsIndex.openCursor(IDBKeyRange.only(reportId));
+                    const inspectionsRequest = inspectionsStore.openCursor();
                     
+                    let inspectionsDeleted = false;
                     inspectionsRequest.onsuccess = () => {
                         const cursor = inspectionsRequest.result;
                         if (cursor) {
-                            inspectionsStore.delete(cursor.primaryKey);
+                            if (cursor.value.reportId === reportId) {
+                                inspectionsStore.delete(cursor.primaryKey);
+                            }
                             cursor.continue();
                         } else {
+                            console.log('Все проверки обработаны');
+                            inspectionsDeleted = true;
                             completedOperations++;
+                            checkCompletion();
                         }
                     };
-                    inspectionsRequest.onerror = () => reject(inspectionsRequest.error);
+                    inspectionsRequest.onerror = () => {
+                        hasError = true;
+                        reject(inspectionsRequest.error);
+                    };
                     
+                    // Удаляем связанные фото (без использования индекса)
                     const photosStore = transaction.objectStore(this.indexedDB.stores.PHOTOS);
-                    const photosIndex = photosStore.index('reportId');
-                    const photosRequest = photosIndex.openCursor(IDBKeyRange.only(reportId));
+                    const photosRequest = photosStore.openCursor();
                     
+                    let photosDeleted = false;
                     photosRequest.onsuccess = () => {
                         const cursor = photosRequest.result;
                         if (cursor) {
-                            photosStore.delete(cursor.primaryKey);
+                            if (cursor.value.reportId === reportId) {
+                                photosStore.delete(cursor.primaryKey);
+                            }
                             cursor.continue();
                         } else {
+                            console.log('Все фото обработаны');
+                            photosDeleted = true;
                             completedOperations++;
+                            checkCompletion();
                         }
                     };
-                    photosRequest.onerror = () => reject(photosRequest.error);
+                    photosRequest.onerror = () => {
+                        hasError = true;
+                        reject(photosRequest.error);
+                    };
+                    
+                    // На случай, если нет записей для удаления
+                    setTimeout(() => {
+                        if (!inspectionsDeleted) {
+                            console.log('Нет проверок для удаления');
+                            completedOperations++;
+                            checkCompletion();
+                        }
+                        if (!photosDeleted) {
+                            console.log('Нет фото для удаления');
+                            completedOperations++;
+                            checkCompletion();
+                        }
+                    }, 100);
                 });
             },
             async saveReportToDatabase() {
@@ -1415,21 +1444,46 @@
                     const brand = data.brand === 'Другая марка' ? data.brand_custom : data.brand;
                     const model = data.model === 'Другая модель' ? data.model_custom : data.model;
                     
+                    // Сохраняем только основные данные без комментариев и фото
                     const report = {
                         id: this.state.editingReportId || Date.now().toString(),
                         timestamp: new Date().toISOString(),
-                        ...data,
                         brand,
                         model,
+                        year: data.year,
+                        mileage_km: data.mileage_km,
+                        mileage_miles: data.mileage_miles,
+                        vin: data.vin,
+                        engine_number: data.engine_number,
+                        license_plate: data.license_plate,
+                        motorcycle_class: data.motorcycle_class,
+                        gearbox_type: data.gearbox_type,
+                        origin_country: data.origin_country,
+                        auction_type: data.auction_type,
+                        auction_lot_number: data.auction_lot_number,
+                        legal_check: data.legal_check,
+                        pts_type: data.pts_type,
+                        legal_status: data.legal_status,
+                        price: data.price,
+                        objective_cost: data.objective_cost,
+                        seller_discount: data.seller_discount,
+                        investment_cost: data.investment_cost,
+                        key_finding: data.key_finding,
+                        expert_verdict: data.expert_verdict,
+                        decision: data.decision,
                         generated_text: document.getElementById('output')?.textContent || ''
                     };
                     
+                    console.log('Сохранение отчета в базу:', report);
+                    
                     await this.saveReportToIndexedDB(report);
                     
-                    if (Object.keys(this.state.currentPhotos).length > 0) {
-                        await this.savePhotosToIndexedDB(report.id, this.state.currentPhotos);
-                    }
+                    // Не сохраняем фото в базу данных
+                    // if (Object.keys(this.state.currentPhotos).length > 0) {
+                    //     await this.savePhotosToIndexedDB(report.id, this.state.currentPhotos);
+                    // }
                     
+                    // Обновляем локальное состояние
                     const existingIndex = this.state.reportsDatabase.findIndex(r => r.id === report.id);
                     if (existingIndex >= 0) {
                         this.state.reportsDatabase[existingIndex] = report;
@@ -1459,12 +1513,22 @@
                 try {
                     await this.deleteReportFromIndexedDB(reportId);
                     
+                    // Обновляем локальное состояние
                     this.state.reportsDatabase = this.state.reportsDatabase.filter(r => r.id !== reportId);
                     this.state.inspectionsDatabase = this.state.inspectionsDatabase.filter(i => i.reportId !== reportId);
                     
+                    // Если удаляем редактируемый отчет, сбрасываем состояние
+                    if (this.state.editingReportId === reportId) {
+                        this.state.editingReportId = null;
+                        this.state.currentPhotos = {};
+                        this.clearForm();
+                    }
+                    
+                    // Обновляем UI
                     this.loadReportsList();
                     this.loadInspectionsList();
                     this.updateStatistics();
+                    
                     this.playSound('success');
                     this.showToast('Отчет успешно удален', 'success');
                 } catch (e) {
@@ -1481,8 +1545,9 @@
                     this.state.editingReportId = reportId;
                     this.state.currentPhotos = {};
                     
-                    const photos = await this.loadPhotosFromIndexedDB(reportId);
-                    this.state.currentPhotos = photos;
+                    // Не загружаем фото из базы данных
+                    // const photos = await this.loadPhotosFromIndexedDB(reportId);
+                    // this.state.currentPhotos = photos;
                     
                     Object.keys(report).forEach(key => {
                         const el = document.getElementById(key);
@@ -1545,6 +1610,44 @@
                 this.initClearStorage();
                 this.initAllDataButtons();
                 this.initPhotoUploadSystem();
+                this.initHeaderScrollEffect();
+                
+                // Добавляем обработчики для основных взаимодействий
+                const interactiveElements = document.querySelectorAll('button, input, select, textarea, .nav-tab, .card');
+                interactiveElements.forEach(element => {
+                    element.addEventListener('click', () => {
+                        // При первом клике на любом интерактивном элементе инициализируем звук
+                        if (!this.state.audioContext) {
+                            this.setupAudioContextOnUserGesture();
+                        }
+                    });
+                });
+            },
+            initHeaderScrollEffect() {
+                const header = document.querySelector('.app-header');
+                if (!header) return;
+                
+                let lastScrollY = window.scrollY;
+                let ticking = false;
+                
+                const updateHeader = () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    lastScrollY = window.scrollY;
+                    ticking = false;
+                };
+                
+                const onScroll = () => {
+                    if (!ticking) {
+                        requestAnimationFrame(updateHeader);
+                        ticking = true;
+                    }
+                };
+                
+                window.addEventListener('scroll', onScroll, { passive: true });
             },
             initPhotoUploadSystem() {
                 this.loadPhotoPreviews();
@@ -1565,7 +1668,7 @@
                     this.state.currentPhotos[section] = [];
                 }
                 
-                const maxPhotos = (section === 'exterior') ? 1 : 10;
+                const maxPhotos = (section === 'exterior') ? 1 : 9;
                 const currentCount = this.state.currentPhotos[section].length;
                 const remainingSlots = maxPhotos - currentCount;
                 
@@ -1657,8 +1760,8 @@
             getSectionName(section) {
                 const sectionNames = {
                     'exterior': 'Титульный лист',
-                    'geometry': 'Внешний вид',
-                    'engine': 'Осмотр Общий',
+                    'geometry': 'Дополнительные фотографии',
+                    'engine': 'Осмотр Общий, Внешний вид',
                     'consumables': 'Состояние ЛКП',
                     'electrical': 'Состояние Сиденья',
                     'suspension': 'Осмотр Оптики',
@@ -1697,7 +1800,7 @@
                 const counter = document.querySelector(`.photo-counter[data-section="${section}"]`);
                 if (counter) {
                     const photos = this.state.currentPhotos[section] || [];
-                    const maxPhotos = (section === 'exterior') ? 1 : 10;
+                    const maxPhotos = (section === 'exterior') ? 1 : 9;
                     counter.textContent = `Загружено: ${photos.length}/${maxPhotos}`;
                     if (photos.length >= maxPhotos) {
                         counter.style.color = 'var(--warning-color)';
@@ -1735,7 +1838,7 @@
                 const counters = document.querySelectorAll('.photo-counter');
                 counters.forEach(counter => {
                     const section = counter.getAttribute('data-section');
-                    const maxPhotos = (section === 'exterior') ? 1 : 10;
+                    const maxPhotos = (section === 'exterior') ? 1 : 9;
                     counter.textContent = `Загружено: 0/${maxPhotos}`;
                     counter.style.color = 'var(--text-light)';
                     counter.style.fontWeight = 'normal';
@@ -1743,32 +1846,70 @@
             },
             initSoundSystem() {
                 try {
-                    this.state.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    // Только загружаем настройки, не создаем аудио контекст сразу
                     const soundEnabled = localStorage.getItem('motodiag_sound_enabled');
                     this.state.soundEnabled = soundEnabled === null ? true : soundEnabled === 'true';
                     const soundCheckbox = document.getElementById('soundNotifications');
                     if (soundCheckbox) {
                         soundCheckbox.checked = this.state.soundEnabled;
                     }
-                    console.log('Звуковая система инициализирована');
+                    
+                    // Инициализируем аудио контекст только при первом взаимодействии
+                    this.setupAudioContextOnUserGesture();
+                    console.log('Звуковая система инициализирована (ожидание жеста для активации)');
                 } catch (e) {
                     console.warn('Аудио контекст не поддерживается:', e);
                     this.state.soundEnabled = false;
                 }
             },
+            setupAudioContextOnUserGesture() {
+                // Функция для инициализации аудио контекста при первом взаимодействии
+                const initAudioContext = () => {
+                    try {
+                        if (!this.state.audioContext) {
+                            this.state.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                            console.log('Аудио контекст инициализирован по жесту пользователя');
+                        }
+                        
+                        // Удаляем обработчики после инициализации
+                        document.removeEventListener('click', initAudioContext);
+                        document.removeEventListener('keydown', initAudioContext);
+                        document.removeEventListener('touchstart', initAudioContext);
+                    } catch (e) {
+                        console.warn('Ошибка инициализации аудио контекста:', e);
+                        this.state.soundEnabled = false;
+                    }
+                };
+
+                // Добавляем обработчики для различных пользовательских жестов
+                document.addEventListener('click', initAudioContext, { once: true });
+                document.addEventListener('keydown', initAudioContext, { once: true });
+                document.addEventListener('touchstart', initAudioContext, { once: true });
+            },
             playSound(type) {
-                if (!this.state.soundEnabled || !this.state.audioContext) return;
+                // Если звук отключен, ничего не делаем
+                if (!this.state.soundEnabled) return;
+                
                 try {
+                    // Если аудио контекст еще не создан, пытаемся создать его
+                    if (!this.state.audioContext) {
+                        this.state.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    }
+                    
+                    // Если контекст приостановлен (обычное состояние после создания), возобновляем его
                     if (this.state.audioContext.state === 'suspended') {
                         this.state.audioContext.resume();
                     }
+                    
                     const oscillator = this.state.audioContext.createOscillator();
                     const gainNode = this.state.audioContext.createGain();
                     oscillator.connect(gainNode);
                     gainNode.connect(this.state.audioContext.destination);
+                    
                     let frequency = 440;
                     let duration = 0.2;
                     let typeWave = 'sine';
+                    
                     switch(type) {
                         case 'success':
                             frequency = 880;
@@ -1806,6 +1947,7 @@
                             typeWave = 'sawtooth';
                             break;
                     }
+                    
                     oscillator.frequency.value = frequency;
                     oscillator.type = typeWave;
                     gainNode.gain.setValueAtTime(0.3, this.state.audioContext.currentTime);
@@ -1814,6 +1956,8 @@
                     oscillator.stop(this.state.audioContext.currentTime + duration);
                 } catch (e) {
                     console.warn('Ошибка воспроизведения звука:', e);
+                    // Отключаем звук при ошибках
+                    this.state.soundEnabled = false;
                 }
             },
             initNavigation() {
@@ -1876,43 +2020,60 @@
                     clearStorageBtn.addEventListener('click', async () => {
                         if (confirm('Вы уверены, что хотите удалить ВСЕ данные приложения? Это действие нельзя отменить.')) {
                             try {
+                                // Очищаем IndexedDB
                                 if (this.db) {
-                                    const transaction = this.db.transaction([
+                                    const stores = [
                                         this.indexedDB.stores.REPORTS,
                                         this.indexedDB.stores.INSPECTIONS,
                                         this.indexedDB.stores.PHOTOS,
                                         this.indexedDB.stores.SETTINGS
-                                    ], 'readwrite');
+                                    ];
                                     
-                                    const reportsStore = transaction.objectStore(this.indexedDB.stores.REPORTS);
-                                    const inspectionsStore = transaction.objectStore(this.indexedDB.stores.INSPECTIONS);
-                                    const photosStore = transaction.objectStore(this.indexedDB.stores.PHOTOS);
-                                    const settingsStore = transaction.objectStore(this.indexedDB.stores.SETTINGS);
-                                    
-                                    await Promise.all([
-                                        reportsStore.clear(),
-                                        inspectionsStore.clear(),
-                                        photosStore.clear(),
-                                        settingsStore.clear()
-                                    ]);
+                                    // Очищаем каждое хранилище
+                                    for (const storeName of stores) {
+                                        await new Promise((resolve, reject) => {
+                                            const transaction = this.db.transaction([storeName], 'readwrite');
+                                            const store = transaction.objectStore(storeName);
+                                            const request = store.clear();
+                                            
+                                            request.onsuccess = () => {
+                                                console.log(`Хранилище ${storeName} очищено`);
+                                                resolve();
+                                            };
+                                            request.onerror = () => {
+                                                console.error(`Ошибка очистки ${storeName}:`, request.error);
+                                                reject(request.error);
+                                            };
+                                        });
+                                    }
                                 }
                                 
-                                localStorage.removeItem('motodiag_theme');
-                                localStorage.removeItem('motodiag_sound_enabled');
-                                localStorage.removeItem('motodiag_auto_save');
-                                localStorage.removeItem('motodiag_inspection_notifications');
-                                localStorage.removeItem('motodiag_reminder_time');
-                                localStorage.removeItem('motodiag_form_data');
+                                // Очищаем localStorage
+                                const itemsToRemove = [
+                                    'motodiag_theme',
+                                    'motodiag_sound_enabled',
+                                    'motodiag_auto_save',
+                                    'motodiag_inspection_notifications',
+                                    'motodiag_reminder_time',
+                                    'motodiag_form_data'
+                                ];
                                 
+                                itemsToRemove.forEach(item => {
+                                    localStorage.removeItem(item);
+                                });
+                                
+                                // Сбрасываем состояние приложения
                                 this.state.reportsDatabase = [];
                                 this.state.inspectionsDatabase = [];
                                 this.state.currentPhotos = {};
                                 this.state.editingReportId = null;
                                 
+                                // Обновляем UI
                                 this.loadReportsList();
                                 this.loadInspectionsList();
                                 this.updateStatistics();
                                 this.clearForm();
+                                
                                 this.showToast('Все данные очищены', 'success');
                                 this.playSound('success');
                             } catch (e) {
@@ -1983,21 +2144,37 @@
                             brandCustom.classList.toggle('hidden', !isCustomBrand);
                             if (!isCustomBrand) brandCustom.value = '';
                         }
+                        
+                        // Очищаем список моделей
                         modelSelect.innerHTML = '<option value="">-- Выберите модель --</option>';
+                        
                         if (brand && app.config.modelsDatabase[brand]) {
+                            // Добавляем модели для выбранной марки
                             app.config.modelsDatabase[brand].forEach(model => {
                                 const option = document.createElement('option');
                                 option.value = model;
                                 option.textContent = model;
                                 modelSelect.appendChild(option);
                             });
+                            
+                            // Добавляем опцию "Другая модель" только один раз
+                            if (brand !== 'Другая марка') {
+                                const customOption = document.createElement('option');
+                                customOption.value = 'Другая модель';
+                                customOption.textContent = 'Другая модель';
+                                modelSelect.appendChild(customOption);
+                            }
+                        } else if (brand === 'Другая марка') {
+                            // Для "Другой марки" сразу показываем поле для ввода модели
+                            const modelCustom = document.getElementById('model_custom');
+                            if (modelCustom) {
+                                modelCustom.classList.remove('hidden');
+                            }
                         }
-                        const customOption = document.createElement('option');
-                        customOption.value = 'Другая модель';
-                        customOption.textContent = 'Другая модель';
-                        modelSelect.appendChild(customOption);
+                        
                         app.updateProgress();
                     });
+                    
                     modelSelect.addEventListener('change', function() {
                         const isCustomModel = this.value === 'Другая модель';
                         const modelCustom = document.getElementById('model_custom');
@@ -2008,9 +2185,9 @@
                         app.updateProgress();
                     });
                 }
+                
                 this.initMileageFields();
                 
-                // ИСПРАВЛЕНИЕ: Добавляем обработчик для auction_type
                 const auctionTypeSelect = document.getElementById('auction_type');
                 if (auctionTypeSelect) {
                     auctionTypeSelect.addEventListener('change', function() {
@@ -2038,23 +2215,29 @@
                         }
                     });
                 }
+                
                 const generateBtn = document.getElementById('generateBtn');
                 const saveToDbBtn = document.getElementById('saveToDbBtn');
                 const clearFormBtn = document.getElementById('clearFormBtn');
                 const copyBtn = document.getElementById('copyBtn');
                 const generatePDFReportBtn = document.getElementById('generatePDFReportBtn');
+                
                 if (generateBtn) generateBtn.addEventListener('click', () => this.generateReport());
                 if (saveToDbBtn) saveToDbBtn.addEventListener('click', () => this.saveReportToDatabase());
                 if (clearFormBtn) clearFormBtn.addEventListener('click', () => this.clearForm());
                 if (copyBtn) copyBtn.addEventListener('click', () => this.copyToClipboard());
                 if (generatePDFReportBtn) generatePDFReportBtn.addEventListener('click', () => this.generatePDFReportMultiPage());
+                
                 this.setupAutoSave();
                 this.loadFormData();
                 this.updateProgress();
             },
             initScrollToTop() {
                 const btn = document.getElementById('scrollToTopBtn');
-                if (!btn) return;
+                if (!btn) {
+                    console.log('Кнопка прокрутки наверх не найдена');
+                    return;
+                }
                 window.addEventListener('scroll', () => {
                     btn.classList.toggle('visible', window.pageYOffset > 300);
                 });
@@ -2068,6 +2251,7 @@
                 const modalClose = document.getElementById('modalClose');
                 const closeModalBtn = document.getElementById('closeModal');
                 const copyModalReportBtn = document.getElementById('copyModalReport');
+                
                 if (modalClose) {
                     modalClose.addEventListener('click', () => {
                         this.playSound('click');
@@ -2157,22 +2341,29 @@
                 const yearEl = document.getElementById('year');
                 const mileageKm = document.getElementById('mileage_km');
                 const mileageMiles = document.getElementById('mileage_miles');
+                
                 if (!brandEl || !modelEl || !yearEl) return;
+                
                 let brandFilled = !!brandEl.value;
                 let modelFilled = !!modelEl.value;
                 let mileageFilled = !!(mileageKm && mileageKm.value) || !!(mileageMiles && mileageMiles.value);
+                
                 if (brandEl.value === 'Другая марка') {
                     const brandCustom = document.getElementById('brand_custom');
                     brandFilled = brandCustom && brandCustom.value.trim() !== '';
                 }
+                
                 if (modelEl.value === 'Другая модель') {
                     const modelCustom = document.getElementById('model_custom');
                     modelFilled = modelCustom && modelCustom.value.trim() !== '';
                 }
+                
                 const filled = (brandFilled ? 1 : 0) + (modelFilled ? 1 : 0) + (yearEl.value ? 1 : 0) + (mileageFilled ? 1 : 0);
                 const progress = (filled / 4) * 100;
+                
                 const progressFill = document.getElementById('progressFill');
                 const progressText = document.getElementById('progressText');
+                
                 if (progressFill) progressFill.style.width = `${progress}%`;
                 if (progressText) {
                     if (progress === 100) {
@@ -2187,11 +2378,13 @@
             setupAutoSave() {
                 const form = document.getElementById('diagnosticForm');
                 if (!form) return;
+                
                 const autoSaveHandler = () => {
                     this.saveFormData();
                     this.updateProgress();
                     this.showSaveIndicator();
                 };
+                
                 const debouncedHandler = this.debounce(autoSaveHandler, 500);
                 const formElements = form.querySelectorAll('input, select, textarea');
                 formElements.forEach(element => {
@@ -2233,8 +2426,10 @@
                         const el = document.getElementById(key);
                         if (el) el.value = data[key];
                     });
+                    
                     const brandEl = document.getElementById('brand');
                     if (brandEl && data.brand) {
+                        brandEl.value = data.brand;
                         brandEl.dispatchEvent(new Event('change'));
                         setTimeout(() => {
                             const modelEl = document.getElementById('model');
@@ -2244,10 +2439,12 @@
                             }
                         }, 0);
                     }
+                    
                     const brandCustom = document.getElementById('brand_custom');
                     const modelCustom = document.getElementById('model_custom');
                     const inspectionFields = document.getElementById('inspectionFields');
                     const auctionLotGroup = document.getElementById('auctionLotNumberGroup');
+                    
                     if (brandCustom) brandCustom.classList.toggle('hidden', data.brand !== 'Другая марка');
                     if (modelCustom) modelCustom.classList.toggle('hidden', data.model !== 'Другая модель');
                     if (inspectionFields) inspectionFields.classList.toggle('hidden', data.decision !== '📅 Запланировать проверку');
@@ -2266,14 +2463,21 @@
                     setTimeout(() => indicator.classList.remove('visible'), 2000);
                 }
             },
+            validateYear(year) {
+                const currentYear = new Date().getFullYear();
+                return year >= 1990 && year <= currentYear + 1;
+            },
             validateForm() {
                 let isValid = true;
                 let errorMessage = '';
                 let firstErrorElement = null;
+                
                 const brandEl = document.getElementById('brand');
                 const modelEl = document.getElementById('model');
                 const yearEl = document.getElementById('year');
+                
                 if (!brandEl || !modelEl || !yearEl) return false;
+                
                 if (!brandEl.value) {
                     isValid = false;
                     brandEl.style.borderColor = 'var(--danger-color)';
@@ -2282,6 +2486,7 @@
                 } else {
                     brandEl.style.borderColor = '';
                 }
+                
                 if (!modelEl.value) {
                     isValid = false;
                     modelEl.style.borderColor = 'var(--danger-color)';
@@ -2290,14 +2495,24 @@
                 } else {
                     modelEl.style.borderColor = '';
                 }
+                
                 if (!yearEl.value) {
                     isValid = false;
                     yearEl.style.borderColor = 'var(--danger-color)';
                     errorMessage = 'Укажите год выпуска';
                     if (!firstErrorElement) firstErrorElement = yearEl;
                 } else {
-                    yearEl.style.borderColor = '';
+                    const year = parseInt(yearEl.value, 10);
+                    if (isNaN(year) || !this.validateYear(year)) {
+                        isValid = false;
+                        yearEl.style.borderColor = 'var(--danger-color)';
+                        errorMessage = `Год выпуска должен быть между 1990 и ${new Date().getFullYear() + 1}`;
+                        if (!firstErrorElement) firstErrorElement = yearEl;
+                    } else {
+                        yearEl.style.borderColor = '';
+                    }
                 }
+                
                 if (brandEl.value === 'Другая марка') {
                     const brandCustom = document.getElementById('brand_custom');
                     if (brandCustom && !brandCustom.value.trim()) {
@@ -2309,6 +2524,7 @@
                         brandCustom.style.borderColor = '';
                     }
                 }
+                
                 if (modelEl.value === 'Другая модель') {
                     const modelCustom = document.getElementById('model_custom');
                     if (modelCustom && !modelCustom.value.trim()) {
@@ -2320,13 +2536,7 @@
                         modelCustom.style.borderColor = '';
                     }
                 }
-                const year = parseInt(yearEl.value, 10);
-                if (yearEl.value && (isNaN(year) || year < 1990 || year > 2030)) {
-                    isValid = false;
-                    yearEl.style.borderColor = 'var(--danger-color)';
-                    errorMessage = 'Год выпуска должен быть между 1990 и 2030';
-                    if (!firstErrorElement) firstErrorElement = yearEl;
-                }
+                
                 const decision = document.getElementById('decision')?.value;
                 if (decision === '📅 Запланировать проверку') {
                     const requiredFields = ['inspection_date', 'inspection_time', 'inspection_address', 'customer_phone'];
@@ -2342,6 +2552,7 @@
                         }
                     });
                 }
+                
                 if (!isValid) {
                     this.showToast(errorMessage || 'Пожалуйста, заполните все обязательные поля', 'warning');
                     this.playSound('error');
@@ -2364,25 +2575,31 @@
                         }, 300);
                     }
                 }
+                
                 return isValid;
             },
             generateReport() {
                 if (!this.validateForm()) return;
+                
                 try {
                     const form = document.getElementById('diagnosticForm');
                     const formData = new FormData(form);
                     const data = Object.fromEntries(formData.entries());
                     const report = this.generateReportText(data);
+                    
                     const output = document.getElementById('output');
                     const outputCard = document.getElementById('outputCard');
                     const copyBtn = document.getElementById('copyBtn');
+                    
                     if (output) output.textContent = report;
                     if (outputCard) outputCard.classList.remove('hidden');
                     if (copyBtn) {
                         copyBtn.textContent = '📋 Копировать отчет для соцсетей';
                         copyBtn.classList.remove('hidden');
                     }
+                    
                     this.calculateAndShowSavings(data);
+                    
                     if (outputCard) outputCard.scrollIntoView({ behavior: 'smooth' });
                     this.playSound('success');
                     this.showToast('Отчет успешно сгенерирован!', 'success');
@@ -2395,11 +2612,14 @@
             generateReportText(data) {
                 const brand = data.brand === 'Другая марка' ? data.brand_custom : data.brand;
                 const model = data.model === 'Другая модель' ? data.model_custom : data.model;
+                
                 let report = `🏍️ Мотоподбор, осмотр мотоцикла перед покупкой, выездная диагностика, подбор под ключ.\n`;
                 report += `📞 Сергей Ландик 8 950 005-05-08\n`;
                 report += `🌐 Сайт: motopodbor.ru\n\n`;
                 report += `🏍️ ${brand} ${model}\n`;
+                
                 if (data.year) report += `📅 Год выпуска: ${data.year}\n`;
+                
                 if (data.mileage_km) {
                     const km = parseFloat(data.mileage_km);
                     if (!isNaN(km)) {
@@ -2413,6 +2633,7 @@
                         report += `🛣️ Пробег: ${miles} тыс. миль (${km} тыс. км)\n`;
                     }
                 }
+                
                 if (data.origin_country) report += `🌍 Происхождение: ${data.origin_country}\n`;
                 if (data.auction_type) report += `🏷️ Аукцион/поставка: ${data.auction_type}\n`;
                 if (data.auction_lot_number) report += `📋 Номер лота/ссылка: ${data.auction_lot_number}\n`;
@@ -2420,9 +2641,11 @@
                 if (data.legal_check) report += `📋 Юридическая проверка: ${data.legal_check}\n`;
                 if (data.legal_status) report += `⚖️ Юридический статус: ${data.legal_status}\n`;
                 if (data.legal_comment) report += `📝 Комментарий: ${data.legal_comment}\n`;
+                
                 report += `\n💼 ВЫВОДЫ:\n`;
                 if (data.key_finding) report += `🔑 Ключевая находка: ${data.key_finding}\n`;
                 if (data.expert_verdict) report += `👨‍💼 Вердикт эксперта: ${data.expert_verdict}\n`;
+                
                 if (data.decision) {
                     report += `🤔 Решение: ${data.decision}\n`;
                     if (data.decision === '📅 Запланировать проверку') {
@@ -2433,6 +2656,7 @@
                         if (data.inspection_address) report += `📍 Адрес: ${data.inspection_address}\n`;
                     }
                 }
+                
                 if (data.price || data.objective_cost || data.seller_discount || data.investment_cost) {
                     report += `\n💰 ФИНАНСОВАЯ ИНФОРМАЦИЯ:\n`;
                     if (data.price) report += `💵 Цена продавца: ${this.formatMoneyDisplay(data.price)}\n`;
@@ -2440,18 +2664,23 @@
                     if (data.seller_discount) report += `🎁 Скидка с продавца: ${this.formatMoneyDisplay(data.seller_discount)}\n`;
                     if (data.investment_cost) report += `🔧 Стоимость вложений: ${this.formatMoneyDisplay(data.investment_cost)}\n`;
                 }
+                
                 report += `\n────────────────────────────\n`;
                 report += `📞 Готовы найти свой идеальный мотоцикл?\n`;
                 report += `Звоните: 8 950 005-05-08\n`;
                 report += `Мы поможем сделать правильный выбор! ✅`;
+                
                 return report;
             },
-            // ИСПРАВЛЕННАЯ ФУНКЦИЯ ГЕНЕРАЦИИ PDF
             async generatePDFReportMultiPage() {
                 if (!this.validateForm()) return;
                 
+                if (this.state.pdfGenerationInProgress) {
+                    this.showToast('Генерация PDF уже выполняется', 'warning');
+                    return;
+                }
+                
                 try {
-                    // Проверка библиотек
                     if (typeof window.jspdf === 'undefined') {
                         this.showToast('Ошибка: Библиотека jsPDF не загружена', 'warning');
                         console.error('jsPDF не загружен');
@@ -2467,7 +2696,6 @@
                     const formData = new FormData(form);
                     const data = Object.fromEntries(formData.entries());
                     
-                    // Показываем индикатор прогресса
                     this.showPDFProgress(0, 'Подготовка данных...');
                     
                     const htmlContent = this.generatePDFHtmlContentMultiPage(data);
@@ -2498,27 +2726,28 @@
                     const pages = tempContainer.querySelectorAll('.pdf-page');
                     const totalPages = pages.length;
                     
+                    this.state.pdfGenerationInProgress = true;
+                    this.state.pdfGenerationCanceled = false;
+                    
                     this.showToast(`Начинаем генерацию PDF (${totalPages} страниц)...`, 'info');
 
-                    const generatePage = async (pageIndex) => {
-                        if (pageIndex >= pages.length) {
-                            // Завершение генерации
-                            const filename = `Отчет_${(data.brand || 'мотоцикл').replace(/[^\w]/g, '_')}_${(data.model || '').replace(/[^\w]/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
-                            doc.save(filename);
-                            document.body.removeChild(tempContainer);
-                            this.hidePDFProgress();
-                            this.playSound('success');
-                            this.showToast(`PDF отчет успешно сгенерирован! (${totalPages} страниц)`, 'success');
-                            return;
+                    for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
+                        if (this.state.pdfGenerationCanceled) {
+                            break;
                         }
-
-                        const page = pages[pageIndex];
+                        
                         const progress = ((pageIndex + 1) / totalPages) * 100;
-                        this.showPDFProgress(progress, `Генерация страницы ${pageIndex + 1} из ${totalPages}`);
-
+                        this.showPDFProgress(progress, `Обработка страницы ${pageIndex + 1} из ${totalPages}`);
+                        
+                        if (pageIndex > 0) {
+                            await new Promise(resolve => setTimeout(resolve, 100));
+                        }
+                        
+                        const page = pages[pageIndex];
+                        
                         try {
                             const canvas = await html2canvas(page, {
-                                scale: 2,
+                                scale: 3,
                                 useCORS: true,
                                 logging: false,
                                 backgroundColor: '#ffffff',
@@ -2538,30 +2767,44 @@
                             
                             doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
                             
-                            // Переходим к следующей странице
-                            setTimeout(() => generatePage(pageIndex + 1), 100);
-                            
                         } catch (error) {
                             console.error('Ошибка генерации страницы PDF:', error);
                             document.body.removeChild(tempContainer);
                             this.hidePDFProgress();
+                            this.state.pdfGenerationInProgress = false;
                             this.playSound('error');
                             this.showToast(`Ошибка на странице ${pageIndex + 1}: ${error.message}`, 'warning');
+                            return;
                         }
-                    };
+                    }
 
-                    // Начинаем генерацию с первой страницы
-                    generatePage(0);
+                    if (!this.state.pdfGenerationCanceled) {
+                        const filename = `Отчет_${(data.brand || 'мотоцикл').replace(/[^\w]/g, '_')}_${(data.model || '').replace(/[^\w]/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+                        doc.save(filename);
+                        document.body.removeChild(tempContainer);
+                        this.hidePDFProgress();
+                        this.state.pdfGenerationInProgress = false;
+                        this.playSound('success');
+                        this.showToast(`PDF отчет успешно сгенерирован! (${totalPages} страниц)`, 'success');
+                    } else {
+                        document.body.removeChild(tempContainer);
+                        this.hidePDFProgress();
+                        this.state.pdfGenerationInProgress = false;
+                        this.playSound('warning');
+                        this.showToast('Генерация PDF отменена', 'warning');
+                    }
 
                 } catch (e) {
                     console.error('Общая ошибка генерации PDF отчета:', e);
                     this.hidePDFProgress();
+                    this.state.pdfGenerationInProgress = false;
                     this.playSound('error');
                     this.showToast('Ошибка при создании PDF отчета: ' + e.message, 'warning');
                 }
             },
-
-            // Функции для управления прогрессом PDF
+            cancelPDFGeneration() {
+                this.state.pdfGenerationCanceled = true;
+            },
             showPDFProgress(percent, message) {
                 const progressModal = document.getElementById('pdfProgress');
                 const progressFill = document.getElementById('pdfProgressFill');
@@ -2575,12 +2818,10 @@
                     pageStatus.textContent = `Прогресс: ${Math.round(percent)}%`;
                 }
             },
-
             hidePDFProgress() {
                 const progressModal = document.getElementById('pdfProgress');
                 if (progressModal) progressModal.classList.add('hidden');
             },
-
             generatePDFHtmlContentMultiPage(data) {
                 const brand = data.brand === 'Другая марка' ? data.brand_custom : data.brand;
                 const model = data.model === 'Другая модель' ? data.model_custom : data.model;
@@ -2589,8 +2830,7 @@
                 let totalPages = 1;
                 
                 const inspectionFields = [
-                    { section: 'geometry', label: 'Внешний вид', value: data.inspection_geometry },
-                    { section: 'engine', label: 'Осмотр Общий', value: data.inspection_engine },
+                    { section: 'engine', label: 'Осмотр Общий, Внешний вид', value: data.inspection_engine },
                     { section: 'consumables', label: 'Состояние ЛКП', value: data.inspection_consumables },
                     { section: 'electrical', label: 'Состояние Сиденья', value: data.inspection_electrical },
                     { section: 'suspension', label: 'Осмотр Оптики', value: data.inspection_suspension },
@@ -2607,7 +2847,8 @@
                     { section: 'suspension_front_rear', label: 'Резина', value: data.inspection_suspension_front_rear },
                     { section: 'computer_diagnostics', label: 'Подвеска перед, зад', value: data.inspection_computer_diagnostics },
                     { section: 'additional_equipment_new', label: 'Компьютерная Диагностика', value: data.inspection_additional_equipment_new },
-                    { section: 'final', label: 'Дополнительное оборудование', value: data.inspection_final }
+                    { section: 'final', label: 'Дополнительное оборудование', value: data.inspection_final },
+                    { section: 'geometry', label: 'Дополнительные фотографии', value: data.inspection_geometry }
                 ];
                 
                 inspectionFields.forEach(field => {
@@ -2615,7 +2856,7 @@
                     const hasPhotos = this.state.currentPhotos[field.section] && this.state.currentPhotos[field.section].length > 0;
                     if (hasText || hasPhotos) {
                         const photos = hasPhotos ? this.state.currentPhotos[field.section] : [];
-                        const photosPerPage = 4;
+                        const photosPerPage = 9;
                         const photoGroups = [];
                         for (let i = 0; i < photos.length; i += photosPerPage) {
                             photoGroups.push(photos.slice(i, i + photosPerPage));
@@ -2641,7 +2882,7 @@
                     const hasPhotos = this.state.currentPhotos[field.section] && this.state.currentPhotos[field.section].length > 0;
                     if (hasText || hasPhotos) {
                         const photos = hasPhotos ? this.state.currentPhotos[field.section] : [];
-                        const photosPerPage = 4;
+                        const photosPerPage = 9;
                         const photoGroups = [];
                         for (let i = 0; i < photos.length; i += photosPerPage) {
                             photoGroups.push(photos.slice(i, i + photosPerPage));
@@ -2665,7 +2906,6 @@
 
                 return html;
             },
-
             generateFirstPage(data, currentPage, totalPages, currentDate) {
                 const brand = data.brand === 'Другая марка' ? data.brand_custom : data.brand;
                 const model = data.model === 'Другая модель' ? data.model_custom : data.model;
@@ -2832,10 +3072,9 @@
                 `;
                 return html;
             },
-
             generateInspectionPage(field, text, photos, currentPage, totalPages, isContinued, brand, model, currentDate) {
-                const photosPerRow = 2;
-                const maxPhotosPerPage = 4;
+                const photosPerRow = 3;
+                const maxPhotosPerPage = 9;
 
                 let html = `
                     <div class="pdf-page">
@@ -2862,7 +3101,7 @@
                         const photoIndex = isContinued ? index + (currentPage - 2) * maxPhotosPerPage : index;
                         html += `
                             <div style="text-align: center;">
-                                <img src="${photo.data}" style="max-width: 100%; max-height: 350px; width: auto; height: auto; object-fit: contain; border-radius: 4px; border: 1px solid #ddd;" alt="Фото ${photoIndex + 1}">
+                                <img src="${photo.data}" style="max-width: 100%; max-height: 250px; width: auto; height: auto; object-fit: contain; border-radius: 4px; border: 1px solid #ddd;" alt="Фото ${photoIndex + 1}">
                                 <div style="font-size: 8px; color: #666; margin-top: 3px;">Фото ${photoIndex + 1}</div>
                             </div>
                         `;
@@ -2880,7 +3119,6 @@
                 `;
                 return html;
             },
-
             generateAgreementPage(currentPage, totalPages, currentDate) {
                 return `
                     <div class="pdf-page">
@@ -2938,7 +3176,6 @@
                     </div>
                 `;
             },
-
             formatMoneyDisplay(value) {
                 if (!value) return 'Не указана';
                 if (typeof value === 'string' && (value.includes('тыс') || value.includes('млн'))) {
@@ -3360,62 +3597,78 @@
                 };
                 input.click();
             },
-            updateStatistics(period = 'week') {
-                const now = new Date();
-                let startDate = new Date(now - 7 * 24 * 60 * 60 * 1000);
-                if (period === 'month') startDate = new Date(now.getFullYear(), now.getMonth(), 1);
-                if (period === 'quarter') {
-                    const q = Math.floor(now.getMonth() / 3);
-                    startDate = new Date(now.getFullYear(), q * 3, 1);
+            updateStatistics() {
+                const startDateEl = document.getElementById('startDate');
+                const endDateEl = document.getElementById('endDate');
+                
+                let startDate = startDateEl ? new Date(startDateEl.value) : null;
+                let endDate = endDateEl ? new Date(endDateEl.value) : null;
+
+                // Если даты не выбраны, берем за весь период
+                if (!startDate || isNaN(startDate.getTime())) {
+                    startDate = new Date(0); // самая ранняя дата
                 }
-                if (period === 'year') startDate = new Date(now.getFullYear(), 0, 1);
-                const periodReports = this.state.reportsDatabase.filter(r => new Date(r.timestamp) >= startDate);
+                if (!endDate || isNaN(endDate.getTime())) {
+                    endDate = new Date(); // текущая дата
+                }
+
+                // Устанавливаем время для endDate на конец дня
+                endDate.setHours(23, 59, 59, 999);
+
+                const periodReports = this.state.reportsDatabase.filter(r => {
+                    const reportDate = new Date(r.timestamp);
+                    return reportDate >= startDate && reportDate <= endDate;
+                });
+
                 const totalReports = periodReports.length;
-                const purchased = periodReports.filter(r => r.decision === '✅ Куплен').length;
-                let totalSavings = 0;
+
+                // Класс мотоциклов: составим объект с количеством по классам
+                const classCounts = {};
                 periodReports.forEach(r => {
-                    const price = this.parseMoneyValue(r.price);
-                    const objectiveCost = this.parseMoneyValue(r.objective_cost);
-                    const sellerDiscount = this.parseMoneyValue(r.seller_discount);
-                    const investmentCost = this.parseMoneyValue(r.investment_cost);
-                    if (price && objectiveCost) {
-                        const savings = (objectiveCost - (price - sellerDiscount)) - investmentCost;
-                        if (savings > 0) totalSavings += savings;
+                    if (r.motorcycle_class) {
+                        classCounts[r.motorcycle_class] = (classCounts[r.motorcycle_class] || 0) + 1;
                     }
                 });
-                const avgSavings = purchased > 0 ? totalSavings / purchased : 0;
+                // Преобразуем в строку для отображения (например, "Спортивные: 5, Голые: 3")
+                const classString = Object.keys(classCounts).map(cls => `${cls}: ${classCounts[cls]}`).join(', ') || 'Нет данных';
+
+                // Популярная марка
                 const brandCounts = {};
                 periodReports.forEach(r => {
-                    if (r.brand) brandCounts[r.brand] = (brandCounts[r.brand] || 0) + 1;
+                    if (r.brand) {
+                        brandCounts[r.brand] = (brandCounts[r.brand] || 0) + 1;
+                    }
                 });
                 const brandKeys = Object.keys(brandCounts);
                 const popularBrand = brandKeys.length > 0 ? 
                     brandKeys.reduce((a, b) => brandCounts[a] > brandCounts[b] ? a : b) : 
                     'Нет данных';
-                const plannedInspections = this.state.inspectionsDatabase.filter(i => i.status === 'planned').length;
-                const completedInspections = this.state.inspectionsDatabase.filter(i => i.status === 'completed').length;
-                const activeInspections = this.state.inspectionsDatabase.filter(i => 
-                    i.status === 'planned' && new Date(i.date + 'T' + i.time) > new Date()
-                ).length;
-                const overdueInspections = this.state.inspectionsDatabase.filter(i => 
-                    i.status === 'planned' && new Date(i.date + 'T' + i.time) < new Date()
-                ).length;
-                const totalReportsEl = document.getElementById('totalReports');
-                const successfulDealsEl = document.getElementById('successfulDeals');
-                const avgSavingsEl = document.getElementById('avgSavings');
-                const popularBrandEl = document.getElementById('popularBrand');
-                const plannedInspectionsEl = document.getElementById('plannedInspections');
-                const completedInspectionsEl = document.getElementById('completedInspections');
-                const activeInspectionsEl = document.getElementById('activeInspections');
-                const overdueInspectionsEl = document.getElementById('overdueInspections');
-                if (totalReportsEl) totalReportsEl.textContent = totalReports;
-                if (successfulDealsEl) successfulDealsEl.textContent = purchased;
-                if (avgSavingsEl) avgSavingsEl.textContent = this.formatMoney(Math.round(avgSavings));
-                if (popularBrandEl) popularBrandEl.textContent = popularBrand;
-                if (plannedInspectionsEl) plannedInspectionsEl.textContent = plannedInspections;
-                if (completedInspectionsEl) completedInspectionsEl.textContent = completedInspections;
-                if (activeInspectionsEl) activeInspectionsEl.textContent = activeInspections;
-                if (overdueInspectionsEl) overdueInspectionsEl.textContent = overdueInspections;
+
+                // Средняя цена
+                let totalPrice = 0;
+                let priceCount = 0;
+                periodReports.forEach(r => {
+                    const price = this.parseMoneyValue(r.price);
+                    if (price > 0) {
+                        totalPrice += price;
+                        priceCount++;
+                    }
+                });
+                const avgPrice = priceCount > 0 ? totalPrice / priceCount : 0;
+
+                // Количество решений
+                const purchasedCount = periodReports.filter(r => r.decision === '✅ Куплен').length;
+                const notPurchasedCount = periodReports.filter(r => r.decision === '❌ Не Куплен').length;
+                const pendingCount = periodReports.filter(r => r.decision === '⏳ На рассмотрение').length;
+
+                // Обновляем DOM
+                document.getElementById('totalReports').textContent = totalReports;
+                document.getElementById('motorcycleClasses').textContent = classString;
+                document.getElementById('popularBrand').textContent = popularBrand;
+                document.getElementById('avgPrice').textContent = this.formatMoney(Math.round(avgPrice));
+                document.getElementById('purchasedCount').textContent = purchasedCount;
+                document.getElementById('notPurchasedCount').textContent = notPurchasedCount;
+                document.getElementById('pendingCount').textContent = pendingCount;
             },
             loadInspectionsList() {
                 const inspectionsList = document.getElementById('inspectionsList');
@@ -3500,18 +3753,48 @@
             },
             clearCompletedInspections() {
                 if (!confirm('Вы уверены, что хотите удалить все завершенные проверки?')) return;
-                const completedCount = this.state.inspectionsDatabase.filter(i => i.status === 'completed').length;
-                this.state.inspectionsDatabase = this.state.inspectionsDatabase.filter(i => i.status !== 'completed');
-                const transaction = this.db.transaction([this.indexedDB.stores.INSPECTIONS], 'readwrite');
-                const store = transaction.objectStore(this.indexedDB.stores.INSPECTIONS);
-                const completedInspections = this.state.inspectionsDatabase.filter(i => i.status === 'completed');
-                completedInspections.forEach(inspection => {
-                    store.delete(inspection.id);
-                });
-                this.loadInspectionsList();
-                this.updateStatistics();
-                this.playSound('success');
-                this.showToast(`Удалено ${completedCount} завершенных проверок`, 'success');
+                
+                try {
+                    const completedInspections = this.state.inspectionsDatabase.filter(i => i.status === 'completed');
+                    
+                    if (completedInspections.length === 0) {
+                        this.showToast('Нет завершенных проверок для удаления', 'info');
+                        return;
+                    }
+                    
+                    // Удаляем из IndexedDB
+                    const deletePromises = completedInspections.map(inspection => {
+                        return new Promise((resolve, reject) => {
+                            const transaction = this.db.transaction([this.indexedDB.stores.INSPECTIONS], 'readwrite');
+                            const store = transaction.objectStore(this.indexedDB.stores.INSPECTIONS);
+                            const request = store.delete(inspection.id);
+                            
+                            request.onsuccess = () => resolve();
+                            request.onerror = () => reject(request.error);
+                        });
+                    });
+                    
+                    Promise.all(deletePromises).then(() => {
+                        // Обновляем локальное состояние
+                        this.state.inspectionsDatabase = this.state.inspectionsDatabase.filter(i => i.status !== 'completed');
+                        
+                        // Обновляем UI
+                        this.loadInspectionsList();
+                        this.updateStatistics();
+                        
+                        this.playSound('success');
+                        this.showToast(`Удалено ${completedInspections.length} завершенных проверок`, 'success');
+                    }).catch(error => {
+                        console.error('Ошибка удаления проверок:', error);
+                        this.playSound('error');
+                        this.showToast('Ошибка при удалении проверок', 'warning');
+                    });
+                    
+                } catch (e) {
+                    console.error('Ошибка очистки завершенных проверок:', e);
+                    this.playSound('error');
+                    this.showToast('Ошибка при очистке проверок', 'warning');
+                }
             },
             checkInspectionReminders() {
                 const reminderTime = parseInt(document.getElementById('reminderTime')?.value || 2, 10);
@@ -3546,28 +3829,92 @@
                 if (searchInspections) {
                     searchInspections.addEventListener('input', () => app.loadInspectionsList());
                 }
-                document.querySelectorAll('.grid-btn[data-period]').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        document.querySelectorAll('.grid-btn[data-period]').forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        app.updateStatistics(this.getAttribute('data-period'));
+                const updateStatsBtn = document.getElementById('updateStatsBtn');
+                if (updateStatsBtn) {
+                    updateStatsBtn.addEventListener('click', () => {
+                        app.updateStatistics();
                         app.playSound('click');
                     });
-                });
+                }
+                // Установка дат по умолчанию для статистики
+                const now = new Date();
+                const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+                const startDateEl = document.getElementById('startDate');
+                const endDateEl = document.getElementById('endDate');
+                if (startDateEl) startDateEl.value = oneMonthAgo.toISOString().split('T')[0];
+                if (endDateEl) endDateEl.value = now.toISOString().split('T')[0];
+                
                 const generateStatsBtn = document.getElementById('generateStatsBtn');
                 if (generateStatsBtn) {
                     generateStatsBtn.addEventListener('click', () => {
                         const statsOutput = document.getElementById('statsOutput');
                         const copyStatsBtn = document.getElementById('copyStatsBtn');
                         if (statsOutput) {
-                            const now = new Date();
+                            const startDateEl = document.getElementById('startDate');
+                            const endDateEl = document.getElementById('endDate');
+                            let startDate = startDateEl ? new Date(startDateEl.value) : null;
+                            let endDate = endDateEl ? new Date(endDateEl.value) : null;
+
+                            if (!startDate || isNaN(startDate.getTime())) {
+                                startDate = new Date(0);
+                            }
+                            if (!endDate || isNaN(endDate.getTime())) {
+                                endDate = new Date();
+                            }
+
+                            const periodReports = app.state.reportsDatabase.filter(r => {
+                                const reportDate = new Date(r.timestamp);
+                                return reportDate >= startDate && reportDate <= endDate;
+                            });
+
+                            const totalReports = periodReports.length;
+                            const purchasedCount = periodReports.filter(r => r.decision === '✅ Куплен').length;
+                            const notPurchasedCount = periodReports.filter(r => r.decision === '❌ Не Куплен').length;
+                            const pendingCount = periodReports.filter(r => r.decision === '⏳ На рассмотрение').length;
+
+                            // Классы мотоциклов
+                            const classCounts = {};
+                            periodReports.forEach(r => {
+                                if (r.motorcycle_class) {
+                                    classCounts[r.motorcycle_class] = (classCounts[r.motorcycle_class] || 0) + 1;
+                                }
+                            });
+                            const classString = Object.keys(classCounts).map(cls => `${cls}: ${classCounts[cls]}`).join(', ') || 'Нет данных';
+
+                            // Популярная марка
+                            const brandCounts = {};
+                            periodReports.forEach(r => {
+                                if (r.brand) {
+                                    brandCounts[r.brand] = (brandCounts[r.brand] || 0) + 1;
+                                }
+                            });
+                            const brandKeys = Object.keys(brandCounts);
+                            const popularBrand = brandKeys.length > 0 ? 
+                                brandKeys.reduce((a, b) => brandCounts[a] > brandCounts[b] ? a : b) : 
+                                'Нет данных';
+
+                            // Средняя цена
+                            let totalPrice = 0;
+                            let priceCount = 0;
+                            periodReports.forEach(r => {
+                                const price = app.parseMoneyValue(r.price);
+                                if (price > 0) {
+                                    totalPrice += price;
+                                    priceCount++;
+                                }
+                            });
+                            const avgPrice = priceCount > 0 ? totalPrice / priceCount : 0;
+
                             statsOutput.textContent = `📊 Статистика Motopodbor.ru PRO\n\n` +
-                                `📅 Период: ${now.toLocaleDateString('ru-RU')}\n` +
-                                `🏍️ Всего отчетов: ${app.state.reportsDatabase.length}\n` +
-                                `✅ Успешных сделок: ${app.state.reportsDatabase.filter(r => r.decision === '✅ Куплен').length}\n` +
-                                `📋 Запланированных проверок: ${app.state.inspectionsDatabase.filter(i => i.status === 'planned').length}\n\n` +
-                                `📞 Сергей Ландик 8 950 005-05-08\n` +
-                                `🌐 Сайт: motopodbor.ru`;
+                                `📅 Период: ${startDate.toLocaleDateString('ru-RU')} - ${endDate.toLocaleDateString('ru-RU')}\n` +
+                                `🏍️ Всего отчетов: ${totalReports}\n` +
+                                `📊 Классы мотоциклов: ${classString}\n` +
+                                `🏆 Популярная марка: ${popularBrand}\n` +
+                                `💵 Средняя цена: ${app.formatMoney(Math.round(avgPrice))}\n` +
+                                `✅ Куплено: ${purchasedCount}\n` +
+                                `❌ Не куплено: ${notPurchasedCount}\n` +
+                                `⏳ На рассмотрении: ${pendingCount}`;
+
                             statsOutput.classList.remove('hidden');
                         }
                         if (copyStatsBtn) {
