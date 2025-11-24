@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/heic2any@2.0.2/dist/heic2any.min.js"></script>
 <style>
 :root{--primary-color:#6366F1;--primary-dark:#4F46E5;--secondary-color:#10B981;--danger-color:#EF4444;--warning-color:#F59E0B;--success-color:#10B981;--text-color:#1F2937;--text-light:#6B7280;--bg-color:#F9FAFB;--card-bg:#ffffff;--border-color:#E5E7EB;--shadow:0 4px 20px rgba(0,0,0,0.08);--shadow-hover:0 8px 30px rgba(0,0,0,0.12);--safe-area-inset-bottom:env(safe-area-inset-bottom,0px);--safe-area-inset-top:env(safe-area-inset-top,0px);}[data-theme="dark"]{--primary-color:#818CF8;--primary-dark:#6366F1;--secondary-color:#34D399;--danger-color:#F87171;--warning-color:#FBBF24;--success-color:#34D399;--text-color:#F9FAFB;--text-light:#D1D5DB;--bg-color:#111827;--card-bg:#1F2937;--border-color:#374151;--shadow:0 4px 20px rgba(0,0,0,0.25);--shadow-hover:0 8px 30px rgba(0,0,0,0.35);}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:var(--bg-color);color:var(--text-color);line-height:1.6;min-height:100vh;padding:0;margin:0;transition:background-color 0.3s ease,color 0.3s ease;padding-bottom:var(--safe-area-inset-bottom);padding-top:var(--safe-area-inset-top);}.app-container{max-width:100%;margin:0 auto;background:var(--bg-color);min-height:100vh;position:relative;}.app-header{background:linear-gradient(135deg,var(--primary-color),var(--primary-dark));color:white;padding:20px 16px;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.15);padding-top:calc(20px + var(--safe-area-inset-top));transform:translateZ(0);transition:transform 0.3s ease,box-shadow 0.3s ease;}.app-header.scrolled{transform:translateY(-5px);box-shadow:0 8px 30px rgba(0,0,0,0.25);}.app-header h1{font-size:1.5rem;margin-bottom:6px;font-weight:700;letter-spacing:-0.025em;}.app-header p{opacity:0.9;font-size:0.9rem;font-weight:400;}.nav-tabs{display:flex;background:var(--card-bg);border-bottom:1px solid var(--border-color);position:sticky;top:0;z-index:99;padding:0 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}.nav-tabs::-webkit-scrollbar{display:none;}.nav-tab{flex:1;min-width:70px;background:none;border:none;padding:14px 6px;text-align:center;font-weight:600;font-size:0.7rem;color:var(--text-light);cursor:pointer;transition:all 0.3s ease;border-bottom:3px solid transparent;border-radius:0;margin:0 1px;white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:4px;}.nav-tab.active{color:var(--primary-color);border-bottom-color:var(--primary-color);background:rgba(99,102,241,0.05);}.nav-tab:active{background:rgba(99,102,241,0.1);transform:scale(0.98);}.nav-tab .tab-icon{font-size:1.1rem;margin-bottom:2px;}.nav-tab .tab-text{font-size:0.65rem;line-height:1.2;}.tab-content{display:none;padding:20px 16px;animation:fadeIn 0.4s ease;padding-bottom:calc(20px + var(--safe-area-inset-bottom));}.tab-content.active{display:block;}@keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}.card{background:var(--card-bg);border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:var(--shadow);border:1px solid var(--border-color);transition:transform 0.3s ease,box-shadow 0.3s ease;transform:translateZ(0);}.card:hover{box-shadow:var(--shadow-hover);transform:translateY(-5px) translateZ(0);}.card:active{transform:scale(0.995) translateZ(0);}.section-title{font-size:1.1rem;font-weight:700;margin-bottom:16px;color:var(--primary-color);display:flex;align-items:center;gap:8px;letter-spacing:-0.025em;}.form-group{margin-bottom:20px;}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}label{display:block;margin-bottom:8px;font-weight:600;color:var(--text-color);font-size:0.9rem;}input,select,textarea{width:100%;padding:14px;border:2px solid var(--border-color);border-radius:12px;font-size:16px;background:var(--card-bg);color:var(--text-color);transition:all 0.3s ease;font-family:inherit;-webkit-appearance:none;}input:focus,select:focus,textarea:focus{border-color:var(--primary-color);outline:none;box-shadow:0 0 0 3px rgba(99,102,241,0.1);transform:translateY(-2px);}.mileage-row{display:flex;align-items:center;gap:12px;}.mileage-input-group{flex:1;display:flex;flex-direction:column;gap:6px;}.mileage-input-group input{width:100%;padding:14px;border:2px solid var(--border-color);border-radius:12px;font-size:16px;background:var(--card-bg);color:var(--text-color);transition:all 0.3s ease;}.mileage-input-group input:focus{border-color:var(--primary-color);outline:none;box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.mileage-label{font-size:0.75rem;color:var(--text-light);text-align:center;font-weight:500;}.mileage-separator{color:var(--primary-color);font-size:1.2rem;font-weight:bold;padding:0 8px;}@media (max-width:480px){.mileage-row{flex-direction:column;gap:8px;}.mileage-separator{transform:rotate(90deg);padding:4px 0;}}.btn{background:linear-gradient(135deg,var(--primary-color),var(--primary-dark));color:white;border:none;border-radius:12px;padding:16px 20px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s ease;text-align:center;display:block;width:100%;position:relative;overflow:hidden;transform:translateZ(0);}.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s;}.btn:hover::before{left:100%;}.btn:hover{transform:translateY(-3px) translateZ(0);box-shadow:0 8px 25px rgba(99,102,241,0.3);}.btn:active{transform:scale(0.98) translateZ(0);}.btn-secondary{background:linear-gradient(135deg,var(--secondary-color),#059669);}.btn-warning{background:linear-gradient(135deg,var(--warning-color),#D97706);}.btn-danger{background:linear-gradient(135deg,var(--danger-color),#DC2626);}.btn-success{background:linear-gradient(135deg,var(--success-color),#059669);}.progress-container{margin:20px 0;}.progress-bar{height:8px;background:var(--border-color);border-radius:4px;overflow:hidden;margin-bottom:10px;box-shadow:inset0 1px 3px rgba(0,0,0,0.1);}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary-color),var(--secondary-color));width:0%;transition:width 0.7s cubic-bezier(0.34,1.56,0.64,1);border-radius:4px;position:relative;overflow:hidden;}.progress-fill::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2s infinite;}@keyframes shimmer{0%{left:-100%;}100%{left:100%;}}.progress-text{text-align:center;font-size:0.8rem;color:var(--text-light);font-weight:500;}.alert{padding:16px;border-radius:12px;margin:16px 0;font-weight:500;animation:slideIn 0.4s ease;border-left:4px solid;}@keyframes slideIn{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}.alert-success{background:rgba(16,185,129,0.1);color:var(--success-color);border-left-color:var(--success-color);}.alert-info{background:rgba(99,102,241,0.1);color:var(--primary-color);border-left-color:var(--primary-color);}.alert-warning{background:rgba(245,158,11,0.1);color:var(--warning-color);border-left-color:var(--warning-color);}.output-container{background:var(--card-bg);border-radius:12px;padding:20px;margin-top:20px;border:1px solid var(--border-color);white-space:pre-wrap;font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.85rem;line-height:1.6;max-height:400px;overflow-y:auto;transition:all 0.3s ease;}.output-container:focus{border-color:var(--primary-color);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.search-box{position:relative;margin-bottom:20px;}.search-box input{padding-left:44px;}.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-light);z-index:2;}.reports-list{max-height:500px;overflow-y:auto;}.report-item{background:var(--card-bg);border-radius:14px;padding:16px;margin-bottom:10px;border:1px solid var(--border-color);transition:all 0.3s ease;cursor:pointer;transform:translateZ(0);}.report-item:hover{transform:translateY(-5px) translateZ(0);box-shadow:var(--shadow-hover);}.report-item:active{transform:scale(0.99) translateZ(0);}.report-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}.report-title{font-weight:700;font-size:1rem;color:var(--text-color);}.report-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:0.8rem;color:var(--text-light);}.report-actions{display:flex;gap:6px;}.action-btn{padding:6px 10px;border:none;border-radius:8px;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;font-weight:600;transform:translateZ(0);}.action-btn:hover{transform:translateY(-2px) translateZ(0);}.action-btn:active{transform:scale(0.95) translateZ(0);}.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:20px 0;}.stat-card{background:var(--card-bg);border-radius:14px;padding:16px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border-color);transition:all 0.3s ease;transform:translateZ(0);}.stat-card:hover{transform:translateY(-5px) translateZ(0);box-shadow:var(--shadow-hover);}.stat-value{font-size:1.5rem;font-weight:800;color:var(--primary-color);margin:6px 0;letter-spacing:-0.025em;}.stat-label{font-size:0.8rem;color:var(--text-light);font-weight:500;}.grid-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;}.grid-btn{background:var(--card-bg);border:1px solid var(--border-color);border-radius:8px;padding:8px 4px;font-size:0.75rem;cursor:pointer;transition:all 0.3s ease;}.grid-btn.active{background:var(--primary-color);color:white;border-color:var(--primary-color);}@media (max-width:768px){.form-row{grid-template-columns:1fr;}.nav-tab{font-size:0.65rem;padding:12px 4px;}.nav-tab .tab-icon{font-size:1rem;}.stats-grid{grid-template-columns:1fr;}.tab-content{padding:16px 12px;}.card{padding:16px;border-radius:14px;}.app-header{padding:16px 12px;padding-top:calc(16px + var(--safe-area-inset-top));}.app-header h1{font-size:1.3rem;}.section-title{font-size:1rem;}.btn{padding:14px 16px;font-size:0.95rem;}}@media (max-width:480px){.app-header h1{font-size:1.2rem;}.nav-tab .tab-text{font-size:0.6rem;}}@media (max-width:380px){.nav-tabs{padding:0 2px;}.nav-tab{min-width:60px;padding:8px 1px;}.nav-tab .tab-icon{font-size:0.9rem;}.nav-tab .tab-text{font-size:0.55rem;}}.text-center{text-align:center;}.mt-10{margin-top:10px;}.mt-20{margin-top:20px;}.mb-10{margin-bottom:10px;}.mb-20{margin-bottom:20px;}.hidden{display:none!important;}.flex{display:flex;}.items-center{align-items:center;}.justify-between{justify-content:space-between;}.gap-10{gap:10px;}.scroll-to-top{position:fixed;bottom:80px;right:16px;width:50px;height:50px;border-radius:50%;background:#6366F1;color:white;border:none;font-size:20px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center;z-index:10000;transition:all 0.3s ease;opacity:0;visibility:hidden;}.scroll-to-top.visible{opacity:1;visibility:visible;}.scroll-to-top:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(99,102,241,0.3);}.scroll-to-top:active{transform:scale(0.95);}@media (max-width:480px){.scroll-to-top{bottom:70px;right:12px;width:44px;height:44px;font-size:18px;}}.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;}.modal.hidden{display:none;}.modal-content{background:var(--card-bg);border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:modalSlideIn 0.3s ease;}@keyframes modalSlideIn{from{opacity:0;transform:translateY(-50px) scale(0.9);}to{opacity:1;transform:translateY(0) scale(1);}}.modal-header{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--border-color);background:var(--primary-color);color:white;}.modal-header h3{margin:0;font-size:1.2rem;}.modal-close{background:none;border:none;color:white;font-size:24px;cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;}.modal-body{padding:20px;max-height:60vh;overflow-y:auto;}.modal-actions{padding:20px;border-top:1px solid var(--border-color);display:flex;gap:10px;}.report-identifiers{background:rgba(99,102,241,0.05);border-radius:12px;padding:16px;margin-bottom:16px;border:2px solid var(--primary-color);}.identifier-item{display:flex;justify-content:space-between;margin-bottom:8px;padding:8px 0;border-bottom:1px solid var(--border-color);}.identifier-item:last-child{margin-bottom:0;border-bottom:none;}#toastContainer{position:fixed;bottom:calc(20px + var(--safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:10001;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:90vw;width:400px;}.toast{pointer-events:all;background:var(--card-bg);color:var(--text-color);border:1px solid var(--border-color);border-left:4px solid var(--primary-color);border-radius:12px;padding:16px;box-shadow:var(--shadow-hover);opacity:0;transform:translateY(6px);transition:all .3s ease;font-weight:500;max-width:100%;word-wrap:break-word;}.toast.show{opacity:1;transform:translateY(0);}.toast-success{border-left-color:var(--success-color);}.toast-info{border-left-color:var(--primary-color);}.toast-warning{border-left-color:var(--warning-color);}.save-indicator{position:fixed;top:20px;right:20px;background:var(--success-color);color:white;padding:8px 16px;border-radius:8px;font-size:0.8rem;z-index:10002;opacity:0;transform:translateY(-10px);transition:all 0.3s ease;}.save-indicator.visible{opacity:1;transform:translateY(0);}.tooltip{position:fixed;background:var(--card-bg);color:var(--text-color);padding:12px 16px;border-radius:8px;box-shadow:var(--shadow-hover);border:1px solid var(--border-color);max-width:300px;font-size:0.8rem;line-height:1.4;z-index:10003;pointer-events:none;}.mileage-conversion{font-size:0.75rem;color:var(--text-light);margin-top:4px;font-style:italic;}@media (max-width:480px){#toastContainer{width:95vw;max-width:95vw;}.toast{padding:14px;}}@keyframes errorPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,0.7);}70%{box-shadow:0 0 0 10px rgba(239,68,68,0);}100%{box-shadow:0 0 0 0 rgba(239,68,68,0);}}.pulse{animation:errorPulse 1.5s infinite;}input:invalid,select:invalid{border-color:var(--danger-color)!important;}.required-field::after{content:" *";color:var(--danger-color);}.toast-close{background:none;border:none;font-size:18px;cursor:pointer;margin-left:auto;padding:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--text-light);}.toast-close:hover{color:var(--text-color);}.inspection-item.priority-high{border-left:4px solid var(--danger-color);}.inspection-item.priority-medium{border-left:4px solid var(--warning-color);}.inspection-item.priority-low{border-left:4px solid var(--success-color);}.priority-badge{font-size:0.7rem;padding:2px 6px;border-radius:8px;font-weight:600;}.priority-high{background:rgba(239,68,68,0.1);color:var(--danger-color);}.priority-medium{background:rgba(245,158,11,0.1);color:var(--warning-color);}.priority-low{background:rgba(16,185,129,0.1);color:var(--success-color);}.photo-upload-section{margin-top:16px;padding:16px;background:rgba(99,102,241,0.05);border-radius:12px;border:2px dashed var(--primary-color);}.photo-upload-label{display:block;margin-bottom:10px;font-weight:600;color:var(--primary-color);}.photo-upload-input{width:100%;padding:12px;border:2px dashed var(--border-color);border-radius:8px;background:var(--card-bg);cursor:pointer;transition:all 0.3s ease;margin-bottom:12px;}.photo-upload-input:hover{border-color:var(--primary-color);background:rgba(99,102,241,0.05);}.photo-preview-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;margin-top:12px;}.photo-preview-item{position:relative;border-radius:8px;overflow:hidden;border:2px solid var(--border-color);transition:all 0.3s ease;}.photo-preview-item:hover{border-color:var(--primary-color);transform:scale(1.05);}.photo-preview-img{width:100%;height:80px;object-fit:cover;display:block;}.photo-preview-remove{position:absolute;top:4px;right:4px;background:var(--danger-color);color:white;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;}.photo-counter{font-size:0.8rem;color:var(--text-light);margin-top:8px;text-align:center;}.photo-storage-warning{background:rgba(245,158,11,0.1);border:1px solid var(--warning-color);border-radius:8px;padding:10px;margin-top:10px;font-size:0.8rem;color:var(--warning-color);}.pdf-page{width:100%;min-height:280mm;padding:8mm;background:white;position:relative;page-break-after:always;box-sizing:border-box;}.pdf-page:last-child{page-break-after:auto;}.page-break{page-break-before:always;}@media print{.pdf-page{page-break-after:always;}.pdf-page:last-child{page-break-after:auto;}}.inspection-section{border:2px dashed var(--primary-color);border-radius:12px;padding:16px;margin-bottom:20px;background:rgba(99,102,241,0.03);}#pdfProgress .modal-content{max-width:500px;}#pdfProgress .progress-container{margin:20px 0;}#pdfPageStatus{text-align:center;margin-top:10px;font-size:0.9rem;color:var(--text-light);}#pdfProgressDetails{font-size:0.8rem;color:var(--text-light);margin-top:5px;text-align:center;}.settings-group{margin-bottom:30px;padding:20px;background:var(--card-bg);border-radius:12px;border:1px solid var(--border-color);}.settings-label{font-weight:700;font-size:1rem;margin-bottom:8px;color:var(--text-color);}.settings-description{font-size:0.85rem;color:var(--text-light);margin-bottom:16px;line-height:1.4;}.toggle-container{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;padding:12px 0;border-bottom:1px solid var(--border-color);}.toggle-container:last-child{margin-bottom:0;border-bottom:none;}.toggle-label{font-weight:600;font-size:0.9rem;color:var(--text-color);}.toggle-switch{position:relative;display:inline-block;width:50px;height:24px;}.toggle-switch input{opacity:0;width:0;height:0;}.toggle-slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:var(--border-color);transition:.3s ease;border-radius:24px;border:2px solid transparent;}.toggle-slider:before{position:absolute;content:"";height:20px;width:20px;left:2px;bottom:2px;background-color:white;transition:.3s ease;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,0.2);}.toggle-switch input:checked+.toggle-slider{background-color:var(--primary-color);border-color:var(--primary-dark);}.toggle-switch input:checked+.toggle-slider:before{transform:translateX(26px);}.toggle-switch input:focus+.toggle-slider{box-shadow:0 0 0 3px rgba(99,102,241,0.1);}.toggle-switch input:disabled+.toggle-slider{opacity:0.6;cursor:not-allowed;}.reminder-input{display:flex;align-items:center;gap:10px;margin-top:15px;padding:12px;background:rgba(99,102,241,0.05);border-radius:8px;border:1px solid var(--border-color);}.reminder-label{font-size:0.85rem;color:var(--text-color);font-weight:500;}</style>
 </head>
@@ -957,7 +958,6 @@ const app = {
 upgradeToVersion2(db) {
     console.log('Выполняется миграция до версии 2');
     
-    // Добавляем индекс reportId если его нет
     if (db.objectStoreNames.contains(this.indexedDB.stores.INSPECTIONS)) {
         const transaction = db.transaction([this.indexedDB.stores.INSPECTIONS], 'readwrite');
         const inspectionsStore = transaction.objectStore(this.indexedDB.stores.INSPECTIONS);
@@ -970,7 +970,6 @@ upgradeToVersion2(db) {
 upgradeToVersion3(db) {
     console.log('Выполняется миграция до версии 3');
     
-    // Создаем индекс reportId для существующих данных
     if (db.objectStoreNames.contains(this.indexedDB.stores.INSPECTIONS)) {
         const inspectionsStore = db.transaction([this.indexedDB.stores.INSPECTIONS], 'readwrite').objectStore(this.indexedDB.stores.INSPECTIONS);
         if (!inspectionsStore.indexNames.contains('reportId')) {
@@ -1459,9 +1458,7 @@ upgradeToVersion3(db) {
         });
     },
 
-    // НОВАЯ ФУНКЦИЯ: Удаление проверок по reportId
     async deleteInspectionsByReportId(reportId) {
-    // Удаляем из state
     this.state.inspectionsDatabase = this.state.inspectionsDatabase.filter(i => i.reportId !== reportId);
     
     if (!this.db) {
@@ -1472,7 +1469,6 @@ upgradeToVersion3(db) {
     const store = transaction.objectStore(this.indexedDB.stores.INSPECTIONS);
     
     return new Promise((resolve, reject) => {
-        // Используем курсор для перебора всех записей вместо индекса
         const request = store.openCursor();
         
         request.onsuccess = () => {
@@ -1504,10 +1500,8 @@ upgradeToVersion3(db) {
             const brand = data.brand === 'Другая марка' ? data.brand_custom : data.brand;
             const model = data.model === 'Другая модель' ? data.model_custom : data.model;
 
-            // Сохраняем новые марки и модели в конфиг
             let configUpdated = false;
             
-            // Если выбрана "Другая марка" и введена новая марка
             if (data.brand === 'Другая марка' && brand && brand.trim() !== '') {
                 if (!this.config.modelsDatabase[brand]) {
                     this.config.modelsDatabase[brand] = ['Другая модель'];
@@ -1515,7 +1509,6 @@ upgradeToVersion3(db) {
                 }
             }
             
-            // Если выбрана "Другая модель" и введена новая модель
             if (data.model === 'Другая модель' && model && model.trim() !== '' && brand && brand.trim() !== '') {
                 if (this.config.modelsDatabase[brand] && !this.config.modelsDatabase[brand].includes(model)) {
                     this.config.modelsDatabase[brand].push(model);
@@ -1523,7 +1516,6 @@ upgradeToVersion3(db) {
                 }
             }
             
-            // Сохраняем обновленный конфиг в IndexedDB
             if (configUpdated) {
                 await this.saveConfigToIndexedDB();
                 this.updateBrandsAndModelsDropdowns();
@@ -1569,10 +1561,8 @@ upgradeToVersion3(db) {
                 this.state.reportsDatabase.push(report);
             }
 
-            // ИСПРАВЛЕНИЕ: Удаляем существующие проверки для этого отчета перед созданием новой
             await this.deleteInspectionsByReportId(report.id);
 
-            // Создаем новую проверку только если выбрано соответствующее решение
             if (data.decision === '📅 Запланировать проверку') {
                 await this.saveInspectionToDatabase(data, report.id);
             }
@@ -1726,11 +1716,15 @@ upgradeToVersion3(db) {
         console.log('Система загрузки фотографий инициализирована');
     },
 
+    async convertHeicToJpeg(file) {
+        if (typeof heic2any === 'undefined') throw new Error('heic2any not available');
+        const blob = await heic2any({ blob: file, toType: 'image/jpeg' });
+        return new File([blob], file.name.replace(/\.heic$/i, '.jpg'), { type: 'image/jpeg' });
+    },
+
     handlePhotoUpload(section, files) {
         if (!files || files.length === 0) return;
-        if (!this.state.currentPhotos[section]) {
-            this.state.currentPhotos[section] = [];
-        }
+        if (!this.state.currentPhotos[section]) this.state.currentPhotos[section] = [];
         const maxPhotos = (section === 'exterior') ? 1 : 9;
         const currentCount = this.state.currentPhotos[section].length;
         const remainingSlots = maxPhotos - currentCount;
@@ -1739,52 +1733,46 @@ upgradeToVersion3(db) {
             return;
         }
         const filesToProcess = Array.from(files).slice(0, remainingSlots);
-        let processedCount = 0;
-        filesToProcess.forEach(file => {
-            if (file.type.startsWith('image/')) {
-                this.compressImage(file).then(compressedFile => {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const photoId = Date.now() + Math.random().toString(36).substr(2, 9);
-                        this.state.currentPhotos[section].push({
-                            id: photoId,
-                            data: e.target.result,
-                            name: file.name,
-                            timestamp: new Date().toISOString(),
-                            compressed: true
-                        });
-                        processedCount++;
-                        if (processedCount === filesToProcess.length) {
-                            this.updatePhotoPreview(section);
-                            this.updatePhotoCounter(section);
-                            this.playSound('success');
-                            this.showToast(`Добавлено ${processedCount} фотографий в раздел "${this.getSectionName(section)}"`, 'success');
-                        }
-                    };
-                    reader.readAsDataURL(compressedFile);
-                }).catch(error => {
-                    console.error('Ошибка сжатия изображения:', error);
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const photoId = Date.now() + Math.random().toString(36).substr(2, 9);
-                        this.state.currentPhotos[section].push({
-                            id: photoId,
-                            data: e.target.result,
-                            name: file.name,
-                            timestamp: new Date().toISOString(),
-                            compressed: false
-                        });
-                        processedCount++;
-                        if (processedCount === filesToProcess.length) {
-                            this.updatePhotoPreview(section);
-                            this.updatePhotoCounter(section);
-                            this.playSound('success');
-                            this.showToast(`Добавлено ${processedCount} фотографий в раздел "${this.getSectionName(section)}"`, 'success');
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                });
+        Promise.all(filesToProcess.map(async (file) => {
+            if (!file.type.startsWith('image/')) return null;
+            let processedFile = file;
+            if (file.type === 'image/heic' || file.name.toLowerCase().endsWith('.heic')) {
+                try {
+                    processedFile = await this.convertHeicToJpeg(file);
+                } catch (e) {
+                    console.error('Ошибка преобразования HEIC в JPEG:', e);
+                    processedFile = file;
+                }
             }
+            let compressedFile;
+            try {
+                compressedFile = await this.compressImage(processedFile);
+            } catch (e) {
+                console.error('Ошибка сжатия изображения:', e);
+                compressedFile = processedFile;
+            }
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (e) => resolve({
+                    id: Date.now() + Math.random().toString(36).substr(2, 9),
+                    data: e.target.result,
+                    name: processedFile.name,
+                    timestamp: new Date().toISOString(),
+                    compressed: true
+                });
+                reader.readAsDataURL(compressedFile);
+            });
+        })).then(photos => {
+            const validPhotos = photos.filter(photo => photo !== null);
+            this.state.currentPhotos[section].push(...validPhotos);
+            this.updatePhotoPreview(section);
+            this.updatePhotoCounter(section);
+            this.playSound('success');
+            this.showToast(`Добавлено ${validPhotos.length} фотографий в раздел "${this.getSectionName(section)}"`, 'success');
+        }).catch(error => {
+            console.error('Ошибка обработки фотографий:', error);
+            this.playSound('error');
+            this.showToast('Ошибка при обработке фотографий', 'warning');
         });
     },
 
@@ -2195,7 +2183,6 @@ upgradeToVersion3(db) {
                     brandCustom.classList.toggle('hidden', !isCustomBrand);
                     if (!isCustomBrand) brandCustom.value = '';
                 }
-                // Обновляем список моделей для выбранной марки
                 app.updateModelsDropdown(brand);
                 app.updateProgress();
             });
@@ -3509,7 +3496,6 @@ upgradeToVersion3(db) {
     }
 };
 
-// Инициализация приложения
 document.addEventListener('DOMContentLoaded', function() {
     try {
         app.init();
