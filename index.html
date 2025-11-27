@@ -2719,7 +2719,7 @@ upgradeToVersion3(db) {
                     const progress = ((pageIndex + 1) / totalPages) * 100;
                     this.showPDFProgress(progress, `Обработка страницы ${pageIndex + 1} из ${totalPages}`);
                     if (pageIndex > 0) {
-                        await new Promise(resolve => setTimeout(resolve, 100));
+                        await new Promise(resolve => setTimeout(resolve, 300));
                     }
                     const page = pages[pageIndex];
                     try {
@@ -3600,3 +3600,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
